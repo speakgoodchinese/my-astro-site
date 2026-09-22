@@ -1,23 +1,167 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import PeachIcon from '../assets/peach.svg';
+import { TAXONOMY } from '../data/taxonomy';
+import { getCollection } from 'astro:content';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  activeCategory?: 'thoughts' | 'language' | 'arts';
+}
+
+const { title } = Astro.props;
+
+// Fetch all collections to build a unified recent additions feed
+const posts = await getCollection('posts');
+const terms = await getCollection('terms');
+const propositions = await getCollection('propositions');
+
+const recentItems = [
+  ...posts.map(p => ({
+    title: p.data.title,
+    url: `/posts/${p.id}`,
+    date: p.data.date || '2026-01-01',
+    type: 'Post'
+  })),
+  ...terms.map(t => ({
+    title: t.data.term,
+    url: `/terms/${t.id}`,
+    date: t.data.date || '2026-01-01',
+    type: 'Term'
+  })),
+  ...propositions.map(prop => ({
+    title: prop.data.title,
+    url: `/propositions/${prop.id}`,
+    date: prop.data.date || '2026-01-01',
+    type: 'Proposition'
+  }))
+];
+
+// Sort descending by date and take top 5
+recentItems.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+const recentAdditions = recentItems.slice(0, 5);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {/* Browser Tab Favicon */}
+    <link rel="icon" type="image/svg+xml" href={PeachIcon.src} />
+  </head>
+
+  <body class="m-0 bg-paper text-ink">
+    
+    {/* Global Top Navbar */}
+    <header class="border-b border-border-warm bg-white px-4 md:px-8 py-4 flex justify-between items-center sticky top-0 z-50 shadow-xs">
+      <div class="flex items-center gap-3">
+        {/* Mobile Hamburger Button */}
+        <button 
+          id="menu-toggle" 
+          class="md:hidden p-2 text-ink-muted hover:text-cinnabar focus:outline-none"
+          aria-label="Toggle Navigation"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+
+        <a href="/" class="no-underline font-bold text-ink hover:text-cinnabar font-serif transition flex items-center gap-2 group">
+          <img src={PeachIcon.src} alt="Peach Blossom" class="w-5 h-5 object-contain group-hover:scale-105 transition" />
+          <span class="text-[1.1rem]">大家学华语</span>
+        </a>
+
+      </div>
+      
+      <nav class="hidden sm:flex gap-6 text-[0.95rem] items-center">
+        <a href="/thoughts" class="no-underline text-jade hover:text-ink font-medium">Thoughts 思想</a>
+        <a href="/language" class="no-underline text-jade hover:text-ink font-medium">Language 语言</a>
+        <a href="/arts" class="no-underline text-jade hover:text-ink font-medium">Arts & Expressions 文艺</a>
+        <a href="/posts" class="no-underline text-cinnabar hover:text-ink font-medium">Posts 随笔</a>
+        <a href="/search" class="no-underline text-cinnabar font-bold ml-4 pl-6 border-l border-border-warm hover:opacity-80">Search 🔍</a>
+      </nav>
+    </header>
+
+    {/* Main 3-Column Content Layout */}
+    <div class="max-w-[1300px] mx-auto grid grid-cols-1 md:grid-cols-[240px_1fr_260px] gap-6 md:gap-8 p-4 md:p-8">
+      
+      {/* Left Sidebar: Taxonomy & Reflections */}
+      <aside id="sidebar" class="hidden md:block border-r border-border-warm pr-6">
+        <h4 class="mt-0 text-[0.85rem] uppercase text-ink-muted tracking-[0.08em] font-bold font-sans">
+          Taxonomy 体系
+        </h4>
+        
+        {TAXONOMY.map((cat) => (
+          <div class="mb-6">
+            <a href={`/${cat.id}`} class="font-bold font-serif no-underline text-ink block mb-1 hover:text-cinnabar transition">
+              {cat.title}
+            </a>
+            <ul class="list-none pl-4 m-0 text-[0.9rem] space-y-1">
+              {cat.subcategories.map((sub) => (
+                <li class="mb-1">
+                  <a href={`/${cat.id}/${sub.id}`} class="no-underline text-ink-muted hover:text-ink">
+                    {sub.title.split('(')[0].trim()}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        <hr class="border-none border-t border-border-warm my-6" />
+        <h4 class="text-[0.85rem] uppercase text-ink-muted tracking-[0.08em] font-bold font-sans">
+          Reflections
+        </h4>
+        <ul class="list-none p-0 m-0 text-[0.9rem] space-y-2 mt-2">
+          <li><a href="/random-notes" class="no-underline text-ink-muted hover:text-ink">Random Notes 偶感</a></li>
+          <li><a href="/miscellaneous" class="no-underline text-ink-muted hover:text-ink">Miscellaneous 杂类</a></li>
+        </ul>
+      </aside>
+
+      {/* Center Main Reading / Content Area */}
+      <main class="min-w-0">
+        <slot />
+      </main>
+
+      {/* Right Sidebar: Recent Additions (Posts, Terms, Propositions) */}
+      <aside class="hidden lg:block border-l border-border-warm pl-6">
+        <h4 class="mt-0 text-[0.85rem] uppercase text-ink-muted tracking-[0.08em] font-bold font-sans mb-4">
+          Recent Additions 近期更新
+        </h4>
+        <ul class="list-none p-0 m-0 space-y-4 text-[0.9rem]">
+          {recentAdditions.length > 0 ? (
+            recentAdditions.map((item) => (
+              <li>
+                <div class="flex items-center justify-between gap-2 mb-0.5">
+                  <a href={item.url} class="wiki-term block leading-snug text-[0.95rem]">
+                    {item.title}
+                  </a>
+                  <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-paper-card border border-border-warm text-ink-muted shrink-0">
+                    {item.type}
+                  </span>
+                </div>
+                <span class="text-xs font-mono text-ink-muted">{item.date}</span>
+              </li>
+            ))
+          ) : (
+            <li class="text-ink-muted italic text-xs">No entries added yet.</li>
+          )}
+        </ul>
+      </aside>
+
+    </div>
+
+    <script>
+      const toggleBtn = document.getElementById('menu-toggle');
+      const sidebar = document.getElementById('sidebar');
+
+      if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('hidden');
+        });
+      }
+    </script>
+  </body>
+</html>

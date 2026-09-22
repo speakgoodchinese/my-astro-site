@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #fcfbfa;          
+  --color-paper-card: #f7f5f0;     
+  --color-ink: #222222;            
+  --color-ink-muted: #555555;      
+  --color-border-warm: #e6e2dd;    
+  --color-cinnabar: #993333;       
+  --color-jade: #3b5a5c;           
+
+  --font-serif: "Noto Serif SC", "Songti SC", "Georgia", serif;
+  --font-sans: system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Standard Headings (Ink Black) */
+h2, h3, h4, h5, h6, .wiki-entry-title {
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Main Page H1 Titles in Cinnabar Red */
+h1 {
+  font-family: var(--font-serif);
+  color: var(--color-cinnabar);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Prominent Proposition / Term Links */
+.wiki-term {
+  font-family: var(--font-serif);
+  color: var(--color-cinnabar);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.wiki-term:hover {
+  color: var(--color-ink);
+  text-decoration: underline;
+}
+
+/* Classical blockquotes */
+blockquote {
+  border-left: 3px solid var(--color-cinnabar);
+  margin: 1.5rem 0;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-paper-card);
+  color: var(--color-ink-muted);
+  font-family: var(--font-serif);
+  font-style: italic;
+}

@@ -1,0 +1,95 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { getConnectedEntries } from '../../utils/links';
+
+export async function getStaticPaths() {
+  const propositions = await getCollection('propositions');
+  return propositions.map((prop) => ({
+    params: { id: prop.id },
+    props: { prop },
+  }));
+}
+
+const { prop } = Astro.props;
+const { Content } = await render(prop);
+
+// Resolve bidirectional links
+const { explicitLinks, incomingBacklinks } = await getConnectedEntries(
+  prop.id, 
+  'proposition', 
+  prop.data.relatedTerms, 
+  prop.data.relatedPropositions
+);
+---
+
+<Layout title={`${prop.data.title} - Scholar's Studio`}>
+  <article class="max-w-prose">
+    
+    {/* Category Nav */}
+    <nav class="text-xs font-sans text-ink-muted uppercase tracking-wider mb-3">
+      <a href={`/${prop.data.category}`} class="no-underline text-jade hover:text-ink">{prop.data.category}</a> 
+      <span class="mx-1.5">•</span> 
+      <span>{prop.data.subcategory}</span>
+    </nav>
+
+    {/* Main Proposition Title */}
+    <h1 class="wiki-term text-3xl md:text-4xl pb-3 border-b border-border-warm mb-6">
+      {prop.data.title}
+    </h1>
+
+    {/* Summary Callout Box */}
+    {prop.data.summary && (
+      <div class="bg-paper-card border-l-3 border-jade p-4 my-6 text-ink-muted font-serif italic text-[0.95rem]">
+        <strong class="font-sans not-italic uppercase tracking-wider text-xs block text-ink mb-1">Summary 概述</strong>
+        {prop.data.summary}
+      </div>
+    )}
+
+    {/* Main Markdown Body Content */}
+    <div class="mt-6 space-y-4 text-ink leading-relaxed">
+      <Content />
+    </div>
+
+    {/* Bidirectional Cross-References Section */}
+    {(explicitLinks.length > 0 || incomingBacklinks.length > 0) && (
+      <section class="mt-12 pt-6 border-t border-border-warm space-y-8">
+        <h3 class="font-serif text-lg font-bold text-ink mb-3">Related Concepts & Cross-References 相关命题与词条</h3>
+        
+        {explicitLinks.length > 0 && (
+          <div>
+            <h4 class="text-xs uppercase text-ink-muted tracking-[0.08em] font-bold font-sans mb-3">Direct Connections 直接连接</h4>
+            <ul class="list-none p-0 space-y-3">
+              {explicitLinks.map(link => (
+                <li class="bg-paper-card border border-border-warm p-4 rounded-lg shadow-2xs">
+                  <div class="flex items-baseline gap-2 mb-1">
+                    <a href={link.url} class="wiki-term text-[0.95rem] font-bold">{link.title}</a>
+                    <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white border border-border-warm text-ink-muted">{link.type}</span>
+                  </div>
+                  {link.summary && <p class="text-xs font-serif text-ink-muted m-0">{link.summary}</p>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {incomingBacklinks.length > 0 && (
+          <div>
+            <h4 class="text-xs uppercase text-ink-muted tracking-[0.08em] font-bold font-sans mb-3">Mentioned In (Backlinks) 反向引用</h4>
+            <ul class="list-none p-0 space-y-3">
+              {incomingBacklinks.map(link => (
+                <li class="bg-paper-card border border-border-warm p-4 rounded-lg shadow-2xs">
+                  <div class="flex items-baseline gap-2 mb-1">
+                    <a href={link.url} class="wiki-term text-[0.95rem] font-bold">{link.title}</a>
+                    <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white border border-border-warm text-ink-muted">{link.type}</span>
+                  </div>
+                  {link.summary && <p class="text-xs font-serif text-ink-muted m-0">{link.summary}</p>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
+    )}
+  </article>
+</Layout>

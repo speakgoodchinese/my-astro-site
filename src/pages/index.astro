@@ -1,17 +1,103 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import MasterNarrative from '../components/MasterNarrative.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Fetch all posts and sort them by date descending (newest first)
+const posts = await getCollection('posts');
+posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
-import { Image } from 'astro:assets';
-import myImage from '../assets/hero.jpg';
+// Take the top 2 most recent posts
+const recentPosts = posts.slice(0, 2);
 ---
-<main>
-  <h1>Welcome</h1>
-  <Image src={myImage} alt="Hero photo" width={400} height={300} />
-</main>
-<Layout>
-	<Welcome />
+
+<Layout title="大家学华语">
+  <div class="space-y-6">
+    <div>
+      <h1 class="text-3xl font-serif font-bold text-ink mb-2">有时学一学，应该不错吧</h1>
+      <p class="text-lg text-ink-muted leading-relaxed font-serif">
+        A personal, opinionated journal using Chinese linguistic constructs to critique corporate managerialism and organized dogma and explore fundamental existence.
+      </p>
+    </div>
+    
+    {/* Embedded Master Narrative Component */}
+    <div class="my-8">
+      <MasterNarrative />
+    </div>
+
+    {/* Three Pillars Grid */}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+      
+      <div class="border border-border-warm p-6 rounded-xl bg-paper-card shadow-xs hover:shadow-sm transition flex flex-col justify-between">
+        <div>
+          <h3 class="text-lg font-serif font-bold text-ink mb-2">Thoughts 思想</h3>
+          <p class="text-ink-muted text-sm leading-normal">Core philosophical doctrines, ontological principles, and ethical frameworks.</p>
+        </div>
+        <a href="/thoughts" class="inline-block mt-4 text-jade font-semibold text-sm no-underline hover:text-ink transition">
+          Explore Thoughts →
+        </a>
+      </div>
+
+      <div class="border border-border-warm p-6 rounded-xl bg-paper-card shadow-xs hover:shadow-sm transition flex flex-col justify-between">
+        <div>
+          <h3 class="text-lg font-serif font-bold text-ink mb-2">Language 语言</h3>
+          <p class="text-ink-muted text-sm leading-normal">Semantics, classical terminology, logical structures, and linguistic nuances.</p>
+        </div>
+        <a href="/language" class="inline-block mt-4 text-jade font-semibold text-sm no-underline hover:text-ink transition">
+          Explore Language →
+        </a>
+      </div>
+
+      <div class="border border-border-warm p-6 rounded-xl bg-paper-card shadow-xs hover:shadow-sm transition flex flex-col justify-between">
+        <div>
+          <h3 class="text-lg font-serif font-bold text-ink mb-2">Arts & Expressions 文艺</h3>
+          <p class="text-ink-muted text-sm leading-normal">Aesthetics, poetic imagery, calligraphy theory, and traditional expressions.</p>
+        </div>
+        <a href="/arts" class="inline-block mt-4 text-jade font-semibold text-sm no-underline hover:text-ink transition">
+          Explore Arts →
+        </a>
+      </div>
+
+    </div>
+
+    {/* Recent Dispatches Section */}
+    <section class="mt-12 pt-8 border-t border-border-warm space-y-6">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-xl font-serif font-bold text-cinnabar">
+          Recent Dispatches / 近期随笔
+        </h2>
+        <a href="/posts" class="text-xs font-sans text-jade hover:text-ink transition">
+          View all posts →
+        </a>
+      </div>
+
+      <div class="space-y-8">
+        {recentPosts.length > 0 ? (
+          recentPosts.map((post) => (
+            <article class="group">
+              <div class="text-xs font-sans text-ink-muted mb-1">
+                {post.data.date} <span class="mx-1">•</span> 随笔 Post
+              </div>
+              <h3 class="text-xl font-serif font-bold mb-2">
+                <a href={`/posts/${post.id}`} class="no-underline text-ink group-hover:text-cinnabar transition">
+                  {post.data.title}
+                </a>
+              </h3>
+              {post.data.description && (
+                <p class="text-ink-muted font-serif text-[0.95rem] leading-relaxed mb-3">
+                  {post.data.description}
+                </p>
+              )}
+              <a href={`/posts/${post.id}`} class="inline-block text-xs font-sans font-semibold text-jade group-hover:text-ink transition">
+                Read dispatch →
+              </a>
+            </article>
+          ))
+        ) : (
+          <p class="text-ink-muted italic font-serif">No dispatches published yet.</p>
+        )}
+      </div>
+    </section>
+
+  </div>
 </Layout>

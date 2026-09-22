@@ -1,0 +1,19 @@
+---
+import { getEntry, render } from 'astro:content';
+
+// Fetch the manifesto markdown file
+const manifesto = await getEntry('manifesto', 'main');
+const { Content } = manifesto ? await render(manifesto) : { Content: null };
+---
+
+<section style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+  {manifesto && <h2 style="margin-top: 0; color: #1e293b; font-size: 1.5rem;">{manifesto.data.title}</h2>}
+
+  {Content ? (
+    <div style="color: #475569; line-height: 1.7; font-size: 1.05rem;">
+      <Content />
+    </div>
+  ) : (
+    <p>Master narrative content coming soon.</p>
+  )}
+</section>

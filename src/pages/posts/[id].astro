@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} - Scholar's Studio`}>
+  <article class="max-w-prose">
+    
+    {/* Metadata & Date */}
+    <div class="text-xs font-sans text-ink-muted uppercase tracking-wider mb-2">
+      {post.data.date} <span class="mx-1.5">•</span> 随笔 Dispatch
+    </div>
+
+    {/* Post Title */}
+    <h1 class="text-3xl md:text-4xl font-serif font-bold pb-3 border-b border-border-warm mb-6 text-ink">
+      {post.data.title}
+    </h1>
+
+    {/* Description / Subtitle Callout */}
+    {post.data.description && (
+      <div class="bg-paper-card border-l-3 border-cinnabar p-4 my-6 text-ink-muted font-serif italic text-[0.95rem]">
+        {post.data.description}
+      </div>
+    )}
+
+    {/* Main Post Content */}
+    <div class="mt-6 space-y-4 text-ink leading-relaxed">
+      <Content />
+    </div>
+
+    {/* Back to Posts link */}
+    <div class="mt-12 pt-6 border-t border-border-warm">
+      <a href="/posts" class="text-xs font-sans font-semibold text-jade hover:text-ink transition">
+        ← Return to all dispatches
+      </a>
+    </div>
+
+  </article>
+</Layout>

@@ -1,0 +1,94 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import { TAXONOMY } from '../data/taxonomy';
+
+export async function getStaticPaths() {
+  return TAXONOMY.map((cat) => ({
+    params: { category: cat.id },
+    props: { title: cat.title, cta: cat.cta },
+  }));
+}
+
+const { category } = Astro.params;
+const { title, cta } = Astro.props;
+
+// Fetch category markdown essay if available
+const categoryEntry = await getEntry('categories', category);
+const { Content } = categoryEntry ? await render(categoryEntry) : { Content: null };
+
+// Fetch Propositions belonging strictly to this category
+const allPropositions = await getCollection('propositions');
+const categoryPropositions = allPropositions.filter((p) => p.data.category === category);
+categoryPropositions.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+// Fetch Terms belonging strictly to this category
+const allTerms = await getCollection('terms');
+const categoryTerms = allTerms.filter((t) => t.data.category === category);
+categoryTerms.sort((a, b) => a.data.term.localeCompare(b.data.term));
+---
+
+<Layout title={`${title} - Philosophy Wiki`}>
+  <h1>{title}</h1>
+  
+  <!-- Exhortation / Call to Action -->
+  <div style="background: #f0f4f8; padding: 1.2rem; border-left: 4px solid #0066cc; margin: 1.5rem 0; border-radius: 0 4px 4px 0;">
+    <p style="margin: 0; color: #333; font-style: italic;">{cta}</p>
+  </div>
+
+  {/* Render Markdown Content if available */}
+  {Content && (
+    <div style="margin: 2rem 0; line-height: 1.6;">
+      <Content />
+    </div>
+  )}
+
+  {/* Propositions Section (Core Ideas & Doctrines) */}
+  <section style="margin: 3rem 0;">
+    <h2>Propositions 立说 ({categoryPropositions.length})</h2>
+    {categoryPropositions.length === 0 ? (
+      <p style="color: #666;">No propositions added to this category yet.</p>
+    ) : (
+      <ul style="list-style: none; padding: 0;">
+        {categoryPropositions.map((prop) => (
+          <li style="margin-bottom: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 1.2rem;">
+            <h3 style="margin: 0;">
+              <a href={`/propositions/${prop.id}`} style="text-decoration: none; color: #0066cc;">
+                {prop.data.title}
+              </a>
+            </h3>
+            <p style="margin: 0.3rem 0; font-size: 0.9rem; color: #555;">
+              <strong>Pinyin:</strong> {prop.data.pinyin} | <strong>School:</strong> {prop.data.school} 
+              {prop.data.sourceText && <> | <strong>Source:</strong> {prop.data.sourceText}</>}
+            </p>
+            <p style="margin: 0.5rem 0 0 0; color: #333; line-height: 1.5;">{prop.data.summary}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  {/* Terms Directory Section */}
+  <section style="margin: 3rem 0;">
+    <h2>Terms Directory ({categoryTerms.length})</h2>
+    {categoryTerms.length === 0 ? (
+      <p style="color: #666;">No terms added to this category yet.</p>
+    ) : (
+      <ul style="list-style: none; padding: 0;">
+        {categoryTerms.map((entry) => (
+          <li style="margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+            <h3 style="margin: 0;">
+              <a href={`/terms/${entry.id}`} style="text-decoration: none; color: #0066cc;">
+                {entry.data.term}
+              </a>
+            </h3>
+            <p style="margin: 0.3rem 0; font-size: 0.9rem; color: #555;">
+              <strong>Pinyin:</strong> {entry.data.pinyin} | <strong>School:</strong> {entry.data.school}
+            </p>
+            <p style="margin: 0.4rem 0 0 0; color: #444;">{entry.data.summary}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Layout>

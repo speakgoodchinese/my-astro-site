@@ -1,0 +1,110 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { TAXONOMY } from '../../data/taxonomy';
+
+export async function getStaticPaths() {
+  const paths = [];
+
+  for (const cat of TAXONOMY) {
+    for (const sub of cat.subcategories) {
+      paths.push({
+        params: { category: cat.id, subcategory: sub.id },
+        props: { title: sub.title, cta: sub.cta },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { category, subcategory } = Astro.params;
+const { title, cta } = Astro.props;
+
+// Fetch subcategory markdown landing page if available
+const subcategoryEntry = await getEntry('subcategories', subcategory);
+const { Content } = subcategoryEntry ? await render(subcategoryEntry) : { Content: null };
+
+// Fetch Propositions matching BOTH category and subcategory
+const allPropositions = await getCollection('propositions');
+const subcategoryPropositions = allPropositions.filter(
+  (p) => p.data.category === category && p.data.subcategory === subcategory
+);
+subcategoryPropositions.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+// Fetch Terms matching BOTH category and subcategory
+const allTerms = await getCollection('terms');
+const subcategoryTerms = allTerms.filter(
+  (t) => t.data.category === category && t.data.subcategory === subcategory
+);
+subcategoryTerms.sort((a, b) => a.data.term.localeCompare(b.data.term));
+---
+
+<Layout title={`${title} - Philosophy Wiki`}>
+  <p style="text-transform: uppercase; font-size: 0.85rem; color: #666; margin-bottom: 0.5rem;">
+    <a href={`/${category}`} style="color: #0066cc; text-decoration: none;">{category}</a> / {subcategory}
+  </p>
+  
+  <h1>{title}</h1>
+  
+  <!-- Subcategory Exhortation / Call to Action -->
+  <div style="background: #f0f4f8; padding: 1.2rem; border-left: 4px solid #0066cc; margin: 1.5rem 0; border-radius: 0 4px 4px 0;">
+    <p style="margin: 0; color: #333; font-style: italic;">{cta}</p>
+  </div>
+
+  {/* Render Subcategory Markdown Content if available */}
+  {Content && (
+    <div style="margin: 2rem 0; line-height: 1.6;">
+      <Content />
+    </div>
+  )}
+
+  {/* Propositions Section */}
+  <section style="margin: 3rem 0;">
+    <h2>Propositions 立说 ({subcategoryPropositions.length})</h2>
+    {subcategoryPropositions.length === 0 ? (
+      <p style="color: #666;">No propositions added to this subcategory yet.</p>
+    ) : (
+      <ul style="list-style: none; padding: 0;">
+        {subcategoryPropositions.map((prop) => (
+          <li style="margin-bottom: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 1.2rem;">
+            <h3 style="margin: 0;">
+              <a href={`/propositions/${prop.id}`} style="text-decoration: none; color: #0066cc;">
+                {prop.data.title}
+              </a>
+            </h3>
+            <p style="margin: 0.3rem 0; font-size: 0.9rem; color: #555;">
+              <strong>Pinyin:</strong> {prop.data.pinyin} | <strong>School:</strong> {prop.data.school} 
+              {prop.data.sourceText && <> | <strong>Source:</strong> {prop.data.sourceText}</>}
+            </p>
+            <p style="margin: 0.5rem 0 0 0; color: #333; line-height: 1.5;">{prop.data.summary}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  {/* Terms Directory Section */}
+  <section style="margin: 3rem 0;">
+    <h2>Terms Directory ({subcategoryTerms.length})</h2>
+    {subcategoryTerms.length === 0 ? (
+      <p style="color: #666;">No terms added to this subcategory yet.</p>
+    ) : (
+      <ul style="list-style: none; padding: 0;">
+        {subcategoryTerms.map((entry) => (
+          <li style="margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+            <h3 style="margin: 0;">
+              <a href={`/terms/${entry.id}`} style="text-decoration: none; color: #0066cc;">
+                {entry.data.term}
+              </a>
+            </h3>
+            <p style="margin: 0.3rem 0; font-size: 0.9rem; color: #555;">
+              <strong>Pinyin:</strong> {entry.data.pinyin} | <strong>School:</strong> {entry.data.school}
+            </p>
+            <p style="margin: 0.4rem 0 0 0; color: #444;">{entry.data.summary}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</Layout>
