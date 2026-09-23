@@ -1,4 +1,4 @@
 ---
-title: "Lucid Living 清明的活着"
+title: "Lucid Living 清明的生活"
 ---
-True wisdom begins not with accumulation, but with alignment. This journal is a drifting cloud of ideas towards a clear and unburdened existence.
+True wisdom begins not with accumulation, but with alignment. This journal is a cloud of ideas drifting towards a clear and unburdened existence.
