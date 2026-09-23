@@ -1,6 +1,6 @@
 ---
 title: "辞朝归薮：在喧嚣中重拾读书人的清静"
-description: "A note on why this journal exists - moving away from corporate hype and sterile scientism toward an independent, lived philosophy."
+description: "A note on why this journal exists - moving away from corporate exploitation and aimless scientism toward an independent, lived philosophy."
 relatedTerms:
   - "道"
 date: "2026-09-22"
