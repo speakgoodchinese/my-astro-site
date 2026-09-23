@@ -4,8 +4,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 function buildWikiMap() {
-  const map = new Map();
-  // Maps titles/slugs/aliases to their URL path
   const titleToPath = new Map();
   const contentDir = path.resolve(process.cwd(), 'src/content');
 
@@ -21,38 +19,28 @@ function buildWikiMap() {
     for (const file of files) {
       if (!file.endsWith('.md') && !file.endsWith('.mdx')) continue;
       const filePath = path.join(colPath, file);
-      const content = fs.readFileSync(filePath, 'utf8');
+      let content = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '');
 
       const slug = file.replace(/\.(md|mdx)$/, '');
       const urlPath = `/${col.name}/${slug}`;
 
-      // Extract frontmatter title
-      const titleMatch = content.match(/^title:\s*(["']?)([^"'\n]+)\1/m);
-      let primaryTitle = slug;
+      const titleMatch = content.match(/^(?:---\s*\n)?[\s\S]*?title:\s*(["']?)([^"'\n\r]+)\1/m);
       if (titleMatch) {
-        primaryTitle = titleMatch[2].trim();
+        const primaryTitle = titleMatch[2].trim();
         titleToPath.set(primaryTitle, urlPath);
       }
       
       titleToPath.set(slug, urlPath);
-
-      // Extract optional aliases (e.g., aliases: [Dao, Tao])
-      const aliasMatch = content.match(/^aliases:\s*\[(.*?)\]/m);
-      if (aliasMatch) {
-        const aliases = aliasMatch[1].split(',').map(a => a.trim().replace(/['"]/g, ''));
-        for (const alias of aliases) {
-          if (alias) titleToPath.set(alias, urlPath);
-        }
-      }
     }
   }
+
   return { titleToPath };
 }
 
 let wikiData = null;
 
 export function remarkWikiLinks() {
-  if (!wikiData) {
+  if (process.env.NODE_ENV !== 'production' || !wikiData) {
     wikiData = buildWikiMap();
   }
 
@@ -83,30 +71,39 @@ export function remarkWikiLinks() {
 
         let targetKey = innerContent;
         let displayText = innerContent;
-        let href = '';
 
-        // Handle pipe syntax [[Target|Display]] or [[Display|Target]]
         if (innerContent.includes('|')) {
           const parts = innerContent.split('|').map(s => s.trim());
-          const partA = parts[0];
-          const partB = parts[1];
-
-          // Check which part exists in our map
-          if (wikiData.titleToPath.has(partA)) {
-            targetKey = partA;
-            displayText = partB;
-          } else if (wikiData.titleToPath.has(partB)) {
-            targetKey = partB;
-            displayText = partA;
-          } else {
-            // Default fallback if neither is found explicitly
-            targetKey = partA;
-            displayText = partB;
-          }
+          targetKey = parts[0];
+          displayText = parts[1];
         }
 
-        // Resolve URL from map
-        href = wikiData.titleToPath.get(targetKey) || `/terms/${targetKey}`;
+        let href = '';
+
+        // 1. Check map first
+        if (wikiData.titleToPath.has(targetKey)) {
+          href = wikiData.titleToPath.get(targetKey);
+        } else {
+          // 2. Check if it exists as a proposition file explicitly
+          const propPath = path.resolve(process.cwd(), `src/content/propositions/${targetKey}.md`);
+          const propMdxPath = path.resolve(process.cwd(), `src/content/propositions/${targetKey}.mdx`);
+          const slugKey = targetKey.toLowerCase().replace(/\s+/g, '-');
+          const slugPropPath = path.resolve(process.cwd(), `src/content/propositions/${slugKey}.md`);
+
+          if (fs.existsSync(propPath) || fs.existsSync(propMdxPath)) {
+            href = `/propositions/${targetKey}`;
+          } else if (fs.existsSync(slugPropPath)) {
+            href = `/propositions/${slugKey}`;
+          } else {
+            // 3. Fallback routing for unmapped entries
+            const hasChinese = /[\u4e00-\u9fa5]/.test(targetKey);
+            if (hasChinese) {
+              href = `/propositions/${slugKey || targetKey}`;
+            } else {
+              href = `/terms/${targetKey}`;
+            }
+          }
+        }
 
         children.push({
           type: 'link',
