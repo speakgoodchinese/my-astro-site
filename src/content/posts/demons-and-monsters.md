@@ -8,7 +8,7 @@ date: "2026-09-23"
 
 Holy shit! People often exclaim in frustration at the unruly world. Yet, observe the chaotic theater of human affairs with care, and a pattern emerges: even the most base and foul matter operates according to a strict, internal logic.
 
-The trouble is that their chaos is not our dao - we want no part of it. What, then, is our path? How must we act and react amidst a volatile, violent world? The answer demands that we first know ourselves, and then adapt to external shifts without buckling or overreacting.
+The trouble is that their chaos is not our dao - it is not the cause nor the effect of what we are, and we want no part of it. What, then, is our path? How must we act and react amidst a volatile, violent world? The answer demands that we first know ourselves, and then adapt to external shifts without buckling or overreacting.
 
 ### I. There is a Reason for Everthing
 
