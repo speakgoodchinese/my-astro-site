@@ -1,6 +1,5 @@
 ---
 title: "天地无心，以生物为心"
-traditional: "天地無心，以生物為心"
 pinyin: "tiān dì wú xīn, yǐ shēng wù wéi xīn"
 category: "thoughts"
 subcategory: "cosmology"

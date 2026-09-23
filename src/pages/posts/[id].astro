@@ -39,6 +39,43 @@ const { Content } = await render(post);
       <Content />
     </div>
 
+    {/* Metadata Links: Terms & Propositions */}
+    {((post.data.relatedTerms || post.data.terms)?.length > 0 || (post.data.relatedPropositions || post.data.propositions)?.length > 0) && (
+      <div class="mt-12 pt-6 border-t border-border-warm flex flex-wrap gap-6 text-xs font-sans">
+        {(post.data.relatedTerms || post.data.terms)?.length > 0 && (
+          <div class="flex items-center gap-2">
+            <span class="text-ink-muted font-semibold tracking-wider uppercase">相关术语 Terms:</span>
+            <div class="flex flex-wrap gap-1.5">
+              {(post.data.relatedTerms || post.data.terms).map((term: string) => (
+                <a 
+                  href={`/terms/${term.trim()}`}
+                  class="px-2 py-0.5 bg-paper-card text-jade hover:bg-jade hover:text-white transition rounded border border-border-warm"
+                >
+                  {term}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {(post.data.relatedPropositions || post.data.propositions)?.length > 0 && (
+          <div class="flex items-center gap-2">
+            <span class="text-ink-muted font-semibold tracking-wider uppercase">核心命题 Propositions:</span>
+            <div class="flex flex-wrap gap-1.5">
+              {(post.data.relatedPropositions || post.data.propositions).map((prop: string) => (
+                <a 
+                  href={`/propositions/shengyouya-zhiwuya`}
+                  class="px-2 py-0.5 bg-paper-card text-jade hover:bg-jade hover:text-white transition rounded border border-border-warm"
+                >
+                  {prop}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    )}
+
     {/* Back to Posts link */}
     <div class="mt-12 pt-6 border-t border-border-warm">
       <a href="/posts" class="text-xs font-sans font-semibold text-jade hover:text-ink transition">

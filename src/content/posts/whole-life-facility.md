@@ -3,12 +3,14 @@ title: "立人：跨越作为工具人的全人生教育"
 description: "An exploration of how the modern obsession with comfort and external validation leaves individuals vulnerable to exploitation, and why true foundational education must transcend skills-based training to offer a whole-life facility anchored in classical literature."
 relatedTerms:
   - "道"
+relatedPropositions:
+  - "吾生也有涯，而知也无涯"
 date: "2026-09-22"
 ---
 
 Look closely at the modern everyman. More often than not, what drives his daily choices is not a quiet conviction, but a quiet terror: the fear of standing alone. 
 
-Seeking comfort, validation, and the constant reassurance of company, individuals herd together in digital and physical spaces alike. They trade their autonomy for the fleeting warmth of crowds, leaning on external opinions to prop up a hollow sense of self. This deep-seated psychological dependence， this chronic lack of inner independence，is the great vulnerability of our age.
+Seeking comfort, validation, and the constant reassurance of company, individuals herd together in digital and physical spaces alike. They trade their autonomy for the fleeting warmth of crowds, leaning on external opinions to prop up a hollow sense of self. This deep-seated psychological dependence, this chronic lack of inner independence, is the great vulnerability of our age.
 
 And it is a weakness that never goes unexploited. 
 
@@ -16,7 +18,7 @@ And it is a weakness that never goes unexploited.
 
 A vast machinery has emerged precisely to harvest this weakness. Corporate managerialism, algorithmic feeds, and consumer culture do not sell products; they sell the *illusion* of community, security, and comfort. They whisper to the insecure soul: *“Surrender your agency to our systems, follow our metrics, buy our validation, and you will never feel lonely or lost.”*
 
-Yet, the promise is a cruel inversion. The more people rely on these external crutches, the more their inner peace and strength are systematically drained away. They become hyper-efficient cogs in economic engines, yet utterly incompetent at inhabiting their own minds. When crisis strikes, or when the noise fades, they find themselves destitute—stripped of the quiet resilience required to face life on their own terms.
+Yet, the promise is a cruel inversion. The more people rely on these external crutches, the more their inner peace and strength are systematically drained away. They become hyper-efficient cogs in economic engines, yet utterly incompetent at inhabiting their own minds. When crisis strikes, or when the noise fades, they find themselves destitute, stripped of the quiet resilience required to face life on their own terms.
 
 ### Education Beyond the Job Description
 
@@ -24,7 +26,7 @@ If our foundational education remains chained to the narrow dogma of skills-base
 
 For decades, we have treated schools and universities as factories designed to churn out human capital—units trained to execute narrow, specialized functions until technology or market shifts render them obsolete. This utilitarian view of learning ignores the entire arc of human existence. 
 
-True foundational education must provide a **whole-life facility** (全人生修养). It must serve a human being across every season of existence:
+True foundational education must provide a **whole-life facility** (全人生教育). It must serve a human being across every season of existence:
 * As a teenager bewildered by social mirrors and peer pressure;
 * As a working adult drowning in the endless KPIs of corporate managerialism;
 * As a retiree confronting the quiet erosion of worldly relevance;

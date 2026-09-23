@@ -6,7 +6,7 @@ import { getConnectedEntries } from '../../utils/links';
 export async function getStaticPaths() {
   const propositions = await getCollection('propositions');
   return propositions.map((prop) => ({
-    params: { id: prop.id },
+    params: { id: prop.id }, // prop.id will match the filename, or you can use prop.data.title if configured
     props: { prop },
   }));
 }
