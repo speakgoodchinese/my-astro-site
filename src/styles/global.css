@@ -60,3 +60,14 @@ blockquote {
   font-family: var(--font-serif);
   font-style: italic;
 }
+
+article a {
+  color: var(--color-jade, #2b7a78); /* Fallback to your jade theme color */
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+article a:hover {
+  color: var(--color-ink, #222222);
+}
