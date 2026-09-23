@@ -38,6 +38,11 @@ const { explicitLinks, incomingBacklinks } = await getConnectedEntries(
       {prop.data.title}
     </h1>
 
+    {/* Pinyin */}
+    <div class="text-sm font-mono text-ink-muted mb-6">
+      Pinyin: <span class="text-ink font-semibold">{prop.data.pinyin}</span>
+    </div>
+
     {/* Summary Callout Box */}
     {prop.data.summary && (
       <div class="bg-paper-card border-l-3 border-jade p-4 my-6 text-ink-muted font-serif italic text-[0.95rem]">
