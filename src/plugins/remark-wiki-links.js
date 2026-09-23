@@ -24,13 +24,21 @@ function buildWikiMap() {
       const slug = file.replace(/\.(md|mdx)$/, '');
       const urlPath = `/${col.name}/${slug}`;
 
+      // 1. Map the filename slug directly
+      titleToPath.set(slug, urlPath);
+
+      // 2. Map the frontmatter title if present
       const titleMatch = content.match(/^(?:---\s*\n)?[\s\S]*?title:\s*(["']?)([^"'\n\r]+)\1/m);
       if (titleMatch) {
         const primaryTitle = titleMatch[2].trim();
         titleToPath.set(primaryTitle, urlPath);
+        
+        // 3. Map a clean version of the title (stripping commas, punctuation, etc. for flexible matching)
+        const cleanTitle = primaryTitle.replace(/[，,：:?？！!]/g, '').trim();
+        if (cleanTitle !== primaryTitle) {
+          titleToPath.set(cleanTitle, urlPath);
+        }
       }
-      
-      titleToPath.set(slug, urlPath);
     }
   }
 
