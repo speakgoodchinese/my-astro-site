@@ -8,7 +8,7 @@ const posts = await getCollection('posts');
 posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 // Take the top 2 most recent posts
-const recentPosts = posts.slice(0, 2);
+const recentPosts = posts.slice(0, 10);
 ---
 
 <Layout title="大家学华语">

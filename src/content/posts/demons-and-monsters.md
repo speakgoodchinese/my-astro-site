@@ -12,9 +12,7 @@ That chaos is not our dao. We don't want all that. What, then, is our path? How 
 
 ### I. There is a Reason for Everthing
 
-The mortal world is no pure land; it is a slaughterhouse of ambition. When silt and clear water churn together, what surfaces first is never a lofty moral code, but the naked instinct for survival and the rules of brute engagement.
-
-What looks on the surface like grand vision and macro-ideals is, at its root, simply resource allocation and profit-seeking. Absurd decisions, endless friction, and institutional hypocrisy repeat themselves across millennia, endlessly cycling in the service of self-preservation.
+The mortal world is no pure land; it is a slaughterhouse of ambition. What looks on the surface like lofty moral code, grand vision and macro-ideals is, at its root, simply resource allocation and profit-seeking. Absurd decisions, endless friction, and institutional hypocrisy repeat themselves across millennia, endlessly cycling in the service of self-preservation.
 
 Once this is grasped, one ceases to be astonished by the baseness of human nature or to harbor illusions about the magnanimity of the world.
 
