@@ -26,6 +26,6 @@ These figures do not lurk in myth; they sit in high places and walk among us.
 
 ### III. Insight and Self-Preservation
 
-Faced with this tangled, turbid reality, one must be grounded in the absolute nature of one's own self, fixed precisely at the intersection of the external physical reality and the honest internal reflection. The self, an actor in a transient world, moves through the volatile and ever-changing world with [[上善若水|the absolute elasticity of water]], anchored entirely in the [[道不可须臾；可离，非道也|unyielding dao of the self]], never moving apart from the dao, thus preserving the self in its purest form.
+Faced with this tangled, turbid reality, one must be grounded in the absolute nature of one's own self, fixed precisely at the intersection of the external physical reality and the honest internal reflection. The self, an actor in a transient world, moves through the volatile and ever-changing world with [[上善若水|the absolute elasticity of water]], anchored entirely in the [[道不可须臾离；可离，非道也|unyielding dao of the self]], never moving apart from the dao, thus preserving the self in its purest form.
 
 Let the storms rage and the monsters gyrate, while the spirit remains untamed and serene.

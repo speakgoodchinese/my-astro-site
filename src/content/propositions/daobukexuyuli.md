@@ -1,5 +1,5 @@
 ---
-title: "道不可须臾；可离，非道也"
+title: "道不可须臾离；可离，非道也"
 pinyin: "dào bù kě xū yú lí; kě lí, fēi dào yě"
 category: "thoughts"
 subcategory: "classical-philosophy"
