@@ -28,6 +28,7 @@ const termsCollection = defineCollection({
     subcategory: z.string(),
     school: z.string(),
     era: z.string(),
+    sourceText: z.string().optional(),
     summary: z.string(),
     relatedTerms: z.array(z.string()).default([]),
     relatedPropositions: z.array(z.string()).default([]),

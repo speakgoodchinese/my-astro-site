@@ -4,7 +4,8 @@ pinyin: "dào bù kě xū yú lí; kě lí, fēi dào yě"
 category: "thoughts"
 subcategory: "classical-philosophy"
 school: "儒家" # Or whatever school applies (e.g., Confucianism, Taoism)
-era: "先秦"    # Or the relevant era/dynasty
+era: "春秋战国"    # Or the relevant era/dynasty
+sourceText: "《中庸》"
 summary: "The Dao cannot be separated from for even a single instant; if it can be separated from, it is not the true Dao."
 relatedTerms:
   - "道"

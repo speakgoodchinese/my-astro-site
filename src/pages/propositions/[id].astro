@@ -33,6 +33,16 @@ const { explicitLinks, incomingBacklinks } = await getConnectedEntries(
       <span>{prop.data.subcategory}</span>
     </nav>
 
+    {/* Metadata Subtitle */}
+    <div class="text-xs font-sans tracking-wide text-ink-muted uppercase mb-2">
+      {prop.data.school} <span class="mx-1">•</span>{prop.data.era}
+      {prop.data.sourceText && (
+        <>
+          <span class="mx-1">•</span><span class="text-ink font-medium">{prop.data.sourceText}</span>
+        </>
+      )}
+    </div>
+
     {/* Main Proposition Title */}
     <h1 class="wiki-term text-3xl md:text-4xl pb-3 border-b border-border-warm mb-6">
       {prop.data.title}

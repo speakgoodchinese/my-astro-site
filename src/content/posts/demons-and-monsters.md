@@ -12,20 +12,20 @@ The trouble is that their chaos is not our dao - it is not the cause nor the eff
 
 ### I. There is a Reason for Everthing
 
-The mortal world is no pure land; it is a slaughterhouse of ambition. What looks on the surface like lofty moral code, grand vision and macro-ideals is, at its root, simply resource allocation and profit-seeking. Absurd decisions, endless friction, and institutional hypocrisy repeat themselves across millennia, endlessly cycling in the service of self-preservation.
+The mortal world is no pure land; it is a slaughterhouse of ambition. What looks on the surface like lofty moral code, grand vision and macro-ideals is, at its root, simply resource allocation and profit-seeking. Absurd decisions, endless friction, and institutional hypocrisy repeat themselves across millennia in the service of self-preservation.
 
 Once this is grasped, one ceases to be astonished by the baseness of human nature or to harbor illusions about the magnanimity of the world.
 
 ### II. Demons and Monsters in Our World
 
 *   **The Pious Predator:** Urbane and smiling, they weaponize love, care and attention to consume others under the banner of success and belonging, riding roughshod over personal choice and boundaries to soothe their own deep-seated insecurity.
-*   **The Petty Schemer:** Devoid of substance, they excel entirely in performance and calculation. They wrap a hollow core in grandiose rhetoric, proving themselves top-tier experts at creating conflict and changes when stability is required.
+*   **The Petty Schemer:** Devoid of substance, they excel entirely in performance and calculation. They wrap a hollow core in grandiose rhetoric, proving themselves top-tier experts at creating conflict when stability is required.
 *   **The Dogmatic Zealot:** Rigid in thought and fueled by self-righteous dogmas. They cling to ideological narratives, slowly suffocating independent thought through policing and bullying.
 
 These figures do not lurk in myth; they sit in high places and walk among us.
 
 ### III. Insight and Self-Preservation
 
-Faced with this tangled, turbid reality, one must be grounded in the absolute nature of one's own self, fixed precisely at the intersection of the external physical reality and the honest internal reflection. The self, an actor in a transient world, moves through the volatile and ever-changing world with [[上善若水|the absolute elasticity of water]], anchored entirely in the [[道不可须臾离；可离，非道也|unyielding dao of the self]], never moving apart from the dao, thus preserving the self in its purest form.
+Faced with this tangled, turbid reality, one must be grounded in the absolute nature of one's own self, fixed precisely at the intersection of the external physical reality and the honest internal reflection. The self, an actor in a transient world, moves through the volatile and ever-changing world with [[上善若水|the absolute elasticity of water]], anchored entirely in the [[道不可须臾离；可离，非道也|unyielding dao of the self]], never moving apart from it, thus preserving the self in its purest form.
 
 Let the storms rage and the monsters gyrate, while the spirit remains untamed and serene.
