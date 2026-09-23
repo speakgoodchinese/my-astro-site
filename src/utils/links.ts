@@ -9,14 +9,19 @@ export interface LinkedItem {
 }
 
 /**
- * Resolves explicit links and incoming backlinks for a given entry ID and type.
+ * Resolves explicit links and incoming backlinks for a given entry ID and type using titles.
  */
 export async function getConnectedEntries(currentId: string, currentType: 'term' | 'proposition', explicitTerms: string[] = [], explicitProps: string[] = []) {
   const allTerms = await getCollection('terms');
   const allPropositions = await getCollection('propositions');
 
-  // Map collections into uniform structures for easy lookup
-  const termMap = new Map(allTerms.map(t => [t.id, {
+  // Find current entry's title to properly skip self-references in backlinks
+  const currentTermObj = allTerms.find(t => t.id === currentId);
+  const currentPropObj = allPropositions.find(p => p.id === currentId);
+  const currentTitle = currentTermObj ? currentTermObj.data.term : (currentPropObj ? currentPropObj.data.title : '');
+
+  // Map collections by their TITLE for easy lookup from frontmatter arrays
+  const termMapByTitle = new Map(allTerms.map(t => [t.data.term, {
     id: t.id,
     title: t.data.term,
     type: 'term' as const,
@@ -26,7 +31,7 @@ export async function getConnectedEntries(currentId: string, currentType: 'term'
     relatedPropositions: t.data.relatedPropositions || []
   }]));
 
-  const propMap = new Map(allPropositions.map(p => [p.id, {
+  const propMapByTitle = new Map(allPropositions.map(p => [p.data.title, {
     id: p.id,
     title: p.data.title,
     type: 'proposition' as const,
@@ -36,36 +41,44 @@ export async function getConnectedEntries(currentId: string, currentType: 'term'
     relatedPropositions: p.data.relatedPropositions || []
   }]));
 
-  // 1. Resolve Explicit Forward Links
+  // Also keep an ID-based map or direct lookup for backlink comparisons
+  const termMap = new Map(allTerms.map(t => [t.id, termMapByTitle.get(t.data.term)!]));
+  const propMap = new Map(allPropositions.map(p => [p.id, propMapByTitle.get(p.data.title)!]));
+
+  // 1. Resolve Explicit Forward Links (using titles from frontmatter)
   const explicitLinks: LinkedItem[] = [];
   
-  for (const tId of explicitTerms) {
-    if (termMap.has(tId)) {
-      const item = termMap.get(tId)!;
+  for (const tTitle of explicitTerms) {
+    if (termMapByTitle.has(tTitle)) {
+      const item = termMapByTitle.get(tTitle)!;
       explicitLinks.push({ id: item.id, title: item.title, type: item.type, url: item.url, summary: item.summary });
     }
   }
 
-  for (const pId of explicitProps) {
-    if (propMap.has(pId)) {
-      const item = propMap.get(pId)!;
+  for (const pTitle of explicitProps) {
+    if (propMapByTitle.has(pTitle)) {
+      const item = propMapByTitle.get(pTitle)!;
       explicitLinks.push({ id: item.id, title: item.title, type: item.type, url: item.url, summary: item.summary });
     }
   }
 
-  // 2. Resolve Implicit Backlinks (Incoming references pointing to currentId)
+  // 2. Resolve Implicit Backlinks (Incoming references pointing to currentTitle or currentId)
   const incomingBacklinks: LinkedItem[] = [];
 
   for (const [_, term] of termMap) {
     if (term.id === currentId && currentType === 'term') continue;
-    if (term.relatedTerms.includes(currentId) || (currentType === 'proposition' && term.relatedPropositions.includes(currentId))) {
+    // Check if term references us by our title or id
+    if (term.relatedTerms.includes(currentTitle) || term.relatedTerms.includes(currentId) || 
+        (currentType === 'proposition' && (term.relatedPropositions.includes(currentTitle) || term.relatedPropositions.includes(currentId)))) {
       incomingBacklinks.push({ id: term.id, title: term.title, type: term.type, url: term.url, summary: term.summary });
     }
   }
 
   for (const [_, prop] of propMap) {
     if (prop.id === currentId && currentType === 'proposition') continue;
-    if (prop.relatedPropositions.includes(currentId) || (currentType === 'term' && prop.relatedTerms.includes(currentId))) {
+    // Check if prop references us by our title or id
+    if (prop.relatedPropositions.includes(currentTitle) || prop.relatedPropositions.includes(currentId) || 
+        (currentType === 'term' && (prop.relatedTerms.includes(currentTitle) || prop.relatedTerms.includes(currentId)))) {
       incomingBacklinks.push({ id: prop.id, title: prop.title, type: prop.type, url: prop.url, summary: prop.summary });
     }
   }

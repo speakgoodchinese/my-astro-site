@@ -64,11 +64,10 @@ const { explicitLinks, incomingBacklinks } = await getConnectedEntries(
     {/* Bidirectional Cross-References Section */}
     {(explicitLinks.length > 0 || incomingBacklinks.length > 0) && (
       <section class="mt-12 pt-6 border-t border-border-warm space-y-8">
-        <h3 class="font-serif text-lg font-bold text-ink mb-3">Related Concepts & Cross-References 相关概念</h3>
+        <h3 class="font-serif text-lg font-bold text-ink mb-3">Cross-Reference 对参</h3>
         
         {explicitLinks.length > 0 && (
           <div>
-            <h4 class="text-xs uppercase text-ink-muted tracking-[0.08em] font-bold font-sans mb-3">Direct Connections 直接连接</h4>
             <ul class="list-none p-0 space-y-3">
               {explicitLinks.map(link => (
                 <li class="bg-paper-card border border-border-warm p-4 rounded-lg shadow-2xs">

@@ -49,7 +49,7 @@ const { Content } = await render(post);
               {(post.data.relatedTerms || post.data.terms).map((term: string) => (
                 <a 
                   href={`/terms/${term.trim()}`}
-                  class="px-2 py-0.5 bg-paper-card text-jade hover:bg-jade hover:text-white transition rounded border border-border-warm"
+                  class="!no-underline px-2 py-0.5 bg-paper-card text-jade hover:bg-jade hover:text-white transition rounded border border-border-warm"
                 >
                   {term}
                 </a>
@@ -65,7 +65,7 @@ const { Content } = await render(post);
               {(post.data.relatedPropositions || post.data.propositions).map((prop: string) => (
                 <a 
                   href={`/propositions/shengyouya-zhiwuya`}
-                  class="px-2 py-0.5 bg-paper-card text-jade hover:bg-jade hover:text-white transition rounded border border-border-warm"
+                  class="!no-underline px-2 py-0.5 bg-paper-card text-jade hover:bg-jade hover:text-white transition rounded border border-border-warm"
                 >
                   {prop}
                 </a>

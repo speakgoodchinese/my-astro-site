@@ -38,6 +38,6 @@ No amount of technical upskilling, coding bootcamps, or productivity frameworks 
 
 How is such whole-life facility cultivated? Not through spreadsheets or technical manuals, but through deep, unhurried engagement with classical literature and philosophy. 
 
-The enduring texts of the past, whether the introspective rigors of *The Great Learning* or the unyielding poise of historical scholars, do not teach you how to operate software or optimize a supply chain. They do something far more radical: they hold up a mirror to the human condition. They teach the mind how to stand alone without feeling desolate; how to find companionship in timeless ideas rather than ephemeral applause; and how to preserve an unshakeable inner peace amidst a chaotic world.
+The enduring texts of the past, whether the introspective rigours of *[[大学|The Great Learning]]* or the unyielding poise of historical scholars, do not teach you how to operate software or optimize a supply chain. They do something far more radical: they hold up a mirror to the human condition. They teach the mind how to stand alone without feeling desolate; how to find companionship in timeless ideas rather than ephemeral applause; and how to preserve an unshakeable inner peace amidst a chaotic world.
 
 When we return to these works, we stop being passive consumers of commercial validation. We reclaim our footing, step out of the corporate fog, and remember what it means to be fully, independently human.
