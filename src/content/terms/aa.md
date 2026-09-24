@@ -1,0 +1,25 @@
+欲界 (Yùjiè / Kāmadhātu)
+Category: Buddhist Cosmology / Psychological Realms
+
+Sanskrit Equivalent: Kāmadhātu (Realm of Desire)
+
+Overview
+欲界 (Yùjiè), or the Desire Realm, is the lowest of the three traditional realms of samsara in Buddhist cosmology (alongside the Form Realm and the Formless Realm). It is a domain where sentient beings—ranging from hell-dwellers and hungry ghosts to animals, humans, and certain lower-tier heavenly deities—are fundamentally bound by sensory attachment, material cravings, and unquenchable emotional desires.
+
+In scholastic texts like the Abhidharmakośa-bhāṣya (Abhidharmakośa), the Desire Realm is mapped not merely as a physical place, but as a condition of existence governed by three primal drives: food, sex, and sleep.
+
+Core Characteristics
+Driven by Craving: Unlike higher realms where beings transcend gross physicality, beings in the Desire Realm experience reality primarily through the filter of sensory contact (sight, sound, smell, taste, touch, and mental phenomena) coupled with relentless grasping (taṇhā / kāma).
+
+The "Burning House" Metaphor: In Mahayana literature (such as the Lotus Sutra), the worldly human experience within the Desire Realm is famously likened to a Huózhuái (Burning House)—a chaotic theater where individuals are consumed by the fires of greed, anger, and ignorance while remaining distracted by trivial pursuits.
+
+Internal Logic of Survival: Far from being a random expanse of suffering, existence within this realm operates on a strict, transactional logic of resource allocation, self-preservation, and competitive ambition.
+
+Cosmological Structure
+According to the Abhidharma framework, the Desire Realm comprises a vertical hierarchy of planes:
+
+Lower Depths: The Hells (Niraya), Hungry Ghosts (Preta), and Animal realms—driven primarily by aversion, terror, and base survival.
+
+The Human Plane: The central arena of moral choice, intellectual capacity, and the potential for awakening.
+
+Desire Heavens: Higher planes of sensory pleasure and longevity (such as the Heaven of the Four Great Kings up to the Paranirmita-vasavartin heavens), where beings still remain tethered to ego and desire despite immense comfort.

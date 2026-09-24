@@ -1,5 +1,5 @@
 ---
-title: "道在屎溺：红尘世故里的妖魔鬼怪"
+title: "道在尿溺：红尘世故里的妖魔鬼怪"
 description: "An unsparing dissection of human nature and the imperative of aligning with one's inner dao amidst systemic chaos."
 relatedTerms:
   - "道"
