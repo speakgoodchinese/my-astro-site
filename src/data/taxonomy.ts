@@ -29,8 +29,12 @@ export const TAXONOMY: CategoryMeta[] = [
     cta: 'Investigate the rigorous interplay between words, names, and ultimate reality - examining how language bridges, or fails to capture, transcendent truth.',
     subcategories: [
       { id: 'semantics', title: 'Rectification of Names (名实之辨)', cta: 'Study the precise correspondence between words, titles, and actual behavior or reality.' },
-      { id: 'transcendence', title: 'Words and Intent (言意之辨)', cta: 'Analyze the philosophical limitations of language in capturing ultimate, unspoken truths.' },
+      { id: 'pragmatics', title: 'Words and Intent (言意之辨)', cta: 'Analyze the philosophical limitations of language in capturing ultimate, unspoken truths.' },
       { id: 'logic', title: 'Dialectics & Argumentation (名辩思辨)', cta: 'Focus on the logic and disputation in analysis, paradoxes, and rhetorical debate.' },
+      { id: 'rhetoric', title: 'Framing & Spin (构架)', cta: 'Building the boundaries of acceptable thought.' },
+      { id: 'narrative', title: 'Discourse Analysis (叙事)', cta: 'Exposing the official institutional story.' },
+      { id: 'word soup', title: 'Implicature & Subtext (相场)', cta: 'Sizing up the power dynamics and situational register.' },
+      { id: 'semiotic', title: 'Conceptual Metaphor (假借)', cta: 'Unmasking how abstract systems hijack physical concepts to mask reality.' },
     ],
   },
   {
