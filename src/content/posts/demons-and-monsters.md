@@ -27,7 +27,7 @@ These figures do not lurk in myth; they sit in high places and walk among us.
 
 ### III. Insight and Self-Preservation
 
-Everything possesses its own inherent nature (dao), even the demons and the monsters, and one must act in accordance with that specific nature. By allowing things to develop according to their own laws, you ultimately harmonize with [[无为|the spontaneous order of things]] and benefit from them.
+Everything possesses its own inherent nature (dao), even the demons and the monsters, and one must act in accordance with that specific nature. By harmonize with [[无为|the spontaneous order of things]], you ultimately benefit from them.
 
 And so, the self, an actor in a transient world, moves through the ever-changing landscape with [[上善若水|the absolute elasticity of water]], anchored in the [[道不可须臾离|unyielding dao of the self]], never moving apart from it, thus preserving the self in its purest form.
 
