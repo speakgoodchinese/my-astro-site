@@ -20,7 +20,7 @@ Once this is grasped, one ceases to be astonished by the baseness of human natur
 Here are the archetypes operating out of this constrained world.
 
 *   **The Pious Predator:** Urbane and smiling, they weaponize love, care and attention to consume others under the banner of success and belonging, riding roughshod over personal choice and boundaries to soothe their own deep-seated insecurity.
-*   **The Petty Schemer:** Exceptionally sharp and suave, they excel at reading power dynamics, stroking egos, and opportunistic positioning. They wrap a hollow core in grandiose rhetoric and polished flattery, masking a total absence of integrity, and prove themselves top-tier experts at creating conflict when stability is required.
+*   **The Petty Schemer:** Exceptionally sharp and suave, they excel at reading power dynamics, stroking egos, and opportunistic positioning, masking a total absence of integrity, and proving themselves top-tier experts in the conflict theory of change.
 *   **The Dogmatic Zealot:** Rigid in thought and fueled by self-righteous dogmas. They cling to ideological narratives, slowly suffocating independent thought through policing and bullying.
 
 These figures do not lurk in myth; they sit in high places and walk among us.
