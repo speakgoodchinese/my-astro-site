@@ -20,14 +20,14 @@ Once this is grasped, one ceases to be astonished by the baseness of human natur
 Here are the archetypes operating out of this constrained world.
 
 *   **The Pious Predator:** Urbane and smiling, they weaponize love, care and attention to consume others under the banner of success and belonging, riding roughshod over personal choice and boundaries to soothe their own deep-seated insecurity.
-*   **The Petty Schemer:** Devoid of substance, they excel entirely in performance and calculation. They wrap a hollow core in grandiose rhetoric and deceitful flattery, proving themselves top-tier experts at creating conflict when stability is required.
+*   **The Petty Schemer:** Exceptionally sharp and suave, they excel at reading power dynamics, stroking egos, and opportunistic positioning. They wrap a hollow core in grandiose rhetoric and polished flattery, masking a total absence of integrity, and prove themselves top-tier experts at creating conflict when stability is required.
 *   **The Dogmatic Zealot:** Rigid in thought and fueled by self-righteous dogmas. They cling to ideological narratives, slowly suffocating independent thought through policing and bullying.
 
 These figures do not lurk in myth; they sit in high places and walk among us.
 
 ### III. Insight and Self-Preservation
 
-Everything possesses its own inherent nature (dao), even the demons and the monsters, and one must act in accordance with that specific nature. By harmonize with [[无为|the spontaneous order of things]], you ultimately benefit from them.
+Everything possesses its own inherent nature (dao), even the demons and the monsters, and one must act in accordance with that specific nature. By harmonizing with [[无为|the spontaneous order of things]], you ultimately benefit from them.
 
 And so, the self, an actor in a transient world, moves through the ever-changing landscape with [[上善若水|the absolute elasticity of water]], anchored in the [[道不可须臾离|unyielding dao of the self]], never moving apart from it, thus preserving the self in its purest form.
 
