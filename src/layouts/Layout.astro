@@ -90,25 +90,11 @@ const recentAdditions = recentItems.slice(0, 5);
       {/* Left Sidebar: Taxonomy & Reflections (Collapsible on mobile) */}
       <aside id="sidebar" class="hidden md:block border-r border-border-warm pr-6 bg-paper md:bg-transparent">
         
-        {/* Mobile-only recent additions section injected at top of mobile menu drawer */}
+        {/* Mobile-only posts archive link injected at top of mobile menu drawer */}
         <div class="block lg:hidden mb-6 pb-6 border-b border-border-warm">
-          <h4 class="mt-0 text-[0.85rem] uppercase text-ink-muted tracking-[0.08em] font-bold font-sans mb-3">
-            Recent Additions 近期更新
-          </h4>
-          <ul class="list-none p-0 m-0 space-y-3 text-[0.9rem]">
-            {recentAdditions.map((item) => (
-              <li>
-                <div class="flex items-center justify-between gap-2">
-                  <a href={item.url} class="wiki-term block leading-snug text-[0.95rem] font-serif">
-                    {item.title}
-                  </a>
-                  <span class="text-[10px] font-mono px-1 py-0.5 rounded bg-paper-card border border-border-warm text-ink-muted shrink-0">
-                    {item.type}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <a href="/posts" class="font-bold font-serif text-cinnabar no-underline block text-[1.05rem] hover:opacity-80 transition">
+            Posts 随笔 →
+          </a>
         </div>
 
         <h4 class="mt-0 text-[0.85rem] uppercase text-ink-muted tracking-[0.08em] font-bold font-sans">
@@ -131,8 +117,10 @@ const recentAdditions = recentItems.slice(0, 5);
             </ul>
           </div>
         ))}
+        
+        {/* Bulletproof Divider */}
+        <div class="h-[1px] bg-border-warm my-6"></div>
 
-        <hr class="border-none border-t border-border-warm my-6" />
         <h4 class="text-[0.85rem] uppercase text-ink-muted tracking-[0.08em] font-bold font-sans">
           Reflections
         </h4>
@@ -140,6 +128,30 @@ const recentAdditions = recentItems.slice(0, 5);
           <li><a href="/random-notes" class="no-underline text-ink-muted hover:text-ink">Random Notes 偶感</a></li>
           <li><a href="/miscellaneous" class="no-underline text-ink-muted hover:text-ink">Miscellaneous 杂类</a></li>
         </ul>
+
+        {/* Mobile-only Recent Additions Section */}
+        <div class="block lg:hidden">
+          {/* Bulletproof Divider */}
+          <div class="h-[1px] bg-border-warm my-6"></div>
+          <h4 class="mt-0 text-[0.85rem] uppercase text-ink-muted tracking-[0.08em] font-bold font-sans mb-3">
+            Recent Additions 近期更新
+          </h4>
+          <ul class="list-none p-0 m-0 space-y-3 text-[0.9rem] mb-6">
+            {recentAdditions.map((item) => (
+              <li>
+                <div class="flex items-center justify-between gap-2">
+                  <a href={item.url} class="wiki-term block leading-snug text-[0.95rem] font-serif">
+                    {item.title}
+                  </a>
+                  <span class="text-[10px] font-mono px-1 py-0.5 rounded bg-paper-card border border-border-warm text-ink-muted shrink-0">
+                    {item.type}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
       </aside>
 
       {/* Center Main Reading / Content Area */}
