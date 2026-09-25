@@ -44,16 +44,6 @@ A picture composition like the one shown below may seem to be inspirational, but
     > 万物有成理而不说 (wàn wù yǒu chéng lǐ ér bù shuō): Immutable. The intrinsic principles inherent in all things are never uttered.
 
 4. **How Information is Packed**  
-   Chinese: Compact (only the bare essential is required to convey the meaning, and additional words are added as required to enhance the meaning).  
-   English: Expanded (over-specified and rule-bound to eliminate ambiguity).
-
-   > Chinese: 下雨了。 (Literal: Descend-rain-particle — "It's raining.") 
-   Stripped to the bare structural skeleton; zero redundancy.
-
-    > English: "It is currently raining outside." 
-    Mandatory dummy subjects ("it"), copular verbs ("is"), and aspect markers ("currently") over-specify the clause to eliminate ambiguity.
-
-4. **How Information is Packed**  
    Chinese: Compact (starts with the bare minimum to convey meaning, adding components only as needed to enrich the scope or to increase the precision when the context demands it).  
    English: Expanded (over-specified and rule-bound, locking down every variable to eliminate ambiguity).
 
