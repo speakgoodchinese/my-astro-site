@@ -7,7 +7,7 @@ date: "2026-09-25"
 ---
 "Who am I?" is a honey pot used by countless con artists to destroy your confidence so they can step in as prophets of truth. Reject the scam immediately. Never surrender your autonomy to them - you know yourself far better than they ever could.
 
-When people fall into this trap, they typically get swallowed by the [[相|thoughts in their mind]] - the psychological construct built from social status, titles, and anxieties. The [[我|ego]] craves complex mental frameworks to generate the dopamine of having "figured it out". But the ego is not the true self; it is the murky storm water. When the ego tries to find itself, it loops endlessly in cognitive work that is never satisfying. This is the true root of losing oneself: mistaking the mind's storm for the true self, and outsourcing awareness to prefabricated answers.
+When people fall into this trap, they typically get swallowed by the [[相|thoughts in their mind]] - the psychological construct built from social status and anxieties. The [[我|ego]] craves complex mental frameworks to generate the dopamine of having "figured it out". But the ego is not the true self; it is the murky storm water. When the ego tries to find itself, it loops endlessly in cognitive work that is never satisfying. This is the true root of losing oneself: mistaking the mind's storm for the true self, and outsourcing awareness to prefabricated answers.
 
 The real answer has always been [[本性|the very nature of yourself]], and you have likely caught glimpses of it before. It is [[活水的源头|the source of the flow]] in our consciousness. Because this flow is already there, you don't need to "achieve" or "cultivate" it - you just have to notice it, and be [[天人感应|touched by that source]].
 
