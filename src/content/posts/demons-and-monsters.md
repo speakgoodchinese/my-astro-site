@@ -5,9 +5,9 @@ relatedTerms:
   - "道"
 date: "2026-09-23"
 ---
-Holy shit! People often exclaim in frustration at the unruly world. Yet, observe the chaotic theater of human affairs with care, and a pattern emerges: even the most base and foul matter operates according to a strict, internal logic.
+Holy shit! People often exclaim in frustration at the unruly world. Yet, observe the human affairs with care, and a pattern emerges: even the most base and foul matter operates according to a strict, internal logic.
 
-The trouble is that their chaos is not our dao - that is not in our nature. What, then, is our path? How must we act and react amidst a volatile, violent world? The answer demands that we first know ourselves, and then adapt to external shifts without buckling or overreacting.
+The trouble is that the logic of what is foul is not our way, and we walk away. What, then, is our path? How must we act and react amidst a volatile, violent world? The answer demands that we first know ourselves, and then adapt to external shifts without buckling or overreacting.
 
 ### I. There is a Reason for Everything
 
