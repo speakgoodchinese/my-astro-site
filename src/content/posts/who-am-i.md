@@ -13,11 +13,11 @@ The real answer has always been [[本性|the very nature of yourself]], and you 
 
 The flow can feel subtle at first. You will have to be quiet to feel it. Laozi said that it could hardly be seen, heard, or grasped.
 
-视之不见，名曰夷；听之不闻，名曰希；搏之不得，名曰微
+> 视之不见，名曰夷；听之不闻，名曰希；搏之不得，名曰微
 
 Look at it, feel it, and you will see the wonder of it. You will see that it springs from a boundless expanse so vast that we stand before it in awe without being able to describe it with words.
 
-大音希声，大象无形。道隐无名。
+> 大音希声，大象无形。道隐无名。
 
 This realization doesn't come through grand theories, but through resonance, much like a string vibrating in its own tone.
 
