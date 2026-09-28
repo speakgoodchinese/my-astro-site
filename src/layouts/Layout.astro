@@ -91,8 +91,11 @@ const recentAdditions = recentItems.slice(0, 5);
       {/* Left Sidebar: Taxonomy & Reflections (Collapsible on mobile) */}
       <aside id="sidebar" class="hidden md:block border-r border-border-warm pr-6 bg-paper md:bg-transparent">
         
-        {/* Mobile-only posts archive link injected at top of mobile menu drawer */}
-        <div class="block lg:hidden mb-6 pb-6 border-b border-border-warm">
+        {/* Mobile-only primary nav links injected at top of mobile menu drawer */}
+        <div class="block lg:hidden mb-6 pb-6 border-b border-border-warm space-y-3">
+          <a href="/dictionary" class="font-bold font-serif text-jade no-underline block text-[1.05rem] hover:opacity-80 transition">
+            Dictionary 字典 →
+          </a>
           <a href="/posts" class="font-bold font-serif text-cinnabar no-underline block text-[1.05rem] hover:opacity-80 transition">
             Posts 随笔 →
           </a>
