@@ -1,0 +1,590 @@
+---
+/**
+ * Stroke-order input component with dual modes + multi-slot character entry:
+ *
+ * - Desktop (md+): Listen to physical keyboard QWERTY zones → 5 strokes + wildcard通配
+ *     QWERT = 横 一 (jade)
+ *     YUIOP = 竖 丨 (sky)
+ *     ASDFG = 点 丶 (cinnabar)   ← swapped, previously 撇
+ *     HJKL  = 撇 丿 (violet)      ← swapped, previously 点
+ *     ZXCVBNM = 折 𠃊 (amber)
+ *     SPACE / * / ? = 通配 wildcard
+ *   Backspace = undo last stroke (or last committed char); Esc = clear; Enter preserved.
+ *
+ * - Mobile: 6 tappable stroke buttons 2x3 keypad (right column, same layout as desktop). Left = 候选字 Probable (2x3 cap). Same layout across all breakpoints.
+ *
+ * - Probable chars panel: As strokes are typed, matching characters are listed
+ *   (stroke prefix match). Click a probable char to commit it into its own slot;
+ *   stroke chips clear so the next character can be entered, enabling multi-char
+ *   word entry directly via stroke input.
+ *
+ * Emits CustomEvent('strokeInputChange', {
+ *   bubbles: true,
+ *   detail: {
+ *     prefix: StrokeType[],                 // current (in-progress) slot strokes
+ *     committedChars: string[],             // already committed characters
+ *     combinedText: string,                 // committedChars.join('')
+ *     currentSlotPrefix: StrokeType[],      // same as prefix, explicit name
+ *   }
+ * }) on every change for parent listeners (dictionary page, search).
+ */
+---
+
+<div
+  id="stroke-input-root"
+  class="rounded-2xl border border-border-warm bg-paper-card/60 shadow-2xs p-3 md:p-4 space-y-3"
+  role="group"
+  aria-label="笔画输入 Stroke input"
+>
+  <div class="flex items-center justify-between flex-wrap gap-2">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="text-xs font-sans font-bold uppercase tracking-wider text-ink-muted">
+        笔画输入 · Stroke Input
+      </span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <button
+        type="button"
+        id="stroke-undo-btn"
+        class="text-[11px] font-sans px-2 py-1 rounded-lg bg-white border border-border-warm text-ink-muted hover:text-ink hover:border-ink/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+        aria-label="撤销上一笔 Undo last stroke"
+        disabled
+      >
+        ↶ Undo
+      </button>
+      <button
+        type="button"
+        id="stroke-clear-btn"
+        class="text-[11px] font-sans px-2 py-1 rounded-lg bg-white border border-border-warm text-ink-muted hover:text-ink hover:border-ink/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+        aria-label="清空 Clear all strokes"
+        disabled
+      >
+        ✕ Clear
+      </button>
+    </div>
+  </div>
+
+  <!-- Side-by-side: LEFT = Probable characters (3x2 cap), RIGHT = Stroke buttons (2x3) -->
+  <div class="stroke-dual-layout" aria-label="Probable characters on left, stroke buttons on right">
+    <!-- LEFT: Header label above the 6-box holder + fixed reserved 3×2 probable characters -->
+    <div class="stroke-left-col flex flex-col">
+      <div id="stroke-probable-label" class="stroke-probable-label mb-1.5 md:mb-2">
+        <span class="text-[10px] font-sans uppercase tracking-wider text-ink-muted">
+          候选字 Probable characters · <span id="stroke-probable-count">0</span>
+        </span>
+      </div>
+      <div
+        id="stroke-probable-holder"
+        class="stroke-probable-holder rounded-2xl border border-dashed border-border-warm/70 bg-white/40 flex flex-1"
+        aria-label="候选字 Probable characters"
+      >
+        <div
+          id="stroke-probable"
+          class="hidden w-full"
+          role="listbox"
+          aria-label="候选字 Probable characters"
+        ></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: label-sized spacer above 2x3 stroke buttons so left/right grid align -->
+    <div class="stroke-right-col flex flex-col">
+      <div class="stroke-right-spacer mb-1.5 md:mb-2" aria-hidden="true"></div>
+      <div class="stroke-pad" aria-label="笔画按钮 Stroke buttons">
+      <div class="pad-row pad-row-1">
+        <button type="button" class="pad-btn pad-btn-横 stroke-btn" data-stroke="横">
+          <span class="pad-keys">Q W E R T</span>
+          <span class="pad-sym">一</span>
+        </button>
+        <button type="button" class="pad-btn pad-btn-竖 stroke-btn" data-stroke="竖">
+          <span class="pad-keys">Y U I O P</span>
+          <span class="pad-sym">丨</span>
+        </button>
+        <button type="button" class="pad-btn pad-btn-撇 stroke-btn" data-stroke="撇">
+          <span class="pad-keys">H J K L</span>
+          <span class="pad-sym">丿</span>
+        </button>
+      </div>
+      <div class="pad-row pad-row-2">
+        <button type="button" class="pad-btn pad-btn-点 stroke-btn" data-stroke="点">
+          <span class="pad-keys">A S D F G</span>
+          <span class="pad-sym">丶</span>
+        </button>
+        <button type="button" class="pad-btn pad-btn-折 stroke-btn" data-stroke="折">
+          <span class="pad-keys">Z X C V B N M</span>
+          <span class="pad-sym">𠃊</span>
+        </button>
+        <button type="button" class="pad-btn pad-btn-通配 stroke-btn" data-stroke="通配">
+          <span class="pad-keys pad-keys-wild">*</span>
+          <span class="pad-sym">通配</span>
+        </button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  type StrokeType = '横' | '竖' | '撇' | '点' | '折' | '通配';
+  const BASE_META: Record<Exclude<StrokeType, '通配'>, { sym: string; cls: string; txt: string }> = {
+    横: { sym: '一', cls: 'bg-jade/10 border-jade/30 text-jade', txt: 'text-jade' },
+    竖: { sym: '丨', cls: 'bg-sky-500/10 border-sky-400/30 text-sky-700', txt: 'text-sky-700' },
+    撇: { sym: '丿', cls: 'bg-violet-500/10 border-violet-400/30 text-violet-700', txt: 'text-violet-700' },
+    点: { sym: '丶', cls: 'bg-cinnabar/10 border-cinnabar/30 text-cinnabar', txt: 'text-cinnabar' },
+    折: { sym: '𠃊', cls: 'bg-amber-500/10 border-amber-400/40 text-amber-700', txt: 'text-amber-700' },
+  };
+  const META: Record<StrokeType, { sym: string; cls: string; txt: string }> = {
+    ...BASE_META,
+    通配: { sym: '＊', cls: 'bg-slate-500/10 border-slate-400/30 text-slate-700', txt: 'text-slate-700' },
+  };
+  function charToStroke(ch: string): StrokeType | null {
+    const u = ch.toUpperCase();
+    if ('QWERT'.includes(u)) return '横';
+    if ('YUIOP'.includes(u)) return '竖';
+    if ('ASDFG'.includes(u)) return '点';
+    if ('HJKL'.includes(u)) return '撇';
+    if ('ZXCVBNM'.includes(u)) return '折';
+    if ('*?X'.includes(u) || u === 'SPACE') return '通配';
+    return null;
+  }
+  function strokeMatchesChar(seq: StrokeType[] | undefined, prefix: StrokeType[]): boolean {
+    if (prefix.length === 0) return true;
+    if (!seq || seq.length < prefix.length) return false;
+    for (let i = 0; i < prefix.length; i++) {
+      const s = prefix[i];
+      if (s === '通配') continue;
+      if (seq[i] !== s) return false;
+    }
+    return true;
+  }
+  interface CharEntry { char: string; sequence: StrokeType[]; pinyin?: string; strokes?: number; }
+  const root = document.getElementById('stroke-input-root')!;
+  const probLabelCount = document.getElementById('stroke-probable-count') as HTMLSpanElement | null;
+  const probHolder = document.getElementById('stroke-probable-holder')!;
+  const probEl = document.getElementById('stroke-probable')!;
+  const undoBtn = document.getElementById('stroke-undo-btn') as HTMLButtonElement;
+  const clearBtn = document.getElementById('stroke-clear-btn') as HTMLButtonElement;
+  let prefix: StrokeType[] = [];
+  let committedChars: string[] = [];
+  let charPromise: Promise<CharEntry[]> | null = null;
+  let charList: CharEntry[] | null = null;
+  function loadChars(): Promise<CharEntry[]> {
+    if (charList) return Promise.resolve(charList);
+    if (charPromise) return charPromise;
+    charPromise = fetch('/dictionary-index.json', { cache: 'no-cache' })
+      .then((r) => r.json())
+      .then((idx: any) => {
+        const arr: CharEntry[] = Array.isArray(idx?.allChars) ? idx.allChars.map((c: any) => ({
+          char: c.char,
+          sequence: Array.isArray(c.strokeSequence) ? c.strokeSequence : [],
+          pinyin: typeof c.pinyin === 'string' ? c.pinyin : undefined,
+          strokes: typeof c.strokes === 'number' ? c.strokes : (Array.isArray(c.strokeSequence) ? c.strokeSequence.length : undefined),
+        })) : [];
+        charList = arr;
+        return arr;
+      })
+      .catch((e) => {
+        console.warn('stroke-input: failed to load char list', e);
+        charList = [];
+        return [];
+      });
+    return charPromise;
+  }
+  function emit() {
+    root.dispatchEvent(new CustomEvent('strokeInputChange', {
+      bubbles: true,
+      detail: {
+        prefix: prefix.slice(),
+        committedChars: committedChars.slice(),
+        combinedText: committedChars.join(''),
+        currentSlotPrefix: prefix.slice(),
+      },
+    }));
+  }
+  function renderProbable() {
+    if (prefix.length === 0) {
+      probEl.classList.add('hidden');
+      probEl.innerHTML = '';
+      if (probLabelCount) probLabelCount.textContent = '0';
+      return;
+    }
+    void loadChars().then((list) => {
+      const matched = list
+        .filter((c) => strokeMatchesChar(c.sequence, prefix))
+        .sort((a, b) => {
+          const sa = a.strokes ?? a.sequence?.length ?? 0;
+          const sb = b.strokes ?? b.sequence?.length ?? 0;
+          if (sa !== sb) return sa - sb;
+          return (a.pinyin || '').localeCompare(b.pinyin || '', 'zh-Hans-CN');
+        })
+        .slice(0, 24);
+      if (matched.length === 0) {
+        probEl.classList.add('hidden');
+        probEl.innerHTML = '';
+        if (probLabelCount) probLabelCount.textContent = '0';
+        return;
+      }
+      probEl.classList.remove('hidden');
+      if (probLabelCount) probLabelCount.textContent = String(matched.length);
+      const wrap = document.createElement('div');
+      wrap.className = 'stroke-probable-wrap';
+      for (const c of matched) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'probable-btn';
+        btn.setAttribute('role', 'option');
+        btn.setAttribute('aria-selected', 'false');
+        btn.dataset.char = c.char;
+        btn.innerHTML = `
+          <span class="probable-char">${c.char}</span>
+          ${c.pinyin ? `<span class="probable-py">${c.pinyin}</span>` : ''}
+        `;
+        btn.addEventListener('click', () => {
+          committedChars.push(c.char);
+          prefix = [];
+          render();
+        });
+        wrap.appendChild(btn);
+      }
+      probEl.innerHTML = '';
+      probEl.appendChild(wrap);
+    });
+  }
+  function render() {
+    const canUndo = prefix.length > 0 || committedChars.length > 0;
+    undoBtn.disabled = !canUndo;
+    clearBtn.disabled = !canUndo;
+    renderProbable();
+    emit();
+  }
+  function addStroke(s: StrokeType) {
+    prefix.push(s);
+    if (prefix.length > 40) prefix = prefix.slice(-40);
+    render();
+  }
+  function undoOnce() {
+    if (prefix.length > 0) {
+      prefix.pop();
+      return true;
+    }
+    if (committedChars.length > 0) {
+      committedChars.pop();
+      return true;
+    }
+    return false;
+  }
+  undoBtn.addEventListener('click', () => {
+    undoOnce();
+    render();
+  });
+  clearBtn.addEventListener('click', () => {
+    prefix = [];
+    committedChars = [];
+    render();
+  });
+  root.querySelectorAll<HTMLButtonElement>('.stroke-btn').forEach((b) => {
+    b.addEventListener('click', () => {
+      const s = b.dataset.stroke as StrokeType;
+      if (s) addStroke(s);
+    });
+  });
+  function isTypingTarget(e: KeyboardEvent) {
+    const t = e.target as HTMLElement | null;
+    if (!t) return false;
+    const tag = (t.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || tag === 'select') return true;
+    if (t.isContentEditable) return true;
+    // Avoid interfering when probable list / committed glyphs in stroke component own focus
+    if (t.closest && t.closest('#stroke-probable')) return false;
+    if (t.closest && t.closest('#stroke-input-root') && tag === 'button') return false;
+    return false;
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'Backspace') {
+      if (isTypingTarget(e)) return;
+      if (!undoOnce()) return;
+      e.preventDefault();
+      render();
+      return;
+    }
+    if (e.key === 'Escape') {
+      if (prefix.length === 0 && committedChars.length === 0) return;
+      prefix = [];
+      committedChars = [];
+      render();
+      return;
+    }
+    if (e.key === ' ') {
+      if (isTypingTarget(e)) return;
+      e.preventDefault();
+      addStroke('通配');
+      return;
+    }
+    if (e.key && e.key.length === 1) {
+      if (isTypingTarget(e)) return;
+      const s = charToStroke(e.key);
+      if (!s) return;
+      e.preventDefault();
+      addStroke(s);
+    }
+  });
+  // Kick off char list loading ASAP so probable panel is populated on first stroke.
+  void loadChars().catch(() => {});
+  // initial render
+  render();
+</script>
+
+<style is:global>
+  /* Dual side-by-side layout: LEFT = Probable (2x3 cap), RIGHT = Stroke buttons (2x3) */
+  #stroke-input-root .stroke-dual-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  /* Mobile viewports (<= 639px) also keep the SAME 2-column side-by-side layout (not stack) — per user req. */
+  @media (max-width: 639px) {
+    #stroke-input-root .stroke-dual-layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.35rem;
+    }
+    #stroke-input-root .pad-keys {
+      display: none !important;
+    }
+    #stroke-input-root .stroke-probable-label { margin-bottom: 0.5rem; }
+  }
+  #stroke-input-root .stroke-pad {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 0.375rem;
+    height: 100%;
+    align-self: stretch;
+    min-height: 0;
+    padding: 0.375rem;
+    box-sizing: border-box;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .stroke-pad {
+      gap: 0.25rem;
+      padding: 0.25rem;
+    }
+  }
+  #stroke-input-root .pad-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
+    gap: 0.375rem;
+    height: 100%;
+    width: 100%;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .pad-row {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: minmax(0, 1fr);
+      gap: 0.25rem;
+    }
+  }
+  #stroke-input-root .pad-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.2rem;
+    border-radius: 0.75rem;
+    background: #ffffff;
+    border: 1px solid var(--color-border-warm, #e6e2dd);
+    font-family: var(--font-serif);
+    transition: all 0.15s ease;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 3.25rem;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .pad-btn {
+      padding: 0.28rem 0.1rem;
+      min-height: 2.8rem;
+      border-radius: 0.6rem;
+    }
+  }
+  #stroke-input-root .pad-btn:hover { box-shadow: 0 1px 2px 0 rgba(0,0,0,0.06); }
+  #stroke-input-root .pad-btn:active { transform: translateY(1px); }
+  #stroke-input-root .pad-keys {
+    font-size: 0.6rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: -0.02em;
+    color: var(--color-ink-muted, #555555);
+    line-height: 1;
+    margin-bottom: 0.1rem;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .pad-keys { font-size: 0.5rem; letter-spacing: -0.04em; }
+  }
+  #stroke-input-root .pad-keys-wild { color: rgb(100, 116, 139); font-size: 0.7rem; }
+  @media (max-width: 639px) {
+    #stroke-input-root .pad-keys-wild { font-size: 0.6rem; }
+  }
+  #stroke-input-root .pad-sym {
+    font-size: 1.45rem;
+    font-family: var(--font-serif);
+    line-height: 1;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .pad-sym { font-size: 1.2rem; }
+  }
+  #stroke-input-root .pad-btn-横:hover { border-color: rgba(59,90,92,0.35); background: rgba(59,90,92,0.05); color: var(--color-jade); }
+  #stroke-input-root .pad-btn-竖:hover { border-color: rgba(56,189,248,0.4); background: rgba(14,165,233,0.06); color: rgb(7, 89, 133); }
+  #stroke-input-root .pad-btn-撇:hover { border-color: rgba(167,139,250,0.4); background: rgba(139,92,246,0.06); color: rgb(109, 40, 217); }
+  #stroke-input-root .pad-btn-点:hover { border-color: rgba(153,51,51,0.4); background: rgba(153,51,51,0.06); color: var(--color-cinnabar); }
+  #stroke-input-root .pad-btn-折:hover { border-color: rgba(251,191,36,0.45); background: rgba(245,158,11,0.07); color: rgb(180, 83, 9); }
+  #stroke-input-root .pad-btn-通配 { background: linear-gradient(180deg,#fafafa,#fff); }
+  #stroke-input-root .pad-btn-通配:hover { border-color: rgba(71,85,105,0.4); background: rgba(71,85,105,0.06); color: rgb(51,65,85); }
+  #stroke-input-root .stroke-chip .chip-nr {
+    font-size: 0.65rem;
+  }
+  #stroke-input-root .stroke-count { line-height: 1; }
+
+  /* LEFT column wrapper = label above + holder, so label sits OUTSIDE the dashed border box */
+  #stroke-input-root .stroke-left-col,
+  #stroke-input-root .stroke-right-col {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 0;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+  }
+  #stroke-input-root .stroke-probable-label,
+  #stroke-input-root .stroke-right-spacer {
+    display: flex;
+    align-items: center;
+    min-height: 0.95rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .stroke-probable-label,
+    #stroke-input-root .stroke-right-spacer {
+      min-height: 0.8rem;
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  /* Probable characters panel holder (LEFT, 3x2 cap, fixed reserved so right buttons never shift) */
+  #stroke-input-root #stroke-probable-holder {
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root #stroke-probable-holder {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  /* Probable characters panel */
+  #stroke-probable {
+    display: block;
+    padding: 0;
+    border-radius: 1rem;
+    background: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  #stroke-probable.hidden { display: none !important; }
+  /* Grid = 3 columns × 2 rows, matching RIGHT stroke-pad geometry so each probable-box size == each stroke-button size */
+  #stroke-input-root .stroke-probable-wrap {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 0.375rem;
+    padding: 0.375rem;
+    box-sizing: border-box;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .stroke-probable-wrap {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 0.25rem;
+      padding: 0.25rem;
+    }
+  }
+  @media (min-width: 640px) {
+    #stroke-input-root .stroke-probable-wrap {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 0.375rem;
+      padding: 0.375rem;
+    }
+  }
+  /* Capped at 6 entries for the 3×2 visual promise */
+  #stroke-input-root .stroke-probable-wrap .probable-btn:nth-child(n+7) { display: none; }
+  #stroke-input-root .probable-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.12rem;
+    padding: 0.35rem 0.2rem;
+    border-radius: 0.75rem;
+    background: #ffffff;
+    border: 1px solid var(--color-border-warm, #e6e2dd);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: var(--font-serif);
+    min-height: 3.25rem;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .probable-btn {
+      padding: 0.28rem 0.1rem;
+      border-radius: 0.6rem;
+      min-height: 2.8rem;
+      gap: 0.05rem;
+    }
+  }
+  #stroke-input-root .probable-btn:hover {
+    border-color: rgba(153, 51, 51, 0.4);
+    background: linear-gradient(180deg, #fff1f2, #ffffff);
+    transform: translateY(-1px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  }
+  #stroke-input-root .probable-btn:active { transform: translateY(0); }
+  #stroke-input-root .probable-char {
+    font-size: 1.45rem;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--color-ink, #111);
+    flex: 0 0 auto;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .probable-char { font-size: 1.25rem; }
+  }
+  #stroke-input-root .probable-py {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.65rem;
+    color: var(--color-cinnabar);
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+  @media (max-width: 639px) {
+    #stroke-input-root .probable-py { font-size: 0.52rem; }
+  }
+</style>

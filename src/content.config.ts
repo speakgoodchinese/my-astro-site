@@ -15,12 +15,12 @@ const postsCollection = defineCollection({
     description: z.string().optional(),
     relatedTerms: z.array(z.string()).optional(),
     relatedPropositions: z.array(z.string()).optional(),
-    date: z.string(), // e.g., "2026-09-22"
+    date: z.string(),
   }),
 });
 
 const termsCollection = defineCollection({
-  loader: glob({ pattern: '**.md', base: './src/content/terms' }),  
+  loader: glob({ pattern: '**.md', base: './src/content/terms' }),
   schema: z.object({
     term: z.string(),
     pinyin: z.string(),
@@ -32,7 +32,7 @@ const termsCollection = defineCollection({
     summary: z.string(),
     relatedTerms: z.array(z.string()).default([]),
     relatedPropositions: z.array(z.string()).default([]),
-    date: z.string().optional(), // e.g., "2026-09-22"
+    date: z.string().optional(),
   }),
 });
 
@@ -49,30 +49,61 @@ const propositionsCollection = defineCollection({
     summary: z.string(),
     relatedTerms: z.array(z.string()).default([]),
     relatedPropositions: z.array(z.string()).default([]),
-    date: z.string().optional(), // e.g., "2026-09-22"
+    date: z.string().optional(),
   }),
 });
 
 const categoriesCollection = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/categories' }),
   schema: z.object({
-    id: z.string(), // Matches category IDs like 'thoughts', 'language', 'arts'
+    id: z.string(),
   }),
 });
 
 const subcategoriesCollection = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/subcategories' }),
   schema: z.object({
-    id: z.string(), // Matches subcategory IDs like 'ethics', 'cosmology', etc.
-    category: z.string(), // Links the subcategory back to its parent category if needed
+    id: z.string(),
+    category: z.string(),
   }),
 });
 
-export const collections = { 
-  manifesto: manifestoCollection, 
+const charactersCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/characters' }),
+  schema: z.object({
+    char: z.string().min(1).max(2),
+    pinyin: z.string(),
+    definition: z.string(),
+    strokes: z.number().int().positive().optional(),
+    strokeSequence: z.array(z.enum(['横', '竖', '撇', '点', '折'])).optional(),
+    radical: z.string().optional(),
+    level: z.enum(['一级', '二级', '三级']).optional(),
+    traditional: z.string().optional(),
+    relatedChars: z.array(z.string()).default([]),
+    date: z.string().optional(),
+  }),
+});
+
+const wordsCollection = defineCollection({
+    loader: glob({ pattern: '**/*.md', base: './src/content/words' }),
+    schema: z.object({
+      word: z.string().min(2),
+      pinyin: z.string(),
+      definition: z.string(),
+      structureType: z.enum(['first', 'last', 'equal']),
+      examples: z.array(z.string()).default([]),
+      relatedWords: z.array(z.string()).default([]),
+      date: z.string().optional(),
+    }),
+  });
+
+export const collections = {
+  manifesto: manifestoCollection,
   posts: postsCollection,
-  terms: termsCollection, 
+  terms: termsCollection,
   propositions: propositionsCollection,
   categories: categoriesCollection,
   subcategories: subcategoriesCollection,
+  characters: charactersCollection,
+  words: wordsCollection,
 };

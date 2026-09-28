@@ -1,0 +1,857 @@
+---
+/**
+ * Client-side lazy-loaded Chinese dictionary search.
+ * MiniSearch library + dictionary-index.json are loaded only on first interaction,
+ * keeping SSR HTML payload tiny on all pages.
+ */
+import StrokeInput from './StrokeInput.astro';
+---
+
+<div id="dict-search-root" class="relative w-full max-w-3xl space-y-3">
+  <label for="dict-search-input" class="sr-only">Search dictionary 字典搜索</label>
+  <div
+    id="dict-search-field"
+    class="relative flex items-center rounded-2xl bg-paper-card border border-border-warm shadow-xs focus-within:border-cinnabar focus-within:ring-2 focus-within:ring-cinnabar/20 transition overflow-hidden pl-4 pr-4"
+  >
+    <span class="shrink-0 text-ink-muted" aria-hidden="true">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m21 21-4.3-4.3" stroke-linecap="round"></path>
+      </svg>
+    </span>
+
+    <div
+      id="dict-search-committed"
+      class="flex flex-nowrap items-center gap-1.5 py-3 px-3 overflow-x-auto whitespace-nowrap"
+      aria-label="Selected strokes and committed characters"
+    ></div>
+
+    <input
+      id="dict-search-input"
+      type="search"
+      autocomplete="off"
+      spellcheck="false"
+      enterkeyhint="search"
+      placeholder=""
+      aria-label="Search character / word / pinyin — 字, 词, 拼音, 释义…"
+      class="min-w-0 flex-1 py-3 pl-2 pr-2 bg-transparent outline-none text-ink text-base font-serif placeholder:text-ink-muted whitespace-nowrap"
+    />
+
+    <div id="dict-search-loading" class="hidden shrink-0 pl-2 text-xs font-sans text-ink-muted flex items-center gap-1.5">
+      <span class="inline-block w-3 h-3 border-2 border-border-warm border-t-cinnabar rounded-full animate-spin"></span>
+      <span>加载索引…</span>
+    </div>
+  </div>
+  <div
+    id="dict-search-stroke"
+    data-open="0"
+    class="hidden"
+  >
+    <div id="dict-search-stroke-toggle"
+         class="hidden"></div>
+    <StrokeInput />
+  </div>
+  <div class="flex items-center px-1">
+    <button type="button" id="dict-toggle-stroke" class="text-[11px] font-sans text-ink-muted hover:text-ink transition">
+      笔画输入 ▾
+    </button>
+  </div>
+  <div
+    id="dict-search-results"
+    class="hidden z-30 mt-1 rounded-2xl bg-white border border-border-warm shadow-lg overflow-hidden divide-y divide-border-warm max-h-[60vh] overflow-y-auto"
+    role="listbox"
+    aria-live="polite"
+  ></div>
+</div>
+
+<script>
+  interface CharEntry {
+    id: string;
+    char: string;
+    pinyin: string;
+    definition: string;
+    level?: string;
+    strokeSequence?: StrokeType[];
+  }
+  type StrokeType = '横' | '竖' | '撇' | '点' | '折' | '通配';
+  interface WordEntry {
+    id: string;
+    word: string;
+    pinyin: string;
+    definition: string;
+    structureType: 'first' | 'last' | 'equal';
+    firstChar: string;
+    lastChar: string;
+  }
+  type SearchDoc = {
+    type: 'char' | 'word';
+    id: string;
+    head: string;
+    pinyin: string;
+    definition: string;
+    level?: string;
+    structureType?: 'first' | 'last' | 'equal';
+    firstChar?: string;
+    lastChar?: string;
+    strokeSequence?: StrokeType[];
+  };
+  type MiniSearchT = any;
+
+  const root = document.getElementById('dict-search-root')!;
+  const input = document.getElementById('dict-search-input') as HTMLInputElement;
+  const resultsEl = document.getElementById('dict-search-results')!;
+  const loadingEl = document.getElementById('dict-search-loading')!;
+  const toggleStrokeBtn = document.getElementById('dict-toggle-stroke') as HTMLButtonElement;
+  const strokePanel = document.getElementById('dict-search-stroke')!;
+  const strokeRoot = document.getElementById('stroke-input-root');
+  const committedRowEl = document.getElementById('dict-search-committed')!;
+
+  const EMPTY_PLACEHOLDER = 'Search character / word / pinyin — 字, 词, 拼音, 释义…';
+
+  let indexPromise: Promise<{ ms: MiniSearchT; docs: Map<string, SearchDoc> }> | null = null;
+  let docsMap: Map<string, SearchDoc> | null = null;
+  let miniSearch: MiniSearchT | null = null;
+  let strokePrefix: StrokeType[] = [];
+  let strokeCommittedChars: string[] = [];
+  let openState = false;
+
+  function updateInputDisplay() {
+    const hasStrokeSignal = strokePrefix.length > 0 || strokeCommittedChars.length > 0;
+    if (hasStrokeSignal) {
+      // Hide the raw input caret + text visually (kept in DOM for events/form submission)
+      committedRowEl.classList.remove('hidden');
+      input.style.opacity = '0';
+      input.style.position = 'absolute';
+      input.style.left = '0';
+      input.style.top = '0';
+      input.style.width = '100%';
+      input.style.height = '100%';
+      input.style.pointerEvents = 'none';
+      input.style.zIndex = '-1';
+      input.placeholder = '';
+      input.setAttribute('aria-hidden', 'true');
+    } else {
+      committedRowEl.classList.add('hidden');
+      input.style.opacity = '';
+      input.style.position = '';
+      input.style.left = '';
+      input.style.top = '';
+      input.style.width = '';
+      input.style.height = '';
+      input.style.pointerEvents = '';
+      input.style.zIndex = '';
+      input.placeholder = EMPTY_PLACEHOLDER;
+      input.removeAttribute('aria-hidden');
+    }
+  }
+  function renderCommittedRow(committed: string[], prefix: StrokeType[]) {
+    const hasSignal = committed.length > 0 || prefix.length > 0;
+    committedRowEl.innerHTML = '';
+    if (!hasSignal) {
+      updateInputDisplay();
+      return;
+    }
+    const frag = document.createDocumentFragment();
+    if (committed.length > 0) {
+      const headStr = committed.join('');
+      const isSingle = committed.length === 1;
+      const href = isSingle
+        ? `/characters/${encodeURIComponent(headStr)}`
+        : `/words/${encodeURIComponent(headStr)}`;
+      const wrap = document.createElement('a');
+      wrap.href = href;
+      wrap.className = `committed-head-link committed-head-link--${isSingle ? 'single' : 'multi'}`;
+      wrap.setAttribute('aria-label', isSingle ? `查看 ${headStr} 的字符页面` : `查看 ${headStr} 的词条页面`);
+      wrap.title = isSingle ? `点击查看字符「${headStr}」的页面 · Character page` : `点击查看词条「${headStr}」的页面 · Word page`;
+      wrap.innerHTML = `<span class="committed-head-glyph">${headStr}</span><span class="committed-head-tag">${isSingle ? '字' : '词'}</span>`;
+      wrap.addEventListener('click', (ev) => ev.stopPropagation());
+      frag.appendChild(wrap);
+    }
+    if (prefix.length > 0) {
+      const META_COMMIT: Record<StrokeType, { sym: string; cls: string }> = {
+        横: { sym: '一', cls: 'bg-jade/10 border-jade/30 text-jade' },
+        竖: { sym: '丨', cls: 'bg-sky-500/10 border-sky-400/30 text-sky-700' },
+        撇: { sym: '丿', cls: 'bg-violet-500/10 border-violet-400/30 text-violet-700' },
+        点: { sym: '丶', cls: 'bg-cinnabar/10 border-cinnabar/30 text-cinnabar' },
+        折: { sym: '𠃊', cls: 'bg-amber-500/10 border-amber-400/40 text-amber-700' },
+        通配: { sym: '＊', cls: 'bg-slate-500/10 border-slate-400/30 text-slate-700' },
+      };
+      if (committed.length > 0) {
+        const sep = document.createElement('span');
+        sep.className = 'committed-active-sep-inline';
+        frag.appendChild(sep);
+      }
+      const slot = document.createElement('div');
+      slot.className = 'active-slot-inline flex flex-nowrap items-center gap-1.5';
+      for (let i = 0; i < prefix.length; i++) {
+        const s = prefix[i];
+        const meta = META_COMMIT[s];
+        const chip = document.createElement('span');
+        chip.className = `stroke-chip inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md border text-sm font-serif leading-none shrink-0 ${meta.cls} transition focus:outline-none`;
+        chip.setAttribute('aria-label', `第 ${i + 1} 笔 ${s}`);
+        chip.innerHTML = `<span class="chip-nr text-[10px] font-mono opacity-60 align-middle">${i + 1}</span><span>${meta.sym}</span>`;
+        slot.appendChild(chip);
+      }
+      const count = document.createElement('span');
+      count.className = 'stroke-count ml-1 text-[11px] font-mono text-ink-muted italic self-center shrink-0';
+      count.textContent = `${prefix.length} 笔`;
+      slot.appendChild(count);
+      frag.appendChild(slot);
+    }
+    committedRowEl.appendChild(frag);
+    updateInputDisplay();
+  }
+  updateInputDisplay();
+  if (toggleStrokeBtn) {
+    toggleStrokeBtn.addEventListener('click', () => {
+      // Force blur first so the click doesn't trigger input.focus then blur.restore racing
+      if (document.activeElement === input) input.blur();
+      openState = !openState;
+      toggleStrokeBtn.textContent = openState ? '笔画输入 ▴' : '笔画输入 ▾';
+      if (openState) strokePanel.classList.remove('hidden');
+      else strokePanel.classList.add('hidden');
+    });
+  }
+  if (strokeRoot) {
+    strokeRoot.addEventListener('strokeInputChange', ((e: Event) => {
+      const detail = (e as CustomEvent).detail as {
+        prefix: StrokeType[];
+        committedChars?: string[];
+        combinedText?: string;
+        currentSlotPrefix?: StrokeType[];
+      };
+      strokePrefix = detail.currentSlotPrefix ?? detail.prefix ?? [];
+      strokeCommittedChars = Array.isArray(detail.committedChars) ? detail.committedChars.slice() : [];
+      const committed = strokeCommittedChars;
+      const combined = typeof detail.combinedText === 'string' ? detail.combinedText : committed.join('');
+      if (combined || committed.length === 0) {
+        input.value = combined;
+      }
+      renderCommittedRow(strokeCommittedChars, strokePrefix);
+      void ensureIndex().then(() => {
+        pendingQ = '';
+        runSearch(combined || input.value);
+      });
+    }) as EventListener);
+  }
+  function strokeMatchesChar(seq: StrokeType[] | undefined, prefix: StrokeType[]): boolean {
+    if (prefix.length === 0) return true;
+    if (!seq || seq.length < prefix.length) return false;
+    for (let i = 0; i < prefix.length; i++) {
+      const s = prefix[i];
+      if (s === '通配') continue;
+      if (seq[i] !== s) return false;
+    }
+    return true;
+  }
+  function applyStrokeFilter(
+    list: SearchDoc[],
+    prefix: StrokeType[],
+    charSeqs: Map<string, StrokeType[] | undefined>,
+    committed: string[] = [],
+  ): SearchDoc[] {
+    if (!prefix.length && committed.length === 0) return list;
+    return list.filter((d) => {
+      if (d.type === 'char') {
+        if (committed.length) {
+          const last = committed[committed.length - 1] ?? '';
+          if (last && d.head !== last && !committed.includes(d.head)) return false;
+        }
+        if (!prefix.length) return true;
+        const seq = d.strokeSequence ?? charSeqs.get(d.head);
+        return strokeMatchesChar(seq ?? [], prefix);
+      }
+      const headStr = d.head ?? '';
+      if (committed.length) {
+        for (let i = 0; i < committed.length; i++) {
+          if (headStr.charAt(i) !== committed[i]) return false;
+        }
+      }
+      if (!prefix.length) return true;
+      const nextIdx = committed.length;
+      const nextCh = headStr.charAt(nextIdx);
+      if (!nextCh) return false;
+      const seq = charSeqs.get(nextCh) ?? [];
+      return strokeMatchesChar(seq, prefix);
+    });
+  }
+
+  function ensureIndex() {
+    if (indexPromise) return indexPromise;
+    loadingEl.classList.remove('hidden');
+    indexPromise = (async () => {
+      const [{ default: MiniSearch }, res] = await Promise.all([
+        import('minisearch') as any,
+        fetch('/dictionary-index.json', { cache: 'no-cache' }),
+      ]);
+      const data = (await res.json()) as {
+        allChars: CharEntry[];
+        allWords: WordEntry[];
+      };
+      const charSeqs = new Map<string, StrokeType[] | undefined>();
+      const docs: SearchDoc[] = [
+        ...data.allChars.map<SearchDoc>((c) => {
+          charSeqs.set(c.char, c.strokeSequence);
+          return {
+            type: 'char',
+            id: `c:${c.id}`,
+            head: c.char,
+            pinyin: c.pinyin,
+            definition: c.definition,
+            level: c.level,
+            strokeSequence: c.strokeSequence,
+          };
+        }),
+        ...data.allWords.map<SearchDoc>((w) => ({
+          type: 'word',
+          id: `w:${w.id}`,
+          head: w.word,
+          pinyin: w.pinyin,
+          definition: w.definition,
+          structureType: w.structureType,
+          firstChar: w.firstChar,
+          lastChar: w.lastChar,
+        })),
+      ];
+      (ensureIndex as any).__charSeqs = charSeqs;
+      const tokenizeLatin = (text: string) => {
+        if (!text) return [];
+        const parts = text.split(/[^A-Za-z0-9]+/).filter(Boolean);
+        const acc: string[] = [...parts];
+        if (parts.length > 1) {
+          const concat = parts.join('');
+          if (concat) acc.push(concat);
+        }
+        return acc;
+      };
+      const ms: MiniSearchT = new MiniSearch({
+        fields: ['head', 'pinyin', 'definition', 'level', 'firstChar', 'lastChar'],
+        storeFields: ['type', 'head', 'pinyin', 'definition', 'level', 'structureType', 'firstChar', 'lastChar', 'strokeSequence'],
+        searchOptions: {
+          prefix: true,
+          fuzzy: (term: string) => (/^[\u4e00-\u9fa5]/.test(term) || term.length <= 3 ? 0 : 0.15),
+          boost: { head: 3, pinyin: 2, firstChar: 1.2, lastChar: 1.2 },
+        },
+        tokenize: (text: string, fieldName?: string) => {
+          if (!text) return [];
+          if (fieldName === 'pinyin') {
+            return tokenizeLatin(text);
+          }
+          if (fieldName === 'head' || fieldName === 'firstChar' || fieldName === 'lastChar') {
+            const cjk = text.match(/[\u4e00-\u9fa5]/g) ?? [];
+            return cjk.length ? [...cjk, text] : tokenizeLatin(text);
+          }
+          const cjk = text.match(/[\u4e00-\u9fa5]/g) ?? [];
+          const latin = tokenizeLatin(text);
+          return [...cjk, ...latin, text];
+        },
+        processTerm: (term: string, fieldName?: string) => {
+          if (!term) return null;
+          if (/[A-Za-z]/.test(term)) {
+            const n = term.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            if (!n) return null;
+            if ((fieldName === 'pinyin' || fieldName === 'head' || fieldName === 'firstChar' || fieldName === 'lastChar') && n.endsWith('r') && n.length > 1) {
+              return [n, n.slice(0, -1)];
+            }
+            return n;
+          }
+          return term;
+        },
+      });
+      ms.addAll(docs);
+      docsMap = new Map(docs.map((d) => [d.id, d]));
+      miniSearch = ms;
+      loadingEl.classList.add('hidden');
+      return { ms, docs: docsMap };
+    })().catch((err) => {
+      console.error('[dict-search] index load failed', err);
+      loadingEl.classList.add('hidden');
+      indexPromise = null;
+      throw err;
+    });
+    return indexPromise;
+  }
+
+  function renderResults(query: string, matches: SearchDoc[]) {
+    if (!query.trim() && matches.length === 0) {
+      resultsEl.classList.add('hidden');
+      resultsEl.innerHTML = '';
+      return;
+    }
+    if (matches.length === 0) {
+      resultsEl.classList.remove('hidden');
+      resultsEl.innerHTML = `
+        <div class="p-5 text-sm text-ink-muted italic font-serif">
+          未找到与 “${query}” 相关的条目。No results found.
+        </div>
+      `;
+      return;
+    }
+    resultsEl.classList.remove('hidden');
+    resultsEl.innerHTML = matches
+      .slice(0, 30)
+      .map((d, i) => {
+        const href = d.type === 'char' ? `/characters/${d.id.slice(2)}` : `/words/${d.id.slice(2)}`;
+        const badge =
+          d.type === 'char'
+            ? d.level
+              ? `<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-paper-card border border-border-warm text-ink-muted">${d.level}</span>`
+              : `<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-paper-card border border-border-warm text-ink-muted">字</span>`
+            : d.structureType === 'first'
+              ? `<span class="text-[10px] font-sans font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-jade/10 text-jade border border-jade/30">首重</span>`
+              : d.structureType === 'equal'
+              ? `<span class="text-[10px] font-sans font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-700 border border-amber-400/40">并重</span>`
+              : `<span class="text-[10px] font-sans font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-cinnabar/10 text-cinnabar border border-cinnabar/30">尾重</span>`;
+        const head = d.type === 'word' && d.structureType
+          ? d.structureType === 'first'
+            ? `<span class="text-jade">${d.head.charAt(0)}</span>${d.head.slice(1)}`
+            : d.structureType === 'equal'
+            ? d.head.split('').map((c) => `<span class="text-amber-600">${c}</span>`).join('')
+            : `${d.head.slice(0, -1)}<span class="text-cinnabar">${d.head.charAt(d.head.length - 1)}</span>`
+          : d.head;
+        return `
+          <a href="${href}" role="option" aria-selected="false" id="dict-opt-${i}"
+             class="wiki-term flex items-start gap-3 px-4 py-3 hover:bg-paper transition bg-white">
+            <div class="flex-shrink-0 mt-0.5 min-w-[3.25rem] text-right">
+              <span class="text-[10px] font-sans uppercase tracking-wider text-ink-muted">${d.type === 'char' ? '字' : '词'}</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap mb-0.5">
+                <span class="text-xl font-serif font-bold text-ink leading-none">${head}</span>
+                <span class="text-xs font-mono text-cinnabar">${d.pinyin}</span>
+                ${badge}
+              </div>
+              <p class="text-xs text-ink-muted leading-snug line-clamp-2 m-0">${d.definition}</p>
+            </div>
+            <div class="flex-shrink-0 self-center text-ink-muted text-xs font-sans">→</div>
+          </a>
+        `;
+      })
+      .join('');
+  }
+
+  let pendingQ = '';
+  function runSearch(raw: string) {
+    const q = raw.trim();
+    const committed = strokeCommittedChars.slice();
+    const charSeqs: Map<string, StrokeType[] | undefined> = (ensureIndex as any).__charSeqs ?? new Map();
+    if (!miniSearch) {
+      pendingQ = q;
+      ensureIndex().then(
+        () => {
+          if (pendingQ) runSearch(pendingQ);
+          else if (strokePrefix.length || strokeCommittedChars.length) runSearch('');
+        },
+        () => {
+          resultsEl.classList.remove('hidden');
+          resultsEl.innerHTML = `<div class="p-5 text-sm text-cinnabar font-serif">Failed to load search index.</div>`;
+        }
+      );
+      return;
+    }
+    const qLower = q.toLowerCase();
+    const isLatinQ = qLower.length > 0 && /[a-zāáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜü]/.test(qLower);
+    const normPinyin = (s: string) => (s || '').toLowerCase().replace(/\s+/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const qNorm = normPinyin(qLower);
+    const baseList: Array<SearchDoc> = [];
+    const docIdToIndex = new Map<string, number>();
+    const pushUniq = (d: SearchDoc) => {
+      if (docIdToIndex.has(d.id)) return;
+      docIdToIndex.set(d.id, baseList.length);
+      baseList.push(d);
+    };
+    if (!q && !(strokePrefix.length > 0 || committed.length > 0)) {
+      renderResults('', []);
+      return;
+    }
+    const charBucket: SearchDoc[] = [];
+    const wordBucket: SearchDoc[] = [];
+    const charBucketSeen = new Set<string>();
+    const wordBucketSeen = new Set<string>();
+    const pushChar = (d: SearchDoc) => {
+      if (charBucketSeen.has(d.id)) return;
+      charBucketSeen.add(d.id);
+      charBucket.push(d);
+    };
+    const pushWord = (d: SearchDoc) => {
+      if (wordBucketSeen.has(d.id)) return;
+      wordBucketSeen.add(d.id);
+      wordBucket.push(d);
+    };
+    // Pass 0A — committed chars → surface each committed char entry, AND words whose head starts with committed (学X matches when committed=[学])
+    if (committed.length) {
+      const headPrefix = committed.join('');
+      for (const d of docsMap?.values() ?? []) {
+        if (d.type === 'char') {
+          if (committed.includes(d.head)) pushChar(d);
+        } else if (typeof d.head === 'string' && d.head.startsWith(headPrefix)) {
+          pushWord(d);
+        }
+      }
+    }
+    if (strokePrefix.length || committed.length) {
+      for (const d of docsMap?.values() ?? []) {
+        if (d.type === 'char') {
+          let ok = strokePrefix.length ? strokeMatchesChar(d.strokeSequence ?? charSeqs.get(d.head), strokePrefix) : true;
+          if (committed.length) {
+            const last = committed[committed.length - 1] ?? '';
+            if (last && d.head !== last && !committed.includes(d.head)) ok = false;
+          }
+          if (ok) pushChar(d);
+        } else {
+          const headStr = d.head ?? '';
+          if (committed.length) {
+            if (!headStr.startsWith(committed.join(''))) continue;
+            const nextIdx = committed.length;
+            const nextCh = headStr.charAt(nextIdx);
+            if (!nextCh) continue;
+            if (strokePrefix.length && !strokeMatchesChar(charSeqs.get(nextCh), strokePrefix)) continue;
+          } else {
+            const head = d.firstChar ?? headStr.charAt(0);
+            if (strokePrefix.length && !strokeMatchesChar(charSeqs.get(head), strokePrefix)) continue;
+          }
+          pushWord(d);
+        }
+      }
+    }
+    // Pass 1 — exact head match (CJK glyph equal to q) — also CJK multi-char Q exact word/char before fuzzy passes
+    if (q) {
+      for (const d of docsMap?.values() ?? []) {
+        if (d.head === q) d.type === 'char' ? pushChar(d) : pushWord(d);
+      }
+    }
+    // Pass 1B — multi-char CJK Q (length >=2): words CHAR whose head STARTS with Q (prefix match), and for length=3+ also char exact matches of prefix char, BUT do NOT expand to first-char fuzzy.
+    const isCjkMultiQ = !isLatinQ && q.length >= 2 && /[\u3400-\u9FFF]/.test(q);
+    if (isCjkMultiQ) {
+      const qHead = q.charAt(0);
+      const qTail = q.slice(1);
+      // Exact multi-char word / char push has happened in Pass 1 (q === head).
+      // Now prefix match words that START with the full Q (for 3+ char user typed prefix).
+      for (const d of docsMap?.values() ?? []) {
+        if (d.type === 'word' && d.head && d.head.startsWith(q) && d.head !== q) {
+          pushWord(d);
+          continue;
+        }
+      }
+      // Exact 2 individual char matches: char doc for first char + char doc for second char (but do NOT flood words just because they start with first char; word matching requires combined Q as passed already)
+      const firstCharDoc = [...(docsMap?.values() ?? [])].find(
+        (d) => d.type === 'char' && d.head === qHead
+      );
+      if (firstCharDoc) pushChar(firstCharDoc as SearchDoc);
+      const secondCharDoc = [...(docsMap?.values() ?? [])].find(
+        (d) => d.type === 'char' && d.head === qTail.charAt(0)
+      );
+      if (secondCharDoc) pushChar(secondCharDoc as SearchDoc);
+    }
+    // Pass 2 — exact pinyin head match for CHAR (道 <-> dao / dào).
+    if (q && !isCjkMultiQ) {
+      for (const d of docsMap?.values() ?? []) {
+        if (d.type !== 'char') continue;
+        const pn = normPinyin(d.pinyin);
+        if (!pn) continue;
+        if (isLatinQ && (pn === qNorm || pn === qNorm + 'r' || pn + 'r' === qNorm)) { pushChar(d); continue; }
+        if (!isLatinQ && d.pinyin.toLowerCase().startsWith(qLower)) pushChar(d);
+      }
+    }
+    // Pass 3 — exact pinyin concatenated match for WORD (daoli→道理, daode→道德, daxue→大学).
+    if (q && !isCjkMultiQ) {
+      for (const d of docsMap?.values() ?? []) {
+        if (d.type !== 'word') continue;
+        const pn = normPinyin(d.pinyin);
+        if (!pn) continue;
+        if (isLatinQ) {
+          const paddedWord = pn.endsWith('r') ? pn.slice(0, -1) : pn;
+          const paddedQuery = qNorm.endsWith('r') ? qNorm.slice(0, -1) : qNorm;
+          if (pn === qNorm || paddedWord === paddedQuery || paddedWord.startsWith(paddedQuery) || pn.startsWith(qNorm)) { pushWord(d); continue; }
+        } else if (d.pinyin.toLowerCase().startsWith(qLower)) {
+          pushWord(d);
+        }
+      }
+    }
+    // Pass 4 — MiniSearch fuzzy fallback + head/pinyin/definition substring scan. SKIP entirely for multi-char CJK Q so "道德" never expands into 道-only word list.
+    if (q && !isCjkMultiQ) {
+      const headRe = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+      for (const d of docsMap?.values() ?? []) {
+        if (d.type === 'char' && charBucketSeen.has(d.id)) continue;
+        if (d.type === 'word' && wordBucketSeen.has(d.id)) continue;
+        const pyNorm = normPinyin(d.pinyin);
+        const pyHit = isLatinQ
+          ? (d.type === 'word' ? (pyNorm.startsWith(qNorm) && qNorm.length >= 2) : (pyNorm.startsWith(qNorm) && qNorm.length >= 2))
+          : false;
+        const headHit = headRe.test(d.head);
+        const defHit = !isLatinQ && d.definition && headRe.test(d.definition);
+        if (headHit || pyHit || (defHit as boolean)) d.type === 'char' ? pushChar(d) : pushWord(d);
+      }
+      const msRes = miniSearch.search(q, { combineWith: 'OR' }) as Array<any>;
+      for (const r of msRes) {
+        const d = (r.id && docsMap ? docsMap.get(r.id) : null) ?? (r as unknown as SearchDoc);
+        if (!d || !d.id) continue;
+        if (d.type === 'char' && charBucketSeen.has(d.id)) continue;
+        if (d.type === 'word' && wordBucketSeen.has(d.id)) continue;
+        if (isLatinQ) {
+          const pyNorm2 = normPinyin(d.pinyin);
+          const paddedPinyin = pyNorm2.endsWith('r') ? pyNorm2.slice(0, -1) : pyNorm2;
+          const paddedQuery = qNorm.endsWith('r') ? qNorm.slice(0, -1) : qNorm;
+          const pinyinMatches =
+            pyNorm2 === qNorm ||
+            paddedPinyin === paddedQuery ||
+            (pyNorm2.startsWith(qNorm) && qNorm.length >= 2) ||
+            (paddedPinyin.startsWith(paddedQuery) && paddedQuery.length >= 2);
+          const defMatches =
+            d.definition &&
+            qNorm.length >= 4 &&
+            /[A-Za-z]{3,}/.test(d.definition) &&
+            headRe.test(d.definition);
+          if (!pinyinMatches && !defMatches) continue;
+        }
+        d.type === 'char' ? pushChar(d) : pushWord(d);
+      }
+    }
+    // Apply stroke-filter AFTER all passes populate buckets (committed-aware).
+    const applyStrokes = (list: SearchDoc[]) => applyStrokeFilter(list, strokePrefix, charSeqs, committed);
+    const hasStrokeSignal = strokePrefix.length > 0 || committed.length > 0;
+    const charsFiltered = hasStrokeSignal ? applyStrokes(charBucket) : charBucket;
+    const wordsFiltered = hasStrokeSignal ? applyStrokes(wordBucket) : wordBucket;
+    // SORT chars: exact pinyin === query first, then committed chars, then stroke count ASC, then canonical stroke-sequence, then pinyin.
+    const seqCompare = (a: StrokeType[] | undefined, b: StrokeType[] | undefined) => {
+      const sa = a ?? [], sb = b ?? [];
+      const n = Math.min(sa.length, sb.length);
+      for (let i = 0; i < n; i++) {
+        const x = sa[i], y = sb[i];
+        const rank: Record<string, number> = { '横': 1, '竖': 2, '撇': 3, '点': 4, '折': 5, '通配': 0 };
+        const rx = rank[x] ?? 0, ry = rank[y] ?? 0;
+        if (rx !== ry) return rx - ry;
+      }
+      return sa.length - sb.length;
+    };
+    charsFiltered.sort((da: SearchDoc, db: SearchDoc) => {
+      const pa = normPinyin(da.pinyin);
+      const pb = normPinyin(db.pinyin);
+      const exactA = isLatinQ ? (pa === qNorm || (pa + 'r') === qNorm || pa.replace(/r$/, '') === qNorm.replace(/r$/, '')) : false;
+      const exactB = isLatinQ ? (pb === qNorm || (pb + 'r') === qNorm || pb.replace(/r$/, '') === qNorm.replace(/r$/, '')) : false;
+      if (exactA !== exactB) return exactA ? -1 : 1;
+      const committedRankA = committed.includes(da.head) ? 1 : 0;
+      const committedRankB = committed.includes(db.head) ? 1 : 0;
+      if (committedRankA !== committedRankB) return committedRankB - committedRankA;
+      const sa = (da.strokeSequence ?? charSeqs.get(da.head))?.length ?? 0;
+      const sb = (db.strokeSequence ?? charSeqs.get(db.head))?.length ?? 0;
+      if (sa !== sb) return sa - sb;
+      const sSeq = seqCompare(da.strokeSequence ?? charSeqs.get(da.head), db.strokeSequence ?? charSeqs.get(db.head));
+      if (sSeq !== 0) return sSeq;
+      return pa.localeCompare(pb, 'zh-Hans-CN');
+    });
+    // SORT words: committed-head matches first, then exact concatenated pinyin, then pinyin ascending. For multi-char CJK Q exact word Q == head MUST rank FIRST (no mixed with fuzzy results).
+    wordsFiltered.sort((da: SearchDoc, db: SearchDoc) => {
+      const pa = normPinyin(da.pinyin);
+      const pb = normPinyin(db.pinyin);
+      let rankA = 0, rankB = 0;
+      const committedPrefix = committed.join('');
+      if (committedPrefix) {
+        if ((da.head ?? '').startsWith(committedPrefix)) rankA += 2;
+        if ((db.head ?? '').startsWith(committedPrefix)) rankB += 2;
+        if ((da.head ?? '') === committedPrefix) rankA += 1;
+        if ((db.head ?? '') === committedPrefix) rankB += 1;
+      }
+      if (isLatinQ) {
+        if (pa === qNorm || pa.replace(/r$/, '') === qNorm.replace(/r$/, '')) rankA = Math.max(rankA, 1);
+        if (pb === qNorm || pb.replace(/r$/, '') === qNorm.replace(/r$/, '')) rankB = Math.max(rankB, 1);
+      }
+      if (isCjkMultiQ) {
+        if ((da.head ?? '') === q) rankA = Math.max(rankA, 10);
+        if ((db.head ?? '') === q) rankB = Math.max(rankB, 10);
+        if ((da.head ?? '').startsWith(q) && (da.head ?? '') !== q) rankA = Math.max(rankA, 5);
+        if ((db.head ?? '').startsWith(q) && (db.head ?? '') !== q) rankB = Math.max(rankB, 5);
+      }
+      if (rankA !== rankB) return rankB - rankA;
+      return pa.localeCompare(pb, 'zh-Hans-CN');
+    });
+    // Append word bucket FIRST then char bucket when query is multi-char CJK word (道德) so exact word appears at top; otherwise keep chars first then words as before
+    if (isCjkMultiQ) {
+      for (const d of wordsFiltered) pushUniq(d);
+      for (const d of charsFiltered) pushUniq(d);
+    } else {
+      for (const d of charsFiltered) pushUniq(d);
+      for (const d of wordsFiltered) pushUniq(d);
+    }
+    const labelParts = [
+      q,
+      committed.length && `已选:${committed.join('')}`,
+      strokePrefix.length && `笔画:${strokePrefix.map(s => s.charAt(0)).join('')}`
+    ].filter(Boolean) as string[];
+    const label = labelParts.length ? labelParts.join(' · ') : q;
+    renderResults(label, baseList.slice(0, 30));
+  }
+
+  input.addEventListener('focus', () => {
+    void ensureIndex();
+    // When user focuses text search, collapse stroke panel UI; keep only toggle button visible
+    strokePanel.classList.add('hidden');
+  });
+  input.addEventListener('input', (e) => {
+    const val = (e.target as HTMLInputElement).value;
+    const trimmed = val.trim();
+    if (trimmed) {
+      strokePrefix = [];
+      strokeCommittedChars = [];
+    }
+    renderCommittedRow(strokeCommittedChars, strokePrefix);
+    if (trimmed || strokePrefix.length || strokeCommittedChars.length) {
+      if (!miniSearch && !indexPromise) void ensureIndex().then(() => runSearch(val));
+      else runSearch(val);
+    } else renderResults('', []);
+  });
+  input.addEventListener('blur', () => {
+    // Restore stroke panel on blur only if user had explicitly opened it earlier,
+    // UNLESS the blur was caused by the user clicking a result link to navigate away.
+    const active = (document.activeElement as HTMLElement | null);
+    const clickedResultLink =
+      active && active.closest && active.closest('#dict-search-results a.wiki-term');
+    if (openState && !clickedResultLink) {
+      setTimeout(() => {
+        if (!strokePanel.isConnected) return;
+        const stillNotOnResultLink =
+          !(document.activeElement instanceof HTMLElement) ||
+          !document.activeElement.closest('#dict-search-results a.wiki-term');
+        if (stillNotOnResultLink) strokePanel.classList.remove('hidden');
+      }, 120);
+    }
+  });
+  // Belt-and-suspenders: if user clicks a result link directly, navigate NOW so blur's delayed
+  // stroke-panel-restore cannot race with the navigation / leave the panel in a weird state.
+  if (resultsEl) {
+    resultsEl.addEventListener('click', (ev: Event) => {
+      const target = ev.target as HTMLElement | null;
+      const link =
+        target && target.closest
+          ? (target.closest('#dict-search-results a.wiki-term') as HTMLAnchorElement | null)
+          : null;
+      if (!link || !link.href) return;
+      const href = link.getAttribute('href') || '';
+      if (!href || href === '#') return;
+      // Prevent any pending blur timer from re-showing the stroke panel (would flash before nav).
+      strokePanel.classList.add('hidden');
+      // If this click came from stroke mode while input had focus, ensure blur's restore won't
+      // fire a pending setTimeout restore over the navigation.
+      if (document.activeElement === input) input.blur();
+      // Navigation: synthetic clicks don't fire native navigation; guarantee it here.
+      const modified =
+        (ev as MouseEvent).metaKey ||
+        (ev as MouseEvent).ctrlKey ||
+        (ev as MouseEvent).shiftKey ||
+        (ev as MouseEvent).altKey ||
+        (ev as MouseEvent).button === 1;
+      if (!modified) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        window.location.assign(href);
+      }
+    }, true);
+  }
+  // --- End result-click belt-and-suspenders ---
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      input.value = '';
+      renderResults('', []);
+      strokePrefix = [];
+      strokeCommittedChars = [];
+      renderCommittedRow([], []);
+      input.blur();
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if (!root.contains(e.target as Node)) {
+      resultsEl.classList.add('hidden');
+    }
+  });
+</script>
+
+<style is:global>
+  #dict-search-root .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  #dict-search-root .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  #dict-search-root .animate-spin {
+    animation: dict-spin 0.8s linear infinite;
+  }
+  @keyframes dict-spin {
+    to { transform: rotate(360deg); }
+  }
+  #dict-search-field { min-height: 3.25rem; }
+  #dict-search-committed { flex: 1 1 auto; min-width: 0; }
+  #dict-search-committed .committed-head-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.22rem 0.5rem;
+    border-radius: 0.55rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    user-select: none;
+    border: 1px solid rgba(251, 146, 60, 0.35);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  #dict-search-committed .committed-head-link--single {
+    background: linear-gradient(180deg, #fff7ed, #ffffff);
+  }
+  #dict-search-committed .committed-head-link--multi {
+    background: linear-gradient(180deg, #f0fdf4, #ffffff);
+    border-color: rgba(16, 185, 129, 0.35);
+  }
+  #dict-search-committed .committed-head-link--single:hover {
+    background: linear-gradient(180deg, #ffedd5, #fff7ed);
+    border-color: rgba(234, 88, 12, 0.55);
+  }
+  #dict-search-committed .committed-head-link--multi:hover {
+    background: linear-gradient(180deg, #dcfce7, #f0fdf4);
+    border-color: rgba(5, 150, 105, 0.55);
+  }
+  #dict-search-committed .committed-head-glyph {
+    font-size: 1.1rem;
+    line-height: 1;
+    font-family: var(--font-serif);
+    color: #9a3412;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  #dict-search-committed .committed-head-link--multi .committed-head-glyph {
+    color: #14532d;
+  }
+  #dict-search-committed .committed-head-tag {
+    font-size: 0.58rem;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.08rem 0.3rem;
+    border-radius: 9999px;
+    line-height: 1;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  #dict-search-committed .committed-head-link--single .committed-head-tag {
+    background: rgba(251, 146, 60, 0.15);
+    color: #9a3412;
+  }
+  #dict-search-committed .committed-head-link--multi .committed-head-tag {
+    background: rgba(16, 185, 129, 0.15);
+    color: #14532d;
+  }
+  #dict-search-committed .committed-active-sep-inline { display: inline-flex; width: 0; height: 1.15rem; align-self: stretch; border-left: 1px dashed rgba(0,0,0,0.10); margin-left: 0.3rem; margin-right: 0.3rem; flex-shrink: 0; }
+  #dict-search-committed .active-slot-inline { display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 0.3rem; min-width: 0; flex-shrink: 1; }
+  #dict-search-committed .stroke-chip {
+    flex-shrink: 0;
+    padding: 0.12rem 0.4rem 0.1rem 0.4rem !important;
+    font-size: 0.92rem !important;
+  }
+  #dict-search-committed .stroke-chip .chip-nr { font-size: 0.6rem; }
+  #dict-search-committed .stroke-count { font-size: 0.62rem !important; margin-left: 0.25rem !important; }
+</style>

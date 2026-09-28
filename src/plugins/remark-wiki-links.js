@@ -3,17 +3,40 @@ import { visit } from 'unist-util-visit';
 import fs from 'node:fs';
 import path from 'node:path';
 
+function readFrontmatterField(content, fieldNames) {
+  const fmMatch = content.match(/^---\s*\r?\n([\s\S]*?)\r?\n---/);
+  if (!fmMatch) return [];
+  const raw = fmMatch[1];
+  const found = [];
+  for (const field of fieldNames) {
+    const re = new RegExp(`(?:^|\\n)\\s*${field}\\s*:\\s*(["']?)([^"'\\n\\r]+)\\1`, 'm');
+    const m = raw.match(re);
+    if (m) found.push(m[2].trim());
+  }
+  return found;
+}
+
 function buildWikiMap() {
   const titleToPath = new Map();
   const contentDir = path.resolve(process.cwd(), 'src/content');
 
   if (!fs.existsSync(contentDir)) return { titleToPath };
 
-  const collections = fs.readdirSync(contentDir, { withFileTypes: true });
-  
-  for (const col of collections) {
-    if (!col.isDirectory()) continue;
-    const colPath = path.join(contentDir, col.name);
+  const allCollections = fs.readdirSync(contentDir, { withFileTypes: true })
+    .filter(col => col.isDirectory())
+    .map(col => col.name);
+
+  const priority = [
+    'characters',
+    'words',
+  ];
+  const legacyCollections = allCollections.filter(
+    name => !priority.includes(name)
+  );
+  const sortedCollections = [...priority, ...legacyCollections];
+
+  for (const colName of sortedCollections) {
+    const colPath = path.join(contentDir, colName);
     const files = fs.readdirSync(colPath);
 
     for (const file of files) {
@@ -22,21 +45,34 @@ function buildWikiMap() {
       let content = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '');
 
       const slug = file.replace(/\.(md|mdx)$/, '');
-      const urlPath = `/${col.name}/${slug}`;
+      const urlPath = `/${colName}/${slug}`;
 
-      // 1. Map the filename slug directly
       titleToPath.set(slug, urlPath);
 
-      // 2. Map the frontmatter title if present
-      const titleMatch = content.match(/^(?:---\s*\n)?[\s\S]*?title:\s*(["']?)([^"'\n\r]+)\1/m);
-      if (titleMatch) {
-        const primaryTitle = titleMatch[2].trim();
+      let primaryTitleKeys = [];
+      if (colName === 'characters') primaryTitleKeys = ['char'];
+      else if (colName === 'words') primaryTitleKeys = ['word'];
+      else primaryTitleKeys = ['title', 'term'];
+
+      const primaryValues = readFrontmatterField(content, primaryTitleKeys);
+      for (const primaryTitle of primaryValues) {
         titleToPath.set(primaryTitle, urlPath);
-        
-        // 3. Map a clean version of the title (stripping commas, punctuation, etc. for flexible matching)
         const cleanTitle = primaryTitle.replace(/[，,：:?？！!]/g, '').trim();
-        if (cleanTitle !== primaryTitle) {
-          titleToPath.set(cleanTitle, urlPath);
+        if (cleanTitle !== primaryTitle) titleToPath.set(cleanTitle, urlPath);
+      }
+
+      if (colName === 'characters') {
+        for (const pinyin of readFrontmatterField(content, ['pinyin'])) {
+          for (const variant of [pinyin, pinyin.toLowerCase()]) {
+            if (variant && !titleToPath.has(variant)) titleToPath.set(variant, urlPath);
+          }
+        }
+      }
+      if (colName === 'words') {
+        for (const pinyin of readFrontmatterField(content, ['pinyin'])) {
+          for (const variant of [pinyin, pinyin.toLowerCase()]) {
+            if (variant && !titleToPath.has(variant)) titleToPath.set(variant, urlPath);
+          }
         }
       }
     }

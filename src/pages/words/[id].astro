@@ -1,0 +1,173 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const words = await getCollection('words');
+  return words.map((w) => ({
+    params: { id: w.id },
+    props: { word: w },
+  }));
+}
+
+const { word } = Astro.props;
+const { Content } = await render(word);
+
+const firstChar = word.data.word.charAt(0);
+const lastChar = word.data.word.charAt(word.data.word.length - 1);
+const anchorChar = word.data.structureType === 'first' ? firstChar : word.data.structureType === 'last' ? lastChar : firstChar;
+const anchorLabel = word.data.structureType === 'first' ? '首重 · 首字' : word.data.structureType === 'last' ? '尾重 · 尾字' : '并重 · 联合式';
+const anchorPosition = word.data.structureType;
+---
+
+<Layout title={`${word.data.word} ${word.data.pinyin} - 词典`}>
+  <article class="max-w-prose">
+    <nav class="text-xs font-sans text-ink-muted uppercase tracking-wider mb-3">
+      <a href="/dictionary" class="no-underline text-jade hover:text-ink">字典 Dictionary</a>
+      <span class="mx-1.5">•</span>
+      <a href="/dictionary#words" class="no-underline text-jade hover:text-ink">词 Words</a>
+    </nav>
+
+    <div class="border-b border-border-warm pb-4 mb-6">
+      <div class="flex items-center gap-2 mb-1 flex-wrap">
+        <span
+          class={`text-[11px] font-sans font-bold tracking-wider uppercase px-2 py-1 rounded ${
+            word.data.structureType === 'first'
+              ? 'bg-jade/10 text-jade border border-jade/30'
+              : word.data.structureType === 'last'
+              ? 'bg-cinnabar/10 text-cinnabar border border-cinnabar/30'
+              : 'bg-amber-500/10 text-amber-700 border border-amber-400/40'
+          }`}
+        >
+          {word.data.structureType === 'first' ? '首重 First-Leaning' : word.data.structureType === 'last' ? '尾重 Last-Leaning' : '并重 Equal-Weight'}
+        </span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-serif font-bold text-ink m-0 tracking-tight mb-2">
+        {word.data.word.split('').map((ch, i) => {
+          const isFirstAnchor = anchorPosition === 'first' && i === 0;
+          const isLastAnchor = anchorPosition === 'last' && i === word.data.word.length - 1;
+          const isEqualAnchor = anchorPosition === 'equal';
+          return (
+            <span
+              class={
+                isFirstAnchor
+                  ? 'text-jade'
+                  : isLastAnchor
+                  ? 'text-cinnabar'
+                  : isEqualAnchor
+                  ? 'text-amber-600'
+                  : ''
+              }
+            >
+              {ch}
+            </span>
+          );
+        })}
+      </h1>
+      <div class="text-sm font-mono text-ink-muted">
+        Pinyin: <span class="text-ink font-semibold text-base">{word.data.pinyin}</span>
+      </div>
+    </div>
+
+    <div class="bg-paper-card border-l-3 border-jade p-4 my-6 text-ink font-serif text-[1rem] leading-relaxed">
+      <strong class="font-sans not-italic uppercase tracking-wider text-xs block text-ink mb-1">释义 Definition</strong>
+      {word.data.definition}
+    </div>
+
+    <div class="mb-6 p-4 rounded-xl bg-paper-card border border-border-warm">
+      <div class="text-xs font-sans uppercase tracking-wider text-ink-muted font-bold mb-2">结构分类 Structural Classification</div>
+      {anchorPosition === 'equal' ? (
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 flex-wrap">
+            <a
+              href={`/characters/${encodeURIComponent(firstChar)}`}
+              class="wiki-term inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-border-warm hover:border-amber-500 transition"
+            >
+              <div class="flex flex-col">
+                <span class="text-[10px] font-sans uppercase text-ink-muted">并重 · 首字 Anchor 1</span>
+                <span class="text-2xl font-serif font-bold text-amber-600 leading-none">{firstChar}</span>
+              </div>
+              <div class="w-px h-8 bg-border-warm mx-1" />
+              <div class="flex flex-col text-xs text-ink-muted">
+                <span class="font-mono">{word.data.pinyin.split(/\s+/)[0] || ''}</span>
+                <span>Open entry →</span>
+              </div>
+            </a>
+            <a
+              href={`/characters/${encodeURIComponent(lastChar)}`}
+              class="wiki-term inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-border-warm hover:border-amber-500 transition"
+            >
+              <div class="flex flex-col">
+                <span class="text-[10px] font-sans uppercase text-ink-muted">并重 · 尾字 Anchor 2</span>
+                <span class="text-2xl font-serif font-bold text-amber-600 leading-none">{lastChar}</span>
+              </div>
+              <div class="w-px h-8 bg-border-warm mx-1" />
+              <div class="flex flex-col text-xs text-ink-muted">
+                <span class="font-mono">{word.data.pinyin.split(/\s+/)[word.data.pinyin.split(/\s+/).length - 1] || ''}</span>
+                <span>Open entry →</span>
+              </div>
+            </a>
+          </div>
+          <div class="text-sm text-ink-muted font-serif leading-snug">
+            {`${word.data.word} is a parallel coordinate compound (联合式) where both graphemes ${firstChar} and ${lastChar} contribute equal structural weight as a fused pair — neither character dominates the head.`}
+          </div>
+        </div>
+      ) : (
+        <div class="flex items-center gap-4 flex-wrap">
+          <a
+            href={`/characters/${encodeURIComponent(anchorChar)}`}
+            class={`wiki-term inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-border-warm transition ${anchorPosition === 'first' ? 'hover:border-jade' : 'hover:border-cinnabar'}`}
+          >
+            <div class="flex flex-col">
+              <span class="text-[10px] font-sans uppercase text-ink-muted">{anchorLabel} Anchor</span>
+              <span class={`text-2xl font-serif font-bold leading-none ${anchorPosition === 'first' ? 'text-jade' : 'text-cinnabar'}`}>{anchorChar}</span>
+            </div>
+            <div class="w-px h-8 bg-border-warm mx-1" />
+            <div class="flex flex-col text-xs text-ink-muted">
+              <span class="font-mono">{word.data.pinyin.split(/\s+/)[anchorPosition === 'first' ? 0 : word.data.pinyin.split(/\s+/).length - 1]}</span>
+              <span>Open entry →</span>
+            </div>
+          </a>
+          <div class="flex-1 min-w-[180px] text-sm text-ink-muted font-serif leading-snug">
+            {word.data.structureType === 'first'
+              ? `The core meaning of ${word.data.word} is driven by its first character ${anchorChar}. The following character(s) qualify or specify the domain of ${anchorChar}.`
+              : `The core meaning of ${word.data.word} is driven by its trailing character ${anchorChar}, which acts as the categorical noun. The preceding character(s) act as modifiers narrowing the category.`}
+          </div>
+        </div>
+      )}
+    </div>
+
+    {word.data.examples && word.data.examples.length > 0 && (
+      <section class="my-8">
+        <h3 class="font-serif text-lg font-bold text-ink mb-3">例句 Examples</h3>
+        <ul class="list-none p-0 space-y-3">
+          {word.data.examples.map((ex) => (
+            <li class="bg-paper-card border border-border-warm p-3 rounded-lg text-ink font-serif leading-relaxed">
+              {ex}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <div class="mt-6 space-y-4 text-ink leading-relaxed">
+      <Content />
+    </div>
+
+    {word.data.relatedWords && word.data.relatedWords.length > 0 && (
+      <section class="mt-10 pt-4 border-t border-border-warm">
+        <h3 class="font-serif text-lg font-bold text-ink mb-2">相关词 Related Words</h3>
+        <div class="flex flex-wrap gap-2">
+          {word.data.relatedWords.map((rw) => (
+            <a
+              href={`/words/${rw}`}
+              class="wiki-term inline-flex items-center justify-center px-3 h-[2.2rem] rounded-lg border border-border-warm bg-paper-card text-ink hover:border-cinnabar hover:text-cinnabar transition font-serif"
+            >
+              {rw}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</Layout>

@@ -1,0 +1,191 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { buildDualIndex, getWordsForChar } from '../../utils/dictionaryIndex';
+
+export async function getStaticPaths() {
+  const characters = await getCollection('characters');
+  return characters.map((c) => ({
+    params: { id: c.id },
+    props: { character: c },
+  }));
+}
+
+const { character } = Astro.props;
+const { Content } = await render(character);
+
+const characters = await getCollection('characters');
+const words = await getCollection('words');
+const dualIndex = buildDualIndex(characters as any, words as any);
+const { firstLeaners, lastLeaners, equalWords } = getWordsForChar(character.data.char, dualIndex as any);
+---
+
+<Layout title={`${character.data.char} ${character.data.pinyin} - 字典`}>
+  <article class="max-w-prose">
+    <nav class="text-xs font-sans text-ink-muted uppercase tracking-wider mb-3">
+      <a href="/dictionary" class="no-underline text-jade hover:text-ink">字典 Dictionary</a>
+      <span class="mx-1.5">•</span>
+      <span>字 Character</span>
+    </nav>
+
+    <div class="flex items-baseline gap-4 flex-wrap border-b border-border-warm pb-4 mb-6">
+      <h1 class="text-5xl md:text-6xl font-serif font-bold text-ink m-0 tracking-tight">
+        {character.data.char}
+      </h1>
+      <div class="flex flex-col gap-1">
+        <div class="text-lg font-mono text-cinnabar font-semibold">
+          {character.data.pinyin}
+        </div>
+        <div class="flex flex-wrap gap-1.5 items-center text-xs font-sans text-ink-muted">
+          {character.data.level && (
+            <span class="px-1.5 py-0.5 rounded bg-paper-card border border-border-warm">{character.data.level}字</span>
+          )}
+          {character.data.traditional && (
+            <span class="px-1.5 py-0.5 rounded bg-paper-card border border-border-warm">繁体 {character.data.traditional}</span>
+          )}
+          {character.data.strokes != null && (
+            <span class="px-1.5 py-0.5 rounded bg-paper-card border border-border-warm">{character.data.strokes} 画</span>
+          )}
+          {character.data.radical && (
+            <span class="px-1.5 py-0.5 rounded bg-paper-card border border-border-warm">部首 {character.data.radical}</span>
+          )}
+        </div>
+      </div>
+    </div>
+
+    {character.data.definition && (
+      <div class="bg-paper-card border-l-3 border-cinnabar p-4 my-6 text-ink font-serif text-[1rem] leading-relaxed">
+        <strong class="font-sans not-italic uppercase tracking-wider text-xs block text-ink mb-1">释义 Definition</strong>
+        {character.data.definition}
+      </div>
+    )}
+
+    <div class="mt-6 space-y-4 text-ink leading-relaxed">
+      <Content />
+    </div>
+
+    {character.data.relatedChars && character.data.relatedChars.length > 0 && (
+      <section class="mt-10 pt-4 border-t border-border-warm">
+        <h3 class="font-serif text-lg font-bold text-ink mb-2">相关字 Related Characters</h3>
+        <div class="flex flex-wrap gap-2">
+          {character.data.relatedChars.map((rc) => (
+            <a
+              href={`/characters/${rc}`}
+              class="wiki-term inline-flex items-center justify-center min-w-[2.2rem] h-[2.2rem] px-3 rounded-lg border border-border-warm bg-paper-card text-ink hover:border-jade hover:text-jade transition text-lg font-serif"
+            >
+              {rc}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="mt-12 pt-6 border-t border-border-warm space-y-10">
+      <h2 class="font-serif text-2xl font-bold text-cinnabar mb-0">
+        词组索引 Word Index
+      </h2>
+
+      <div>
+        <div class="flex items-baseline gap-2 mb-3">
+          <h3 class="font-serif text-lg font-bold text-jade m-0">
+            首重 词组
+          </h3>
+          <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-paper-card border border-border-warm text-ink-muted">
+            First-character-leaning · {firstLeaners.length}
+          </span>
+          <span class="text-xs text-ink-muted ml-auto max-w-md text-right">
+            Core meaning carried by <span class="font-serif text-jade font-bold">{character.data.char}</span> as the leading character
+          </span>
+        </div>
+        {firstLeaners.length > 0 ? (
+          <ul class="list-none p-0 space-y-2">
+            {firstLeaners.map(w => (
+              <li class="bg-paper-card border border-border-warm p-3 rounded-lg hover:border-jade hover:shadow-2xs transition">
+                <div class="flex items-baseline gap-2 flex-wrap">
+                  <a href={`/words/${w.id}`} class="wiki-term text-lg font-serif font-bold text-ink hover:text-jade transition">
+                    {w.data.word}
+                  </a>
+                  <span class="text-xs font-mono text-cinnabar">{w.data.pinyin}</span>
+                  <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white border border-border-warm text-ink-muted shrink-0">首重</span>
+                </div>
+                {w.data.definition && (
+                  <p class="text-sm text-ink-muted mt-1 m-0 leading-snug">{w.data.definition}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-sm text-ink-muted italic">暂无首重词条。</p>
+        )}
+      </div>
+
+      <div>
+        <div class="flex items-baseline gap-2 mb-3">
+          <h3 class="font-serif text-lg font-bold text-amber-600 m-0">
+            并重 词组
+          </h3>
+          <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-paper-card border border-border-warm text-ink-muted">
+            Equal-weight coordinate · {equalWords.length}
+          </span>
+          <span class="text-xs text-ink-muted ml-auto max-w-md text-right">
+            Parallel coordinate compound — <span class="font-serif text-amber-600 font-bold">{character.data.char}</span> carries equal structural weight
+          </span>
+        </div>
+        {equalWords.length > 0 ? (
+          <ul class="list-none p-0 space-y-2">
+            {equalWords.map(w => (
+              <li class="bg-paper-card border border-border-warm p-3 rounded-lg hover:border-amber-500 hover:shadow-2xs transition">
+                <div class="flex items-baseline gap-2 flex-wrap">
+                  <a href={`/words/${w.id}`} class="wiki-term text-lg font-serif font-bold text-ink hover:text-amber-600 transition">
+                    {w.data.word}
+                  </a>
+                  <span class="text-xs font-mono text-cinnabar">{w.data.pinyin}</span>
+                  <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white border border-border-warm text-ink-muted shrink-0">并重</span>
+                </div>
+                {w.data.definition && (
+                  <p class="text-sm text-ink-muted mt-1 m-0 leading-snug">{w.data.definition}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-sm text-ink-muted italic">暂无并重词条。</p>
+        )}
+      </div>
+
+      <div>
+        <div class="flex items-baseline gap-2 mb-3">
+          <h3 class="font-serif text-lg font-bold text-cinnabar m-0">
+            尾重 词组
+          </h3>
+          <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-paper-card border border-border-warm text-ink-muted">
+            Last-character-leaning · {lastLeaners.length}
+          </span>
+          <span class="text-xs text-ink-muted ml-auto max-w-md text-right">
+            Core meaning carried by <span class="font-serif text-cinnabar font-bold">{character.data.char}</span> as the trailing anchor character
+          </span>
+        </div>
+        {lastLeaners.length > 0 ? (
+          <ul class="list-none p-0 space-y-2">
+            {lastLeaners.map(w => (
+              <li class="bg-paper-card border border-border-warm p-3 rounded-lg hover:border-cinnabar hover:shadow-2xs transition">
+                <div class="flex items-baseline gap-2 flex-wrap">
+                  <a href={`/words/${w.id}`} class="wiki-term text-lg font-serif font-bold text-ink hover:text-cinnabar transition">
+                    {w.data.word}
+                  </a>
+                  <span class="text-xs font-mono text-cinnabar">{w.data.pinyin}</span>
+                  <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white border border-border-warm text-ink-muted shrink-0">尾重</span>
+                </div>
+                {w.data.definition && (
+                  <p class="text-sm text-ink-muted mt-1 m-0 leading-snug">{w.data.definition}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-sm text-ink-muted italic">暂无尾重词条。</p>
+        )}
+      </div>
+    </section>
+  </article>
+</Layout>
