@@ -1,0 +1,650 @@
+---
+/**
+ * 部首/偏旁检索 — Radical/peripheral lookup panel (v2: 7 position groups).
+ *
+ * UI layout (mirrors StrokeInput.astro dual-layout for symmetry):
+ *   LEFT  = Row 1: 7 position buttons (无部首, 左边, 右边, 上面, 下面, 中间, 包围)
+ *           Row 2: Candidate allomorphs (部形) — shown ONLY after user clicks a
+ *                   position that is NOT 无部首.
+ *   RIGHT = 6 stroke buttons (2×3 pad) for peripheral stroke prefix + wildcard 通配.
+ *
+ * Selection flow (v2: strict progressive filtering, user-specified):
+ *   1. Click a position button (default 无部首).
+ *      - If 无部首 → character list shows undifferentiated chars (no semantic cluster)
+ *        sub-sorted by their total character stroke order → stroke count.
+ *      - Else (position is 左/右/上/下/中/包围) → Row 2 shows all allomorph glyphs whose
+ *        headingForm.position matches that selection.
+ *   2. User clicks an allomorph glyph (部形) → character list below is filtered to only
+ *      chars whose headingForm matches (position + glyph), sub-sorted by:
+ *          peripherals stroke order → peripherals stroke count → tiebreak pinyin.
+ *   3. (Optional) Tap peripheral stroke pad to refine character list further by prefix.
+ *   4. Click any character → adds it to committedChars[], emits radicalInputChange
+ *      CustomEvent that DictionarySearch.astro consumes identically to strokeInputChange.
+ */
+import type { RadicalPosition, SortedCharEntry, StrokeType } from '../utils/radicalSort';
+---
+
+<div
+  id="radical-input-root"
+  class="rounded-2xl border border-border-warm bg-paper-card/60 shadow-2xs p-3 md:p-4 space-y-3"
+  role="group"
+  aria-label="部首/偏旁检索 Radical / Peripheral lookup"
+>
+  <div class="flex items-center justify-between flex-wrap gap-2">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="text-xs font-sans font-bold uppercase tracking-wider text-ink-muted">
+        部首/偏旁检索 · Radical / Peripheral Lookup
+      </span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <button
+        type="button"
+        id="radical-undo-btn"
+        class="text-[11px] font-sans px-2 py-1 rounded-lg bg-white border border-border-warm text-ink-muted hover:text-ink hover:border-ink/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+        aria-label="撤销上一笔 Undo last selection"
+        disabled
+      >
+        ↶ Undo
+      </button>
+      <button
+        type="button"
+        id="radical-clear-btn"
+        class="text-[11px] font-sans px-2 py-1 rounded-lg bg-white border border-border-warm text-ink-muted hover:text-ink hover:border-ink/20 transition disabled:opacity-40 disabled:cursor-not-allowed"
+        aria-label="清空 Clear all selections"
+        disabled
+      >
+        ✕ Clear
+      </button>
+    </div>
+  </div>
+
+  <!-- Left: Positions + Allomorphs    ||    Right: Peripheral stroke pad (2x3 6 buttons) -->
+  <div class="stroke-dual-layout" aria-label="Position / Allomorphs on left, peripheral strokes on right">
+    <!-- LEFT COLUMN -->
+    <div class="stroke-left-col flex flex-col">
+      <div class="mb-1.5 md:mb-2 flex items-center justify-between">
+        <span class="text-[10px] font-sans uppercase tracking-wider text-ink-muted">
+          位置 (7 组) / 部形 Position · Heading Forms · <span id="rad-allo-count">0</span>
+        </span>
+      </div>
+      <div class="stroke-probable-holder rounded-2xl border border-dashed border-border-warm/70 bg-white/40 p-2 flex flex-col gap-2 min-h-[6rem]">
+        <div
+          id="rad-position-row"
+          role="listbox"
+          aria-label="部首位置 (7 组  无部首·左边·右边·上面·下面·中间·包围) Radical position groups"
+          class="grid grid-cols-7 gap-1"
+        >
+          <button type="button" data-rad-position="__none__" class="rad-pos-btn text-[12px] font-serif font-bold leading-tight py-2">无<br/>部首</button>
+          <button type="button" data-rad-position="left"     class="rad-pos-btn text-sm font-serif font-bold leading-tight py-2">左<br/>边</button>
+          <button type="button" data-rad-position="right"    class="rad-pos-btn text-sm font-serif font-bold leading-tight py-2">右<br/>边</button>
+          <button type="button" data-rad-position="top"      class="rad-pos-btn text-sm font-serif font-bold leading-tight py-2">上<br/>面</button>
+          <button type="button" data-rad-position="bottom"   class="rad-pos-btn text-sm font-serif font-bold leading-tight py-2">下<br/>面</button>
+          <button type="button" data-rad-position="centre"   class="rad-pos-btn text-sm font-serif font-bold leading-tight py-2">中<br/>间</button>
+          <button type="button" data-rad-position="surround" class="rad-pos-btn text-[12px] font-serif font-bold leading-tight py-2">包<br/>围</button>
+        </div>
+        <div
+          id="rad-allomorphs"
+          role="listbox"
+          aria-label="部形候选 Allomorph candidates (only shown for 6 positions, hidden for 无部首)"
+          class="grid grid-cols-6 gap-1.5"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Matched chars (12 cap + "more" jump link below); full list lives in grouped page. -->
+  <div class="rounded-xl border border-border-warm bg-white/60 p-3">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-[10px] font-sans uppercase tracking-wider text-ink-muted">
+        匹配字 Matching characters · <span id="rad-char-count">0</span>
+        <span id="rad-order-hint" class="ml-1 text-cinnabar/80"></span>
+      </span>
+    </div>
+    <div id="rad-matched-chars" class="grid grid-cols-6 gap-1.5" role="listbox" aria-label="匹配字符 Matched characters"></div>
+  </div>
+
+</div>
+
+<script>
+  type Stroke5 = '横' | '竖' | '撇' | '点' | '折' | '通配';
+  // Note: position order for UI filtering matches POSITION_ORDER; we add "__none__"
+  // as a sentinel for 无部首.
+  type UiPos = RadicalPosition | '__none__';
+  const POSITIONS: RadicalPosition[] = ['left', 'right', 'top', 'bottom', 'centre', 'surround'];
+  interface IndexChar {
+    id: string;
+    char: string;
+    pinyin: string;
+    strokes: number | null;
+    strokeSequence: Stroke5[] | null;
+    semanticCluster: string | null;
+    headingForm: { glyph: string; position: RadicalPosition; strokes?: number | null; strokeSequence?: Stroke5[] } | null;
+    peripherals: { glyphs: string[]; strokes?: number | null; strokeSequence: Stroke5[] };
+  }
+  const STROKE_RANK: Record<Stroke5, number> = {
+    '横': 1, '竖': 2, '撇': 3, '点': 4, '折': 5, '通配': 99,
+  };
+  function cmpStrokeSeq(a: Stroke5[] | null | undefined, b: Stroke5[] | null | undefined): number {
+    const ax = a ?? []; const bx = b ?? [];
+    const n = Math.min(ax.length, bx.length);
+    for (let i = 0; i < n; i++) {
+      const x = STROKE_RANK[ax[i]] ?? 99;
+      const y = STROKE_RANK[bx[i]] ?? 99;
+      if (x !== y) return x - y;
+    }
+    return ax.length - bx.length;
+  }
+  function cmpNum(a: number | null | undefined, b: number | null | undefined): number {
+    const av = typeof a === 'number' ? a : Number.POSITIVE_INFINITY;
+    const bv = typeof b === 'number' ? b : Number.POSITIVE_INFINITY;
+    if (av === bv) return 0;
+    return av < bv ? -1 : 1;
+  }
+  // For 6-position groups (with allomorph filter applied):
+  //   sort = peripheral stroke order → peripheral stroke count → total strokes → pinyin
+  function perStrokeCmp(a: IndexChar, b: IndexChar): number {
+    const s = cmpStrokeSeq(a.peripherals.strokeSequence, b.peripherals.strokeSequence);
+    if (s !== 0) return s;
+    const na = a.peripherals.strokes ?? (a.peripherals.strokeSequence?.length ?? 0);
+    const nb = b.peripherals.strokes ?? (b.peripherals.strokeSequence?.length ?? 0);
+    if (na !== nb) return na - nb;
+    const t = cmpNum(a.strokes, b.strokes);
+    if (t !== 0) return t;
+    return (a.pinyin || '').localeCompare(b.pinyin || '', 'zh-Hans-CN');
+  }
+  // For 无部首 (undifferentiated) group:
+  //   sort = full stroke order → total stroke count → pinyin
+  function undiffCmp(a: IndexChar, b: IndexChar): number {
+    const s = cmpStrokeSeq(a.strokeSequence ?? null, b.strokeSequence ?? null);
+    if (s !== 0) return s;
+    const t = cmpNum(a.strokes, b.strokes);
+    if (t !== 0) return t;
+    return (a.pinyin || '').localeCompare(b.pinyin || '', 'zh-Hans-CN');
+  }
+
+  const POSITIONS_LABEL: Record<RadicalPosition, string> = {
+    left: '左边 · Left',
+    right: '右边 · Right',
+    top: '上面 · Top',
+    bottom: '下面 · Bottom',
+    centre: '中间 · Center',
+    surround: '包围 · Surround',
+  };
+  const ALLO_SORT_BY_POS: Record<RadicalPosition, number> = {
+    left: 0, right: 1, top: 2, bottom: 3, centre: 4, surround: 5,
+  };
+
+  const root = document.getElementById('radical-input-root')!;
+  const posRow = document.getElementById('rad-position-row')!;
+  const alloEl = document.getElementById('rad-allomorphs')!;
+  const alloCount = document.getElementById('rad-allo-count')!;
+  const perCount = document.getElementById('rad-per-count') as HTMLElement | null;
+  const charCount = document.getElementById('rad-char-count')!;
+  const orderHint = document.getElementById('rad-order-hint')!;
+  const matchedEl = document.getElementById('rad-matched-chars')!;
+  const undoBtn = document.getElementById('radical-undo-btn') as HTMLButtonElement;
+  const clearBtn = document.getElementById('radical-clear-btn') as HTMLButtonElement;
+
+  let charsPromise: Promise<IndexChar[]> | null = null;
+  let chars: IndexChar[] | null = null;
+  // Default = __none__ (无部首)
+  let selectedPosition: UiPos = '__none__';
+  let selectedAllomorph: { glyph: string; position: RadicalPosition } | null = null;
+  let peripheralPrefix: Stroke5[] = [];
+  let committedChars: string[] = [];
+
+  function loadChars(): Promise<IndexChar[]> {
+    if (chars) return Promise.resolve(chars);
+    if (charsPromise) return charsPromise;
+    charsPromise = fetch('/dictionary-index.json', { cache: 'no-cache' })
+      .then((r) => r.json())
+      .then((idx: any) => {
+        const arr: IndexChar[] = Array.isArray(idx?.allChars) ? idx.allChars.map((c: any) => ({
+          id: c.id,
+          char: c.char,
+          pinyin: typeof c.pinyin === 'string' ? c.pinyin : '',
+          strokes: typeof c.strokes === 'number' ? c.strokes : null,
+          strokeSequence: Array.isArray(c.strokeSequence) ? c.strokeSequence : null,
+          semanticCluster: c.semanticCluster ?? null,
+          headingForm: c.headingForm ?? null,
+          peripherals: c.peripherals ?? { glyphs: [], strokes: 0, strokeSequence: [] },
+        })) : [];
+        chars = arr;
+        return arr;
+      })
+      .catch((e) => {
+        console.warn('radical-input: failed to load index', e);
+        chars = [];
+        return [];
+      });
+    return charsPromise;
+  }
+
+  function emit() {
+    root.dispatchEvent(new CustomEvent('radicalInputChange', {
+      bubbles: true,
+      detail: {
+        position: selectedPosition === '__none__' ? null : selectedPosition,
+        allomorph: selectedAllomorph,
+        peripheralPrefix: peripheralPrefix.slice(),
+        committedChars: committedChars.slice(),
+        combinedText: committedChars.join(''),
+      },
+    }));
+  }
+
+  function setButtonsState() {
+    const dirty = selectedPosition !== '__none__' || selectedAllomorph != null || peripheralPrefix.length > 0 || committedChars.length > 0;
+    clearBtn.disabled = !dirty;
+    undoBtn.disabled = !(
+      peripheralPrefix.length > 0 ||
+      selectedAllomorph != null ||
+      selectedPosition !== '__none__' ||
+      committedChars.length > 0
+    );
+  }
+
+  function renderPositions() {
+    for (const btn of posRow.querySelectorAll<HTMLButtonElement>('.rad-pos-btn')) {
+      const isActive = btn.dataset.radPosition === selectedPosition;
+      btn.classList.toggle('bg-cinnabar/15', isActive && btn.dataset.radPosition === '__none__');
+      btn.classList.toggle('text-cinnabar', isActive && btn.dataset.radPosition === '__none__');
+      btn.classList.toggle('border-cinnabar/40', isActive && btn.dataset.radPosition === '__none__');
+      btn.classList.toggle('bg-jade/15', isActive && btn.dataset.radPosition !== '__none__');
+      btn.classList.toggle('text-jade', isActive && btn.dataset.radPosition !== '__none__');
+      btn.classList.toggle('border-jade/40', isActive && btn.dataset.radPosition !== '__none__');
+      btn.classList.toggle('border-border-warm/60', !isActive);
+      btn.classList.toggle('rounded-lg', true);
+      btn.classList.toggle('border', true);
+      btn.classList.toggle('bg-white', !isActive);
+    }
+  }
+
+  function renderAllomorphs() {
+    void loadChars().then((list) => {
+      // v2: allomorphs only render when position is one of the 6 real positions.
+      // When __none__ (无部首) is selected, allomorph section is empty (disabled).
+      if (selectedPosition === '__none__') {
+        alloCount.textContent = '0';
+        alloEl.innerHTML = '';
+        const empty = document.createElement('div');
+        empty.className = 'col-span-6 text-center text-[11px] font-serif italic text-ink-muted py-2';
+        empty.textContent = '已选 无部首 · Showing only undifferentiated characters.';
+        alloEl.appendChild(empty);
+        return;
+      }
+      const pos = selectedPosition as RadicalPosition;
+      const seenKeys = new Set<string>();
+      const allos: Array<{ glyph: string; position: RadicalPosition; cluster: string | null; strokes: number | null; seq: Stroke5[] }> = [];
+      for (const c of list) {
+        if (!c.headingForm) continue;
+        if (c.headingForm.position !== pos) continue;
+        const key = `${c.headingForm.position}|${c.headingForm.glyph}`;
+        if (seenKeys.has(key)) continue;
+        seenKeys.add(key);
+        allos.push({
+          glyph: c.headingForm.glyph,
+          position: c.headingForm.position,
+          cluster: c.semanticCluster,
+          strokes: c.headingForm.strokes ?? (c.headingForm.strokeSequence?.length ?? null),
+          seq: (c.headingForm.strokeSequence as Stroke5[]) ?? [],
+        });
+      }
+      // Sort: position (all same here), then headingForm stroke order, then headingForm stroke count, then glyph.
+      allos.sort((a, b) => {
+        const s = cmpStrokeSeq(a.seq, b.seq);
+        if (s !== 0) return s;
+        const t = cmpNum(a.strokes, b.strokes);
+        if (t !== 0) return t;
+        return a.glyph.localeCompare(b.glyph, 'zh-Hans-CN');
+      });
+      alloCount.textContent = String(allos.length);
+      alloEl.innerHTML = '';
+      if (allos.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'col-span-6 text-center text-[11px] font-serif italic text-ink-muted py-2';
+        empty.textContent = `该位置无匹配部形 No heading forms match ${POSITIONS_LABEL[pos]}.`;
+        alloEl.appendChild(empty);
+        return;
+      }
+      for (const a of allos) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        const active =
+          selectedAllomorph &&
+          selectedAllomorph.glyph === a.glyph &&
+          selectedAllomorph.position === a.position;
+        btn.className = `rad-allo-btn rounded-lg border py-2 text-xl font-serif font-bold transition bg-white hover:bg-jade/10 hover:border-jade/50 ${
+          active
+            ? '!bg-jade !text-white !border-jade'
+            : 'border-border-warm/60 text-ink'
+        }`;
+        const posIdx = ALLO_SORT_BY_POS[a.position];
+        btn.title = `${a.cluster ? `部首:${a.cluster} · ` : ''}${POSITIONS_LABEL[a.position]}${a.strokes ? ` · ${a.strokes}笔` : ''}`;
+        btn.dataset.radAlloGlyph = a.glyph;
+        btn.dataset.radAlloPos = a.position;
+        btn.dataset.radPosIdx = String(posIdx);
+        btn.textContent = a.glyph;
+        alloEl.appendChild(btn);
+      }
+    });
+  }
+
+  function renderPeripheral() {
+    if (perCount) perCount.textContent = String(peripheralPrefix.length);
+  }
+
+  function charPassesPeripheralPrefix(c: IndexChar): boolean {
+    if (peripheralPrefix.length === 0) return true;
+    const seq = c.peripherals.strokeSequence ?? [];
+    if (seq.length < peripheralPrefix.length) return false;
+    for (let i = 0; i < peripheralPrefix.length; i++) {
+      const s = peripheralPrefix[i];
+      if (s === '通配') continue;
+      if (seq[i] !== s) return false;
+    }
+    return true;
+  }
+
+  function renderMatched() {
+    void loadChars().then((list) => {
+      let matched: IndexChar[];
+      let orderText: string;
+
+      if (selectedPosition === '__none__') {
+        // Undifferentiated bucket only: chars with NO semantic cluster.
+        matched = list.filter((c) => !c.semanticCluster);
+        orderText = '· 排序: 总笔画顺序 → 总笔画数';
+        matched.sort(undiffCmp);
+      }
+      else if (!selectedAllomorph) {     
+        matched = []; 
+        orderText = '· 请点选上方部形以查看字元';     
+      } 
+      else {
+        // Position + (optional) allomorph filter.
+        const pos = selectedPosition as RadicalPosition;
+        matched = list.filter((c) => c.headingForm?.position === pos);
+        
+        if (selectedAllomorph) {
+          matched = matched.filter(
+            (c) =>
+              c.headingForm?.glyph === selectedAllomorph!.glyph &&
+              c.headingForm.position === selectedAllomorph!.position
+          );
+        }
+
+        orderText = selectedAllomorph
+          ? `· 排序: 偏旁笔画顺序 → 偏旁笔画数`
+          : `· 选自 ${POSITIONS_LABEL[pos]} (${matched.length} 字, 可点选上方部形精简)`;
+        
+        matched.sort(perStrokeCmp);
+      }
+
+      // Apply peripheral prefix filter if active
+      if (peripheralPrefix.length > 0) {
+        matched = matched.filter(charPassesPeripheralPrefix);
+      }
+
+      const total = matched.length;
+      charCount.textContent = String(total);
+      orderHint.textContent = orderText;
+      matchedEl.innerHTML = '';
+
+      if (total === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'col-span-6 text-center text-[11px] font-serif italic text-ink-muted py-3';
+        empty.textContent =
+          selectedPosition === '__none__'
+            ? '无无部首字 · No undifferentiated characters.'
+            : '无匹配 · No chars match this filter + prefix yet.';
+        matchedEl.appendChild(empty);
+        return;
+      }
+
+      for (const c of matched.slice(0, 18)) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'wiki-term-link rad-char-btn rounded-lg border border-border-warm bg-white hover:border-cinnabar hover:shadow-xs py-2 transition';
+        const perStrokes = c.peripherals.strokes ?? (c.peripherals.strokeSequence?.length ?? 0);
+        const perGlyphs = (c.peripherals.glyphs ?? []).join('·') || '—';
+        btn.title =
+          selectedPosition === '__none__'
+            ? `${c.char} ${c.pinyin} · 无部首 · ${c.strokes ?? '?'}笔 · 添加到搜索`
+            : `${c.char} ${c.pinyin} · 偏旁:${perGlyphs} (${perStrokes}笔) · 添加到搜索`;
+        btn.dataset.radCharId = c.id;
+        btn.dataset.radChar = c.char;
+        btn.innerHTML = `<div class="text-2xl font-serif font-bold leading-tight">${c.char}</div><div class="text-[10px] font-mono text-ink-muted mt-0.5">${c.pinyin}</div>`;
+        matchedEl.appendChild(btn);
+      }
+    });
+  }
+
+  /*
+  function renderMatched() {
+    void loadChars().then((list) => {
+      let matched: IndexChar[];
+      let orderText: string;
+      if (selectedPosition === '__none__') {
+        // Undifferentiated bucket only: chars with NO semantic cluster.
+        matched = list.filter((c) => !c.semanticCluster);
+        orderText = '· 排序: 总笔画顺序 → 总笔画数';
+        matched.sort(undiffCmp);
+      } else {
+        // Position + (optional) allomorph filter.
+        const pos = selectedPosition as RadicalPosition;
+        matched = list.filter((c) => c.headingForm?.position === pos);
+        if (selectedAllomorph) {
+          matched = matched.filter(
+            (c) =>
+              c.headingForm?.glyph === selectedAllomorph!.glyph &&
+              c.headingForm.position === selectedAllomorph!.position
+          );
+        }
+        orderText = selectedAllomorph
+          ? `· 排序: 偏旁笔画顺序 → 偏旁笔画数`
+          : `· 选择部形以查看 ${POSITIONS_LABEL[pos]} 下的字 (${matched.length} candidate chars)`;
+        matched.sort(perStrokeCmp);
+      }
+      // Apply peripheral prefix filter (applies to all cases, though for 无部首 the
+      // heading concept is different, user still might type strokes to narrow).
+      if (peripheralPrefix.length > 0) {
+        matched = matched.filter(charPassesPeripheralPrefix);
+      }
+      const total = matched.length;
+      charCount.textContent = String(total);
+      orderHint.textContent = orderText;
+      matchedEl.innerHTML = '';
+      if (total === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'col-span-6 text-center text-[11px] font-serif italic text-ink-muted py-3';
+        empty.textContent =
+          selectedPosition === '__none__'
+            ? '无无部首字 · No undifferentiated characters.'
+            : selectedAllomorph
+            ? '无匹配 · No chars match this 部形 + 偏旁 prefix yet.'
+            : '请先点击一个部形 · Click a heading form (部形) above.';
+        matchedEl.appendChild(empty);
+        return;
+      }
+      for (const c of matched.slice(0, 12)) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'wiki-term-link rad-char-btn rounded-lg border border-border-warm bg-white hover:border-cinnabar hover:shadow-xs py-2 transition';
+        const perStrokes = c.peripherals.strokes ?? (c.peripherals.strokeSequence?.length ?? 0);
+        const perGlyphs = (c.peripherals.glyphs ?? []).join('·') || '—';
+        btn.title =
+          selectedPosition === '__none__'
+            ? `${c.char} ${c.pinyin} · 无部首 · ${c.strokes ?? '?'}笔 · 添加到搜索`
+            : `${c.char} ${c.pinyin} · 偏旁:${perGlyphs} (${perStrokes}笔) · 添加到搜索`;
+        btn.dataset.radCharId = c.id;
+        btn.dataset.radChar = c.char;
+        btn.innerHTML = `<div class="text-2xl font-serif font-bold leading-tight">${c.char}</div><div class="text-[10px] font-mono text-ink-muted mt-0.5">${c.pinyin}</div>`;
+        matchedEl.appendChild(btn);
+      }
+    });
+  }
+  */
+
+  function renderAll() {
+    renderPositions();
+    renderAllomorphs();
+    renderPeripheral();
+    renderMatched();
+    setButtonsState();
+  }
+
+  // --- Event wiring ----------------------------------------------
+
+  posRow.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.rad-pos-btn');
+    if (!btn) return;
+    const pos = btn.dataset.radPosition as UiPos;
+    if (!pos) return;
+    // Clicking the same position = no-op (keep selection stable, unlike the old toggle behavior).
+    // Different position → switch position, clear allomorph, clear peripheral prefix.
+    if (pos !== selectedPosition) {
+      selectedPosition = pos;
+      selectedAllomorph = null;
+      peripheralPrefix = [];
+    }
+    emit();
+    renderAll();
+  });
+
+  alloEl.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.rad-allo-btn');
+    if (!btn) return;
+    const glyph = btn.dataset.radAlloGlyph as string;
+    const position = btn.dataset.radAlloPos as RadicalPosition;
+    if (!glyph || !position) return;
+    if (selectedAllomorph && selectedAllomorph.glyph === glyph && selectedAllomorph.position === position) {
+      // toggle off = clear allomorph only
+      selectedAllomorph = null;
+    } else {
+      selectedAllomorph = { glyph, position };
+      // ensure position syncs if user somehow clicked allo from different pos row
+      selectedPosition = position;
+      // clear peripheral prefix when switching allomorphs for a clean start
+      peripheralPrefix = [];
+    }
+    emit();
+    renderAll();
+  });
+
+  const padStroke = root.querySelectorAll<HTMLButtonElement>('.rad-per-stroke');
+  for (const btn of padStroke) {
+    btn.addEventListener('click', () => {
+      const s = btn.dataset.stroke as Stroke5;
+      if (!s) return;
+      peripheralPrefix.push(s);
+      emit();
+      renderAll();
+    });
+  }
+
+  function charToStrokeKey(upper: string): Stroke5 | null {
+    if ('QWERT'.includes(upper)) return '横';
+    if ('YUIOP'.includes(upper)) return '竖';
+    if ('HJKL'.includes(upper)) return '撇';
+    if ('ASDFG'.includes(upper)) return '点';
+    if ('ZXCVBNM'.includes(upper)) return '折';
+    if (upper === ' ' || upper === '*' || upper === '?') return '通配';
+    return null;
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') return;
+    const upper = e.key.toUpperCase();
+    if (upper === 'BACKSPACE') {
+      if (!root.isConnected) return;
+      if (root.classList.contains('hidden')) return;
+      if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+      e.preventDefault();
+      undoLast();
+      return;
+    }
+    if (root.classList.contains('hidden')) return;
+    if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+    const s = charToStrokeKey(upper);
+    if (!s) return;
+    e.preventDefault();
+    peripheralPrefix.push(s);
+    emit();
+    renderAll();
+  });
+
+  matchedEl.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest<HTMLAnchorElement>('a');
+    if (link) return;
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.rad-char-btn');
+    if (!btn) return;
+    const ch = btn.dataset.radChar as string;
+    if (!ch) return;
+    committedChars.push(ch);
+    // Reset current filter state so user can start selecting next char in the multi-char word
+    peripheralPrefix = [];
+    selectedAllomorph = null;
+
+    emit();
+    renderAll();
+  });
+
+  function undoLast() {
+    if (peripheralPrefix.length > 0) {
+      peripheralPrefix.pop();
+    } else if (selectedAllomorph) {
+      selectedAllomorph = null;
+    } else if (committedChars.length > 0) {
+      committedChars.pop();
+    } else if (selectedPosition !== '__none__') {
+      // revert to default 无部首
+      selectedPosition = '__none__';
+      selectedAllomorph = null;
+    } else {
+      return;
+    }
+    emit();
+    renderAll();
+  }
+  undoBtn.addEventListener('click', undoLast);
+  clearBtn.addEventListener('click', () => {
+    selectedPosition = '__none__';
+    selectedAllomorph = null;
+    peripheralPrefix = [];
+    committedChars = [];
+    emit();
+    renderAll();
+  });
+  // Sync committed chars from the shared DictionarySearch state when the OTHER panel
+  // (StrokeInput) is the source of a commit change. Prevents stale committedChars
+  // when user switches modalities between strokes and radicals.
+  root.addEventListener('committedSyncFromSearch', ((e: Event) => {
+    const ce = e as CustomEvent<{ committedChars?: string[] }>;
+    if (Array.isArray(ce.detail?.committedChars)) {
+      const prevLen = committedChars.length;
+      const newLen = ce.detail.committedChars.length;
+      committedChars = ce.detail.committedChars.slice();
+      // If the new shared committed is SHORTER than before (user popped via other modality)
+      // AND we have a current peripheral prefix / allomorph / position — keep them so user
+      // can continue selecting the next char. Only clear filter state if shared committed
+      // was just fully reset AND we had no filter selection already.
+      if (newLen === 0 && prevLen > 0) {
+        peripheralPrefix = [];
+        selectedAllomorph = null;
+        selectedPosition = '__none__';
+      } else if (newLen > prevLen && peripheralPrefix.length === 0 && !selectedAllomorph) {
+        // User committed a char via OTHER modality; reset our per-char filter so they can
+        // pick the next char cleanly in this modality
+        peripheralPrefix = [];
+        selectedAllomorph = null;
+      }
+      // Don't re-emit() here: the sync event is one-way FROM parent (DictionarySearch)
+      // to this panel. Re-emitting would create a redundant event cycle. Just update UI.
+      renderAll();
+    }
+  }) as EventListener);
+
+  // Initial render (default = 无部首 selected → char list already filtered to undifferentiated)
+  renderAll();
+
+</script>

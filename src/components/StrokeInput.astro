@@ -251,11 +251,14 @@
     });
   }
   function render() {
+    renderStateOnly();
+    emit();
+  }
+  function renderStateOnly() {
     const canUndo = prefix.length > 0 || committedChars.length > 0;
     undoBtn.disabled = !canUndo;
     clearBtn.disabled = !canUndo;
     renderProbable();
-    emit();
   }
   function addStroke(s: StrokeType) {
     prefix.push(s);
@@ -282,6 +285,17 @@
     committedChars = [];
     render();
   });
+  // Sync committed chars from the shared DictionarySearch state when the OTHER panel
+  // (RadicalInput) is the source of a commit change. Prevents stale committedChars
+  // when user switches modalities between strokes and radicals.
+  root.addEventListener('committedSyncFromSearch', ((e: Event) => {
+    const ce = e as CustomEvent<{ committedChars?: string[] }>;
+    if (Array.isArray(ce.detail?.committedChars)) {
+      committedChars = ce.detail.committedChars.slice();
+      prefix = [];
+      renderStateOnly();
+    }
+  }) as EventListener);
   root.querySelectorAll<HTMLButtonElement>('.stroke-btn').forEach((b) => {
     b.addEventListener('click', () => {
       const s = b.dataset.stroke as StrokeType;

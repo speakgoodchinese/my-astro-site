@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import yaml from 'js-yaml';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -12,63 +13,13 @@ function frontmatterMatter(text) {
   if (!match) return { data: {}, body: text };
   const raw = match[1];
   const body = text.slice(match[0].length);
-  const data = {};
-  const lines = raw.split(/\r?\n/);
-  let i = 0;
-  let currentKey = null;
-  let arrayCollect = false;
-  while (i < lines.length) {
-    const line = lines[i];
-    if (!line.trim() || line.trim().startsWith('#')) {
-      i++;
-      continue;
-    }
-    if (arrayCollect && /^\s*-\s+/.test(line)) {
-      const m = line.match(/^\s*-\s+(.*)$/);
-      let val = m ? m[1].trim() : '';
-      if (/^["'].*["']$/.test(val)) val = val.slice(1, -1);
-      if (currentKey != null) {
-        if (!Array.isArray(data[currentKey])) data[currentKey] = [];
-        data[currentKey].push(val);
-      }
-      i++;
-      continue;
-    } else if (arrayCollect) {
-      arrayCollect = false;
-      currentKey = null;
-    }
-    const m = line.match(/^([A-Za-z\u4e00-\u9fa5_][\w]*)\s*:\s*(.*)$/);
-    if (!m) {
-      i++;
-      continue;
-    }
-    const key = m[1];
-    let val = m[2].trim();
-    if (val === '') {
-      data[key] = [];
-      currentKey = key;
-      arrayCollect = true;
-      i++;
-      continue;
-    }
-    if (/^\d+$/.test(val) && key !== 'pinyin' && key !== 'char' && key !== 'word' && key !== 'definition' && key !== 'traditional' && key !== 'radical' && key !== 'level' && key !== 'structureType' && key !== 'date') {
-      data[key] = Number(val);
-    } else if (/^(true|false)$/.test(val)) {
-      data[key] = val === 'true';
-    } else if (/^["'].*["']$/.test(val)) {
-      data[key] = val.slice(1, -1);
-    } else if (/^\[.*\]$/.test(val)) {
-      try {
-        data[key] = JSON.parse(val);
-      } catch {
-        data[key] = val;
-      }
-    } else {
-      data[key] = val;
-    }
-    i++;
+  try {
+    const data = yaml.load(raw) ?? {};
+    return { data: typeof data === 'object' && data !== null ? data : {}, body };
+  } catch (e) {
+    console.warn('[dict-index] YAML parse failed, falling back to empty object:', e.message);
+    return { data: {}, body };
   }
-  return { data, body };
 }
 
 function loadCollection(dir, colName) {
@@ -116,14 +67,35 @@ function buildSerialIndex(chars, words) {
   const byEqualLastCharEntries = [...byEqualLastChar.entries()].sort(([a], [b]) => a.localeCompare(b, 'zh-Hans-CN'));
   chars.sort((a, b) => (a.data.char || '').localeCompare(b.data.char || '', 'zh-Hans-CN'));
   words.sort((a, b) => (a.data.word || '').localeCompare(b.data.word || '', 'zh-Hans-CN'));
-  const allChars = chars.map(c => ({
-    id: c.id,
-    char: c.data.char,
-    pinyin: c.data.pinyin,
-    definition: c.data.definition,
-    level: c.data.level,
-    strokeSequence: c.data.strokeSequence,
-  }));
+  function coerceNull(v) { return v === 'null' || v === undefined ? null : v; }
+  const allChars = chars.map(c => {
+    const cd = c.data || {};
+    const hf = cd.headingForm && typeof cd.headingForm === 'object' && !Array.isArray(cd.headingForm) ? cd.headingForm : null;
+    const per = cd.peripherals && typeof cd.peripherals === 'object' && !Array.isArray(cd.peripherals) ? cd.peripherals : null;
+    const hfStrokes = hf?.strokes ?? (hf?.strokeSequence?.length ?? null);
+    const perStrokes = per?.strokes ?? (per?.strokeSequence?.length ?? null);
+    return {
+      id: c.id,
+      char: cd.char,
+      pinyin: cd.pinyin,
+      definition: cd.definition,
+      level: cd.level,
+      strokes: cd.strokes ?? (cd.strokeSequence?.length ?? null),
+      strokeSequence: Array.isArray(cd.strokeSequence) ? cd.strokeSequence : [],
+      semanticCluster: coerceNull(cd.semanticCluster) ?? null,
+      headingForm: hf ? {
+        glyph: hf.glyph,
+        position: hf.position,
+        strokes: hfStrokes,
+        strokeSequence: Array.isArray(hf.strokeSequence) ? hf.strokeSequence : [],
+      } : null,
+      peripherals: per ? {
+        glyphs: Array.isArray(per.glyphs) ? per.glyphs : [],
+        strokes: perStrokes,
+        strokeSequence: Array.isArray(per.strokeSequence) ? per.strokeSequence : [],
+      } : { glyphs: [], strokes: 0, strokeSequence: [] },
+    };
+  });
   const allWords = words.map(w => ({
     id: w.id,
     word: w.data.word,

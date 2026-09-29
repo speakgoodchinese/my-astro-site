@@ -211,8 +211,8 @@ export function fromSerializableIndex(
 export const STROKE_META: Record<Exclude<StrokeType, '通配'>, { symbol: string; label: string; color: string; qwertyZone: string }> = {
   横: { symbol: '一', label: '横 Héng Horizontal', color: 'jade', qwertyZone: 'QWERT' },
   竖: { symbol: '丨', label: '竖 Shù Vertical', color: 'sky', qwertyZone: 'YUIOP' },
-  撇: { symbol: '丿', label: '撇 Piě Left-falling', color: 'violet', qwertyZone: 'ASDFG' },
-  点: { symbol: '丶', label: '点 Diǎn Dot / Right-falling', color: 'cinnabar', qwertyZone: 'HJKL' },
+  撇: { symbol: '丿', label: '撇 Piě Left-falling', color: 'violet', qwertyZone: 'HJKL' },
+  点: { symbol: '丶', label: '点 Diǎn Dot / Right-falling', color: 'cinnabar', qwertyZone: 'ASDFG' },
   折: { symbol: '𠃊', label: '折 Zhé Turn / Bend', color: 'amber', qwertyZone: 'ZXCVBNM' },
 };
 

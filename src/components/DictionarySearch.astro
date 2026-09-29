@@ -3,8 +3,13 @@
  * Client-side lazy-loaded Chinese dictionary search.
  * MiniSearch library + dictionary-index.json are loaded only on first interaction,
  * keeping SSR HTML payload tiny on all pages.
+ *
+ * Two collapsible entry modalities share a single committed-head search bar:
+ *   笔画输入 ▴         - Stroke prefix input (existing)
+ *   部首/偏旁检索 ▴  - Radical / peripheral lookup (NEW)
  */
 import StrokeInput from './StrokeInput.astro';
+import RadicalInput from './RadicalInput.astro';
 ---
 
 <div id="dict-search-root" class="relative w-full max-w-3xl space-y-3">
@@ -51,9 +56,19 @@ import StrokeInput from './StrokeInput.astro';
          class="hidden"></div>
     <StrokeInput />
   </div>
-  <div class="flex items-center px-1">
+  <div
+    id="dict-search-radical"
+    data-open="0"
+    class="hidden"
+  >
+    <RadicalInput />
+  </div>
+  <div class="flex items-center gap-3 px-1 flex-wrap">
     <button type="button" id="dict-toggle-stroke" class="text-[11px] font-sans text-ink-muted hover:text-ink transition">
       笔画输入 ▾
+    </button>
+    <button type="button" id="dict-toggle-radical" class="text-[11px] font-sans text-ink-muted hover:text-ink transition">
+      部首/偏旁检索 ▾
     </button>
   </div>
   <div
@@ -65,15 +80,23 @@ import StrokeInput from './StrokeInput.astro';
 </div>
 
 <script>
+  type StrokeType = '横' | '竖' | '撇' | '点' | '折' | '通配';
   interface CharEntry {
     id: string;
     char: string;
     pinyin: string;
     definition: string;
     level?: string;
+    strokes?: number | null;
     strokeSequence?: StrokeType[];
+    semanticCluster?: string | null;
+    headingForm?: {
+      glyph: string;
+      position: 'left' | 'right' | 'top' | 'bottom' | 'centre' | 'surround';
+      strokes: number;
+      strokeSequence: StrokeType[];
+    } | null;
   }
-  type StrokeType = '横' | '竖' | '撇' | '点' | '折' | '通配';
   interface WordEntry {
     id: string;
     word: string;
@@ -94,16 +117,22 @@ import StrokeInput from './StrokeInput.astro';
     firstChar?: string;
     lastChar?: string;
     strokeSequence?: StrokeType[];
+    headingForm?: { glyph: string; position: RadicalPosition; strokes: number; strokeSequence: StrokeType[] } | null;
+    semanticCluster?: string | null;
   };
   type MiniSearchT = any;
 
+  type RadicalPosition = 'left' | 'right' | 'top' | 'bottom' | 'centre' | 'surround';
   const root = document.getElementById('dict-search-root')!;
   const input = document.getElementById('dict-search-input') as HTMLInputElement;
   const resultsEl = document.getElementById('dict-search-results')!;
   const loadingEl = document.getElementById('dict-search-loading')!;
   const toggleStrokeBtn = document.getElementById('dict-toggle-stroke') as HTMLButtonElement;
+  const toggleRadicalBtn = document.getElementById('dict-toggle-radical') as HTMLButtonElement;
   const strokePanel = document.getElementById('dict-search-stroke')!;
+  const radicalPanel = document.getElementById('dict-search-radical')!;
   const strokeRoot = document.getElementById('stroke-input-root');
+  const radicalRoot = document.getElementById('radical-input-root');
   const committedRowEl = document.getElementById('dict-search-committed')!;
 
   const EMPTY_PLACEHOLDER = 'Search character / word / pinyin — 字, 词, 拼音, 释义…';
@@ -111,38 +140,53 @@ import StrokeInput from './StrokeInput.astro';
   let indexPromise: Promise<{ ms: MiniSearchT; docs: Map<string, SearchDoc> }> | null = null;
   let docsMap: Map<string, SearchDoc> | null = null;
   let miniSearch: MiniSearchT | null = null;
+
+  type ActiveModality = 'none' | 'stroke' | 'radical';
+  let activeModality: ActiveModality = 'none';
+  let sharedCommitted: string[] = [];
+  // Stroke-state (prefix only; committed synced to sharedCommitted)
   let strokePrefix: StrokeType[] = [];
   let strokeCommittedChars: string[] = [];
-  let openState = false;
+  // Radical-state (position/allomorph/peripheral prefix only; committed synced to sharedCommitted)
+  let radicalPosition: RadicalPosition | null = null;
+  let radicalAllomorph: { glyph: string; position: RadicalPosition } | null = null;
+  let radicalPeripheralPrefix: StrokeType[] = [];
+  let radicalCommittedChars: string[] = [];
+
+  function setSharedCommitted(next: string[]) {
+    sharedCommitted = next.slice();
+    strokeCommittedChars = sharedCommitted.slice();
+    radicalCommittedChars = sharedCommitted.slice();
+  }
+  function currentCommitted(): string[] {
+    return sharedCommitted.slice();
+  }
+  function currentPrefix(): StrokeType[] {
+    if (activeModality === 'stroke') return strokePrefix;
+    if (activeModality === 'radical') return radicalPeripheralPrefix;
+    return strokePrefix.length ? strokePrefix : radicalPeripheralPrefix;
+  }
+  function clearTextInputIfSwitching() {
+    if (input.value.trim() && /[\u3400-\u9FFF]/.test(input.value)) {
+      // keep user's CJK typed text if present
+    }
+  }
 
   function updateInputDisplay() {
-    const hasStrokeSignal = strokePrefix.length > 0 || strokeCommittedChars.length > 0;
-    if (hasStrokeSignal) {
-      // Hide the raw input caret + text visually (kept in DOM for events/form submission)
+    const prefix = currentPrefix();
+    const committed = currentCommitted();
+    const hasSignal = prefix.length > 0 || committed.length > 0;
+    if (hasSignal) {
       committedRowEl.classList.remove('hidden');
-      input.style.opacity = '0';
-      input.style.position = 'absolute';
-      input.style.left = '0';
-      input.style.top = '0';
-      input.style.width = '100%';
-      input.style.height = '100%';
-      input.style.pointerEvents = 'none';
-      input.style.zIndex = '-1';
-      input.placeholder = '';
-      input.setAttribute('aria-hidden', 'true');
     } else {
       committedRowEl.classList.add('hidden');
-      input.style.opacity = '';
-      input.style.position = '';
-      input.style.left = '';
-      input.style.top = '';
-      input.style.width = '';
-      input.style.height = '';
-      input.style.pointerEvents = '';
-      input.style.zIndex = '';
-      input.placeholder = EMPTY_PLACEHOLDER;
-      input.removeAttribute('aria-hidden');
     }
+    if (activeModality === 'stroke' || activeModality === 'radical') {
+      input.placeholder = "";
+    } else {
+      input.placeholder = EMPTY_PLACEHOLDER;
+    }    
+    input.removeAttribute('aria-hidden');
   }
   function renderCommittedRow(committed: string[], prefix: StrokeType[]) {
     const hasSignal = committed.length > 0 || prefix.length > 0;
@@ -202,16 +246,53 @@ import StrokeInput from './StrokeInput.astro';
     updateInputDisplay();
   }
   updateInputDisplay();
+
+  function setModality(next: ActiveModality) {
+    if (next === activeModality) {
+      // toggle off
+      activeModality = 'none';
+    } else {
+      activeModality = next;
+    }
+
+    const strokeOpen = activeModality === 'stroke';
+    const radicalOpen = activeModality === 'radical';
+    if (toggleStrokeBtn) toggleStrokeBtn.textContent = strokeOpen ? '笔画输入 ▴' : '笔画输入 ▾';
+    if (toggleRadicalBtn) toggleRadicalBtn.textContent = radicalOpen ? '部首/偏旁检索 ▴' : '部首/偏旁检索 ▾';
+    strokePanel.classList.toggle('hidden', !strokeOpen);
+    radicalPanel.classList.toggle('hidden', !radicalOpen);
+  }
   if (toggleStrokeBtn) {
     toggleStrokeBtn.addEventListener('click', () => {
-      // Force blur first so the click doesn't trigger input.focus then blur.restore racing
       if (document.activeElement === input) input.blur();
-      openState = !openState;
-      toggleStrokeBtn.textContent = openState ? '笔画输入 ▴' : '笔画输入 ▾';
-      if (openState) strokePanel.classList.remove('hidden');
-      else strokePanel.classList.add('hidden');
+      setModality('stroke');
     });
   }
+  if (toggleRadicalBtn) {
+    toggleRadicalBtn.addEventListener('click', () => {
+      if (document.activeElement === input) input.blur();
+      setModality('radical');
+    });
+  }
+
+  function applyToCommittedAndSearch(committed: string[], prefix: StrokeType[], combined: string) {
+    // Clear the text input value if committed items are present so it doesn't duplicate on the right
+    if (committed.length > 0) {
+    input.value = '';
+    } else if (document.activeElement !== input) {
+      if (combined || committed.length === 0) input.value = combined;
+    }
+    renderCommittedRow(committed, prefix);
+    void ensureIndex().then(() => {
+      pendingQ = '';
+      const q =
+        document.activeElement === input && input.value
+          ? input.value
+          : combined || input.value;
+      runSearch(q);
+    });
+  }
+
   if (strokeRoot) {
     strokeRoot.addEventListener('strokeInputChange', ((e: Event) => {
       const detail = (e as CustomEvent).detail as {
@@ -221,17 +302,40 @@ import StrokeInput from './StrokeInput.astro';
         currentSlotPrefix?: StrokeType[];
       };
       strokePrefix = detail.currentSlotPrefix ?? detail.prefix ?? [];
-      strokeCommittedChars = Array.isArray(detail.committedChars) ? detail.committedChars.slice() : [];
-      const committed = strokeCommittedChars;
-      const combined = typeof detail.combinedText === 'string' ? detail.combinedText : committed.join('');
-      if (combined || committed.length === 0) {
-        input.value = combined;
+      const newStrokeCommitted = Array.isArray(detail.committedChars) ? detail.committedChars.slice() : [];
+      setSharedCommitted(newStrokeCommitted);
+      // Sync shared committed state into the OTHER (radical) panel so Undo/Clear there still works correctly
+      if (radicalRoot) {
+        radicalRoot.dispatchEvent(new CustomEvent('committedSyncFromSearch', {
+          detail: { committedChars: sharedCommitted.slice() },
+        }));
       }
-      renderCommittedRow(strokeCommittedChars, strokePrefix);
-      void ensureIndex().then(() => {
-        pendingQ = '';
-        runSearch(combined || input.value);
-      });
+      const combined = typeof detail.combinedText === 'string' ? detail.combinedText : sharedCommitted.join('');
+      applyToCommittedAndSearch(sharedCommitted, strokePrefix, combined);
+    }) as EventListener);
+  }
+  if (radicalRoot) {
+    radicalRoot.addEventListener('radicalInputChange', ((e: Event) => {
+      const detail = (e as CustomEvent).detail as {
+        position?: RadicalPosition | null;
+        allomorph?: { glyph: string; position: RadicalPosition } | null;
+        peripheralPrefix?: StrokeType[];
+        committedChars?: string[];
+        combinedText?: string;
+      };
+      radicalPosition = detail.position ?? null;
+      radicalAllomorph = detail.allomorph ?? null;
+      radicalPeripheralPrefix = Array.isArray(detail.peripheralPrefix) ? detail.peripheralPrefix.slice() : [];
+      const newRadCommitted = Array.isArray(detail.committedChars) ? detail.committedChars.slice() : [];
+      setSharedCommitted(newRadCommitted);
+      // Sync shared committed state into the OTHER (stroke) panel so Undo/Clear there still works correctly
+      if (strokeRoot) {
+        strokeRoot.dispatchEvent(new CustomEvent('committedSyncFromSearch', {
+          detail: { committedChars: sharedCommitted.slice() },
+        }));
+      }
+      const combined = typeof detail.combinedText === 'string' ? detail.combinedText : sharedCommitted.join('');
+      applyToCommittedAndSearch(sharedCommitted, radicalPeripheralPrefix, combined);
     }) as EventListener);
   }
   function strokeMatchesChar(seq: StrokeType[] | undefined, prefix: StrokeType[]): boolean {
@@ -300,6 +404,8 @@ import StrokeInput from './StrokeInput.astro';
             definition: c.definition,
             level: c.level,
             strokeSequence: c.strokeSequence,
+            headingForm: c.headingForm ?? null,
+            semanticCluster: c.semanticCluster ?? null,
           };
         }),
         ...data.allWords.map<SearchDoc>((w) => ({
@@ -433,14 +539,15 @@ import StrokeInput from './StrokeInput.astro';
   let pendingQ = '';
   function runSearch(raw: string) {
     const q = raw.trim();
-    const committed = strokeCommittedChars.slice();
+    const committed = currentCommitted().slice();
+    const usedStrokePrefix = currentPrefix();
     const charSeqs: Map<string, StrokeType[] | undefined> = (ensureIndex as any).__charSeqs ?? new Map();
     if (!miniSearch) {
       pendingQ = q;
       ensureIndex().then(
         () => {
           if (pendingQ) runSearch(pendingQ);
-          else if (strokePrefix.length || strokeCommittedChars.length) runSearch('');
+          else if (usedStrokePrefix.length || currentCommitted().length) runSearch('');
         },
         () => {
           resultsEl.classList.remove('hidden');
@@ -460,7 +567,8 @@ import StrokeInput from './StrokeInput.astro';
       docIdToIndex.set(d.id, baseList.length);
       baseList.push(d);
     };
-    if (!q && !(strokePrefix.length > 0 || committed.length > 0)) {
+    const hasRadicalSignal = radicalAllomorph !== null;
+    if (!q && !(usedStrokePrefix.length > 0 || committed.length > 0 || hasRadicalSignal)) {
       renderResults('', []);
       return;
     }
@@ -478,6 +586,20 @@ import StrokeInput from './StrokeInput.astro';
       wordBucketSeen.add(d.id);
       wordBucket.push(d);
     };
+    function matchesRadical(d: SearchDoc): boolean {
+      if (!hasRadicalSignal) return true;
+      if (radicalAllomorph) {
+        if (!d.headingForm) return false;
+        if (d.headingForm.glyph !== radicalAllomorph.glyph) return false;
+        if (d.headingForm.position !== radicalAllomorph.position) return false;
+        return true;
+      }
+      if (radicalPosition) {
+        if (!d.headingForm) return false;
+        return d.headingForm.position === radicalPosition;
+      }
+      return true;
+    }
     // Pass 0A — committed chars → surface each committed char entry, AND words whose head starts with committed (学X matches when committed=[学])
     if (committed.length) {
       const headPrefix = committed.join('');
@@ -489,13 +611,34 @@ import StrokeInput from './StrokeInput.astro';
         }
       }
     }
-    if (strokePrefix.length || committed.length) {
+    // Pass 0B — radical selection (position/allomorph) narrows chars without commit/stroke input
+    if (hasRadicalSignal && !committed.length) {
+      const matchedChars: string[] = [];
+      for (const d of docsMap?.values() ?? []) {
+        if (d.type !== 'char') continue;
+        if (!matchesRadical(d)) continue;
+        pushChar(d);
+        matchedChars.push(d.head);
+      }
+      // Surface words whose FIRST char is among the matched-char set
+      if (matchedChars.length) {
+        for (const d of docsMap?.values() ?? []) {
+          if (d.type !== 'word') continue;
+          const first = (d.firstChar ?? d.head?.charAt(0) ?? '');
+          if (matchedChars.includes(first)) pushWord(d);
+        }
+      }
+    }
+    if (usedStrokePrefix.length || committed.length) {
       for (const d of docsMap?.values() ?? []) {
         if (d.type === 'char') {
-          let ok = strokePrefix.length ? strokeMatchesChar(d.strokeSequence ?? charSeqs.get(d.head), strokePrefix) : true;
-          if (committed.length) {
+          let ok = usedStrokePrefix.length ? strokeMatchesChar(d.strokeSequence ?? charSeqs.get(d.head), usedStrokePrefix) : true;
+          if (ok && committed.length) {
             const last = committed[committed.length - 1] ?? '';
             if (last && d.head !== last && !committed.includes(d.head)) ok = false;
+          }
+          if (ok && !committed.length && hasRadicalSignal) {
+            ok = matchesRadical(d);
           }
           if (ok) pushChar(d);
         } else {
@@ -505,10 +648,10 @@ import StrokeInput from './StrokeInput.astro';
             const nextIdx = committed.length;
             const nextCh = headStr.charAt(nextIdx);
             if (!nextCh) continue;
-            if (strokePrefix.length && !strokeMatchesChar(charSeqs.get(nextCh), strokePrefix)) continue;
+            if (usedStrokePrefix.length && !strokeMatchesChar(charSeqs.get(nextCh), usedStrokePrefix)) continue;
           } else {
             const head = d.firstChar ?? headStr.charAt(0);
-            if (strokePrefix.length && !strokeMatchesChar(charSeqs.get(head), strokePrefix)) continue;
+            if (usedStrokePrefix.length && !strokeMatchesChar(charSeqs.get(head), usedStrokePrefix)) continue;
           }
           pushWord(d);
         }
@@ -608,8 +751,8 @@ import StrokeInput from './StrokeInput.astro';
       }
     }
     // Apply stroke-filter AFTER all passes populate buckets (committed-aware).
-    const applyStrokes = (list: SearchDoc[]) => applyStrokeFilter(list, strokePrefix, charSeqs, committed);
-    const hasStrokeSignal = strokePrefix.length > 0 || committed.length > 0;
+    const applyStrokes = (list: SearchDoc[]) => applyStrokeFilter(list, usedStrokePrefix, charSeqs, committed);
+    const hasStrokeSignal = usedStrokePrefix.length > 0 || committed.length > 0;
     const charsFiltered = hasStrokeSignal ? applyStrokes(charBucket) : charBucket;
     const wordsFiltered = hasStrokeSignal ? applyStrokes(wordBucket) : wordBucket;
     // SORT chars: exact pinyin === query first, then committed chars, then stroke count ASC, then canonical stroke-sequence, then pinyin.
@@ -676,7 +819,7 @@ import StrokeInput from './StrokeInput.astro';
     const labelParts = [
       q,
       committed.length && `已选:${committed.join('')}`,
-      strokePrefix.length && `笔画:${strokePrefix.map(s => s.charAt(0)).join('')}`
+      usedStrokePrefix.length && `笔画:${usedStrokePrefix.map(s => s.charAt(0)).join('')}`
     ].filter(Boolean) as string[];
     const label = labelParts.length ? labelParts.join(' · ') : q;
     renderResults(label, baseList.slice(0, 30));
@@ -684,35 +827,55 @@ import StrokeInput from './StrokeInput.astro';
 
   input.addEventListener('focus', () => {
     void ensureIndex();
-    // When user focuses text search, collapse stroke panel UI; keep only toggle button visible
+    // When user focuses text search, collapse all modality panels; keep only toggle buttons visible
     strokePanel.classList.add('hidden');
+    radicalPanel.classList.add('hidden');
   });
   input.addEventListener('input', (e) => {
     const val = (e.target as HTMLInputElement).value;
     const trimmed = val.trim();
     if (trimmed) {
       strokePrefix = [];
-      strokeCommittedChars = [];
+      radicalPeripheralPrefix = [];
+      setSharedCommitted([]);
+      radicalPosition = null;
+      radicalAllomorph = null;
+      // Also sync the now-empty committed state back into both panels so their internal Undo/Clear match
+      if (strokeRoot) {
+        strokeRoot.dispatchEvent(new CustomEvent('committedSyncFromSearch', {
+          detail: { committedChars: [] },
+        }));
+      }
+      if (radicalRoot) {
+        radicalRoot.dispatchEvent(new CustomEvent('committedSyncFromSearch', {
+          detail: { committedChars: [] },
+        }));
+      }
     }
-    renderCommittedRow(strokeCommittedChars, strokePrefix);
-    if (trimmed || strokePrefix.length || strokeCommittedChars.length) {
+    const committed = currentCommitted();
+    const prefix = currentPrefix();
+    renderCommittedRow(committed, prefix);
+    if (trimmed || prefix.length || committed.length) {
       if (!miniSearch && !indexPromise) void ensureIndex().then(() => runSearch(val));
       else runSearch(val);
     } else renderResults('', []);
   });
   input.addEventListener('blur', () => {
-    // Restore stroke panel on blur only if user had explicitly opened it earlier,
+    // Restore the currently-active modality panel on blur only if user had explicitly opened it earlier,
     // UNLESS the blur was caused by the user clicking a result link to navigate away.
     const active = (document.activeElement as HTMLElement | null);
     const clickedResultLink =
       active && active.closest && active.closest('#dict-search-results a.wiki-term');
-    if (openState && !clickedResultLink) {
+    if (activeModality !== 'none' && !clickedResultLink) {
       setTimeout(() => {
-        if (!strokePanel.isConnected) return;
+        if (!strokePanel.isConnected || !radicalPanel.isConnected) return;
         const stillNotOnResultLink =
           !(document.activeElement instanceof HTMLElement) ||
           !document.activeElement.closest('#dict-search-results a.wiki-term');
-        if (stillNotOnResultLink) strokePanel.classList.remove('hidden');
+        if (stillNotOnResultLink) {
+          strokePanel.classList.toggle('hidden', activeModality !== 'stroke');
+          radicalPanel.classList.toggle('hidden', activeModality !== 'radical');
+        }
       }, 120);
     }
   });
@@ -728,8 +891,9 @@ import StrokeInput from './StrokeInput.astro';
       if (!link || !link.href) return;
       const href = link.getAttribute('href') || '';
       if (!href || href === '#') return;
-      // Prevent any pending blur timer from re-showing the stroke panel (would flash before nav).
+      // Prevent any pending blur timer from re-showing any modality panel (would flash before nav).
       strokePanel.classList.add('hidden');
+      radicalPanel.classList.add('hidden');
       // If this click came from stroke mode while input had focus, ensure blur's restore won't
       // fire a pending setTimeout restore over the navigation.
       if (document.activeElement === input) input.blur();
@@ -753,7 +917,20 @@ import StrokeInput from './StrokeInput.astro';
       input.value = '';
       renderResults('', []);
       strokePrefix = [];
-      strokeCommittedChars = [];
+      radicalPeripheralPrefix = [];
+      setSharedCommitted([]);
+      radicalPosition = null;
+      radicalAllomorph = null;
+      if (strokeRoot) {
+        strokeRoot.dispatchEvent(new CustomEvent('committedSyncFromSearch', {
+          detail: { committedChars: [] },
+        }));
+      }
+      if (radicalRoot) {
+        radicalRoot.dispatchEvent(new CustomEvent('committedSyncFromSearch', {
+          detail: { committedChars: [] },
+        }));
+      }
       renderCommittedRow([], []);
       input.blur();
     }

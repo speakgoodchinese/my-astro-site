@@ -1,0 +1,2128 @@
+﻿[2m08:08:56[22m [34m[vite][39m connected.
+[2m08:08:58[22m [34m[types][39m Generated [2m1ms[22m
+[2m08:08:58[22m [34m[vite][39m connected.
+[2m08:08:58[22m [34m[content][39m Syncing content
+[2m08:08:58[22m [34m[content][39m Astro config changed
+[2m08:08:58[22m [34m[content][39m Clearing content store
+[2m08:08:59[22m [34m[content][39m Synced content
+[2m08:08:59[22m [34m[vite][39m Port 4321 is in use, trying another one...
+[2m08:08:59[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[42m[1m astro [22m[49m [32mv7.2.9[39m [2mready in[22m 8311 [2mms[22m
+[2m┃[22m Local    [36mhttp://127.0.0.1:4322/[39m
+[2m08:08:59[22m [32mwatching for file changes...[39m
+[2m08:09:22[22m [34m[200][39m / [2m100ms[22m
+[2m08:09:22[22m [34m[200][39m / [2m3ms[22m
+[2m11:51:24[22m [34m[200][39m / [2m11ms[22m
+[2m12:46:49[22m [34m[watch][39m /src/styles/global.css
+[2m12:46:50[22m [34m[content][39m Syncing content
+[2m12:46:50[22m [34m[content][39m Content config changed
+[2m12:46:50[22m [34m[content][39m Clearing content store
+[2m12:46:54[22m [34m[200][39m / [2m3219ms[22m
+[2m12:46:54[22m [34m[200][39m / [2m192ms[22m
+[2m12:46:54[22m [34m[content][39m Synced content
+[2m12:47:01[22m [34m[watch][39m /src/styles/global.css
+[2m12:49:03[22m [34m[vite][39m program reload
+[2m12:49:03[22m [34m[glob-loader][39m Reloaded data from [32m一.md[39m
+[2m12:49:03[22m [34m[glob-loader][39m Reloaded data from [32m七.md[39m
+[2m12:49:03[22m [34m[glob-loader][39m Reloaded data from [32m三.md[39m
+[2m12:49:03[22m [34m[glob-loader][39m Reloaded data from [32m上.md[39m
+[2m12:49:03[22m [34m[glob-loader][39m Reloaded data from [32m下.md[39m
+[2m12:49:03[22m [34m[glob-loader][39m Reloaded data from [32m不.md[39m
+[2m12:49:03[22m [34m[glob-loader][39m Reloaded data from [32m世.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m个.md[39m
+node : [31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 中.md: **characters → 中** data does not match 
+collection schema.
+At line:15 char:3992
++ ... pgrep\bin'; node .\node_modules\astro\bin\astro.mjs dev --host 127.0. ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31m[1m12:49:...lection schema.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 主.md: bad indentation of a mapping entry
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m乐.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 九.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 也.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 书.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 二.md: bad indentation of a mapping entry
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m五.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m人.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m仁.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m今.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m他.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m以.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m们.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m作.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m你.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 先.md: **characters → 先** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 光.md: **characters → 光** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m入.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m六.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m八.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 写.md: **characters → 写** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m出.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 到.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 前.md: **characters → 前** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m办.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 医.md: **characters → 医** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m十.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m去.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 友.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 可.md: **characters → 可** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 后.md: **characters → 后** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 写.md: **characters → 写** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m出.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m听.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 喜.md: **characters → 喜** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m四.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 国.md: **characters → 国** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m在.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 地.md: **characters → 地** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 坐.md: **characters → 坐** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 外.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 多.md: bad indentation of a mapping entry
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m大.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m天.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 太.md: **characters → 太** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 好.md: **characters → 好** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 妈.md: **characters → 妈** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 字.md: **characters → 字** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 学.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 家.md: **characters → 家** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m小.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m少.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 就.md: **characters → 就** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m山.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 工.md: **characters → 工** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 已.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 师.md: **characters → 师** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 常.md: **characters → 常** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m年.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m很.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 德.md: **characters → 德** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m心.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 快.md: bad indentation of a mapping entry
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m想.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 我.md: **characters → 我** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 所.md: **characters → 所** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 教.md: bad indentation of a mapping entry
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m方.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m日.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 时.md: **characters → 时** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 明.md: **characters → 明** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 昨.md: **characters → 昨** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 是.md: **characters → 是** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m月.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m有.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 朋.md: **characters → 朋** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m来.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 欢.md: **characters → 欢** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m母.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 正.md: **characters → 正** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 常.md: **characters → 常** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m年.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m很.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 德.md: **characters → 德** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m心.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 快.md: bad indentation of a mapping entry
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m想.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 我.md: **characters → 我** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 所.md: **characters → 所** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 教.md: bad indentation of a mapping entry
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m方.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m日.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 时.md: **characters → 时** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 明.md: **characters → 明** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 昨.md: **characters → 昨** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 是.md: **characters → 是** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m月.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m有.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 朋.md: **characters → 朋** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m水.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m没.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m法.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m火.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 爱.md: **characters → 爱** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 父.md: **characters → 父** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 爸.md: **characters → 爸** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m生.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 界.md: **characters → 界** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m看.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 真.md: **characters → 真** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 知.md: **characters → 知** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 经.md: **characters → 经** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 美.md: **characters → 美** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 花.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 老.md: **characters → 老** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m行.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 要.md: **characters → 要** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m见.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m言.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m认.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m识.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m话.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m语.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m说.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m请.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m读.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 走.md: bad indentation of a mapping entry
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m车.md[39m
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m这.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 过.md: **characters → 过** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 道.md: **characters → 道** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m那.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 都.md: **characters → 都** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[2m12:49:04[22m [34m[glob-loader][39m Reloaded data from [32m里.md[39m
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 问.md: **characters → 问** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 间.md: **characters → 间** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 阳.md: **characters → 阳** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 院.md: **characters → 院** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 雪.md: bad indentation of a mapping entry
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 题.md: **characters → 题** data does not match 
+collection schema.
+
+  **headingForm.strokes**: Too small: expected number to be >0
+
+[31m[1m12:49:04[22m [ERROR] [glob-loader][39m Failed to reload 风.md: bad indentation of a mapping entry
+[2m12:49:05[22m [34m[vite][39m program reload
+[2m12:49:05[22m [34m[vite][39m program reload
+[2m12:49:05[22m [34m[vite][39m program reload
+[2m12:49:05[22m [34m[vite][39m program reload
+[2m12:49:05[22m [34m[vite][39m program reload
+[2m12:49:05[22m [34m[vite][39m program reload
+[2m12:49:05[22m [34m[vite][39m program reload
+[2m12:49:06[22m [34m[vite][39m program reload
+[2m12:49:06[22m [34m[vite][39m program reload
+[2m12:49:06[22m [34m[vite][39m program reload
+[2m12:49:06[22m [34m[vite][39m program reload
+[2m12:49:06[22m [34m[vite][39m program reload
+[2m12:49:06[22m [34m[vite][39m program reload
+[2m12:49:06[22m [34m[vite][39m program reload
+[2m12:49:06[22m [34m[vite][39m program reload
+[2m12:49:06[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:07[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:08[22m [34m[vite][39m program reload
+[2m12:49:09[22m [34m[vite][39m program reload
+[2m12:49:09[22m [34m[vite][39m program reload
+[2m12:49:09[22m [34m[vite][39m program reload
+[2m12:49:09[22m [34m[vite][39m program reload
+[2m12:49:09[22m [34m[vite][39m program reload
+[2m12:49:09[22m [34m[vite][39m program reload
+[2m12:49:09[22m [34m[vite][39m program reload
+[2m12:49:09[22m [34m[vite][39m program reload
+[2m12:49:09[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:10[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:11[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:12[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:13[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:14[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:15[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[vite][39m program reload
+[2m12:49:16[22m [34m[200][39m / [2m11557ms[22m
+[2m12:49:16[22m [34m[200][39m / [2m11557ms[22m
+[2m12:49:16[22m [34m[200][39m / [2m11557ms[22m
+[2m12:49:16[22m [34m[200][39m / [2m11557ms[22m
+[2m12:49:16[22m [34m[200][39m / [2m11557ms[22m
+[2m12:49:16[22m [34m[200][39m / [2m11557ms[22m
+[2m12:49:16[22m [34m[200][39m / [2m11557ms[22m
+[2m12:49:16[22m [34m[200][39m / [2m27ms[22m
+[2m12:50:36[22m [34m[watch][39m /src/styles/global.css
+[2m12:52:53[22m [34m[watch][39m /src/styles/global.css
+[2m12:54:09[22m [34m[watch][39m /src/styles/global.css
+[2m12:54:27[22m [34m[watch][39m /src/styles/global.css
+[2m12:55:02[22m [34m[watch][39m /src/styles/global.css
+[2m12:55:17[22m [34m[watch][39m /src/styles/global.css
+[2m12:55:27[22m [34m[watch][39m /src/styles/global.css
+[2m12:55:39[22m [34m[watch][39m /src/styles/global.css
+[2m12:55:56[22m [34m[watch][39m /src/styles/global.css
+[2m12:56:09[22m [34m[watch][39m /src/styles/global.css
+[2m12:56:32[22m [34m[watch][39m /src/styles/global.css
+[2m12:57:01[22m [34m[watch][39m /src/styles/global.css
+[2m12:58:05[22m [34m[watch][39m /src/styles/global.css
+[2m12:58:15[22m [34m[vite][39m program reload
+[2m12:58:16[22m [34m[200][39m / [2m14ms[22m
+[2m12:58:58[22m [34m[200][39m /dictionary [2m22ms[22m
+[2m12:58:59[22m [34m[vite][39m [optimizer] bundling dependencies...
+[2m12:59:00[22m [34m[vite][39m [32mdependency optimized: [33mminisearch[32m[39m
+[2m13:17:51[22m [34m[watch][39m /src/styles/global.css
+[2m13:17:52[22m [34m[content][39m Syncing content
+[2m13:17:52[22m [34m[content][39m Content config changed
+[2m13:17:52[22m [34m[content][39m Clearing content store
+[31m[1m13:17:52[22m [ERROR][39m [31m[InvalidContentEntryDataError][39m [1mcharacters → 中[22m data does not 
+match collection schema.
+
+  [1mheadingForm.strokes[22m: Too small: expected number to be >0
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content 
+schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mStack trace:[22m
+[2m    at C:\Projects\astro-site\src\content\characters\中.md
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[2m13:17:52[22m [34m[200][39m /dictionary [2m632ms[22m
+[2m13:17:53[22m [34m[200][39m /dictionary [2m5ms[22m
+[2m13:17:53[22m [34m[200][39m /dictionary [2m5ms[22m
+[2m13:17:53[22m [34m[200][39m /dictionary [2m23ms[22m
+[2m13:18:00[22m [34m[watch][39m /src/styles/global.css
+[2m13:18:01[22m [34m[200][39m /dictionary [2m22ms[22m
+[2m13:18:27[22m [34m[watch][39m /src/styles/global.css
+[2m13:18:33[22m [34m[watch][39m /src/styles/global.css
+[2m13:18:38[22m [34m[watch][39m /src/styles/global.css
+[2m13:18:45[22m [34m[watch][39m /src/styles/global.css
+[2m13:18:53[22m [34m[watch][39m /src/styles/global.css
+[2m13:20:04[22m [34m[watch][39m /src/styles/global.css
+[2m13:21:53[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m13:21:53[22m [34m[200][39m /dictionary [2m18ms[22m
+[2m13:22:13[22m [34m[vite][39m program reload
+[2m13:22:15[22m [34m[vite][39m program reload
+[2m13:22:15[22m [34m[vite][39m program reload
+[2m13:22:16[22m [34m[vite][39m program reload
+[2m13:22:16[22m [34m[vite][39m program reload
+[2m13:22:16[22m [34m[vite][39m program reload
+[2m13:22:16[22m [34m[vite][39m program reload
+[2m13:22:16[22m [34m[vite][39m program reload
+[2m13:22:16[22m [34m[vite][39m program reload
+[2m13:22:16[22m [34m[vite][39m program reload
+[2m13:22:17[22m [34m[vite][39m program reload
+[2m13:22:17[22m [34m[vite][39m program reload
+[2m13:22:17[22m [34m[vite][39m program reload
+[2m13:22:17[22m [34m[vite][39m program reload
+[2m13:22:17[22m [34m[vite][39m program reload
+[2m13:22:17[22m [34m[vite][39m program reload
+[2m13:22:17[22m [34m[vite][39m program reload
+[2m13:22:17[22m [34m[vite][39m program reload
+[2m13:22:18[22m [34m[vite][39m program reload
+[2m13:22:18[22m [34m[vite][39m program reload
+[2m13:22:18[22m [34m[vite][39m program reload
+[2m13:22:18[22m [34m[vite][39m program reload
+[2m13:22:18[22m [34m[vite][39m program reload
+[2m13:22:18[22m [34m[vite][39m program reload
+[2m13:22:18[22m [34m[vite][39m program reload
+[2m13:22:18[22m [34m[vite][39m program reload
+[2m13:22:19[22m [34m[vite][39m program reload
+[2m13:22:19[22m [34m[vite][39m program reload
+[2m13:22:19[22m [34m[vite][39m program reload
+[2m13:22:19[22m [34m[vite][39m program reload
+[2m13:22:19[22m [34m[vite][39m program reload
+[2m13:22:19[22m [34m[vite][39m program reload
+[2m13:22:19[22m [34m[vite][39m program reload
+[2m13:22:19[22m [34m[vite][39m program reload
+[2m13:22:20[22m [34m[vite][39m program reload
+[2m13:22:20[22m [34m[vite][39m program reload
+[2m13:22:20[22m [34m[vite][39m program reload
+[2m13:22:20[22m [34m[vite][39m program reload
+[2m13:22:20[22m [34m[vite][39m program reload
+[2m13:22:20[22m [34m[vite][39m program reload
+[2m13:22:20[22m [34m[vite][39m program reload
+[2m13:22:20[22m [34m[vite][39m program reload
+[2m13:22:21[22m [34m[vite][39m program reload
+[2m13:22:21[22m [34m[vite][39m program reload
+[2m13:22:21[22m [34m[vite][39m program reload
+[2m13:22:21[22m [34m[vite][39m program reload
+[2m13:22:21[22m [34m[vite][39m program reload
+[2m13:22:21[22m [34m[vite][39m program reload
+[2m13:22:21[22m [34m[vite][39m program reload
+[2m13:22:21[22m [34m[vite][39m program reload
+[2m13:22:22[22m [34m[vite][39m program reload
+[2m13:22:22[22m [34m[vite][39m program reload
+[2m13:22:22[22m [34m[vite][39m program reload
+[2m13:22:22[22m [34m[vite][39m program reload
+[2m13:22:22[22m [34m[vite][39m program reload
+[2m13:22:22[22m [34m[vite][39m program reload
+[2m13:22:22[22m [34m[vite][39m program reload
+[2m13:22:22[22m [34m[vite][39m program reload
+[2m13:22:23[22m [34m[vite][39m program reload
+[2m13:22:23[22m [34m[vite][39m program reload
+[2m13:22:23[22m [34m[vite][39m program reload
+[2m13:22:23[22m [34m[vite][39m program reload
+[2m13:22:23[22m [34m[vite][39m program reload
+[2m13:22:23[22m [34m[vite][39m program reload
+[2m13:22:23[22m [34m[vite][39m program reload
+[2m13:22:23[22m [34m[vite][39m program reload
+[2m13:22:23[22m [34m[vite][39m program reload
+[2m13:22:24[22m [34m[vite][39m program reload
+[2m13:22:24[22m [34m[vite][39m program reload
+[2m13:22:24[22m [34m[vite][39m program reload
+[2m13:22:24[22m [34m[vite][39m program reload
+[2m13:22:24[22m [34m[vite][39m program reload
+[2m13:22:24[22m [34m[vite][39m program reload
+[2m13:22:24[22m [34m[vite][39m program reload
+[2m13:22:24[22m [34m[vite][39m program reload
+[2m13:22:25[22m [34m[vite][39m program reload
+[2m13:22:25[22m [34m[vite][39m program reload
+[2m13:22:25[22m [34m[vite][39m program reload
+[2m13:22:25[22m [34m[vite][39m program reload
+[2m13:22:25[22m [34m[vite][39m program reload
+[2m13:22:25[22m [34m[vite][39m program reload
+[2m13:22:25[22m [34m[vite][39m program reload
+[2m13:22:25[22m [34m[vite][39m program reload
+[2m13:22:26[22m [34m[vite][39m program reload
+[2m13:22:26[22m [34m[vite][39m program reload
+[2m13:22:26[22m [34m[vite][39m program reload
+[2m13:22:26[22m [34m[vite][39m program reload
+[2m13:22:26[22m [34m[vite][39m program reload
+[2m13:22:26[22m [34m[vite][39m program reload
+[2m13:22:26[22m [34m[vite][39m program reload
+[2m13:22:26[22m [34m[vite][39m program reload
+[2m13:22:26[22m [34m[vite][39m program reload
+[2m13:22:27[22m [34m[vite][39m program reload
+[2m13:22:27[22m [34m[vite][39m program reload
+[2m13:22:27[22m [34m[vite][39m program reload
+[2m13:22:27[22m [34m[vite][39m program reload
+[2m13:22:27[22m [34m[vite][39m program reload
+[2m13:22:27[22m [34m[vite][39m program reload
+[2m13:22:27[22m [34m[vite][39m program reload
+[2m13:22:27[22m [34m[vite][39m program reload
+[2m13:22:28[22m [34m[vite][39m program reload
+[2m13:22:28[22m [34m[vite][39m program reload
+[2m13:22:28[22m [34m[vite][39m program reload
+[2m13:22:28[22m [34m[vite][39m program reload
+[2m13:22:28[22m [34m[vite][39m program reload
+[2m13:22:28[22m [34m[vite][39m program reload
+[2m13:22:28[22m [34m[vite][39m program reload
+[2m13:22:28[22m [34m[vite][39m program reload
+[2m13:22:29[22m [34m[vite][39m program reload
+[2m13:22:29[22m [34m[vite][39m program reload
+[2m13:22:29[22m [34m[vite][39m program reload
+[2m13:22:29[22m [34m[vite][39m program reload
+[2m13:22:29[22m [34m[vite][39m program reload
+[2m13:22:29[22m [34m[vite][39m program reload
+[2m13:22:29[22m [34m[vite][39m program reload
+[2m13:22:29[22m [34m[vite][39m program reload
+[2m13:22:30[22m [34m[vite][39m program reload
+[2m13:22:30[22m [34m[vite][39m program reload
+[2m13:22:30[22m [34m[vite][39m program reload
+[2m13:22:30[22m [34m[vite][39m program reload
+[2m13:22:30[22m [34m[vite][39m program reload
+[2m13:22:30[22m [34m[vite][39m program reload
+[2m13:22:30[22m [34m[vite][39m program reload
+[2m13:22:30[22m [34m[vite][39m program reload
+[2m13:22:31[22m [34m[vite][39m program reload
+[2m13:22:31[22m [34m[vite][39m program reload
+[2m13:22:31[22m [34m[vite][39m program reload
+[2m13:22:31[22m [34m[vite][39m program reload
+[2m13:22:31[22m [34m[vite][39m program reload
+[2m13:22:31[22m [34m[vite][39m program reload
+[2m13:22:31[22m [34m[vite][39m program reload
+[2m13:22:31[22m [34m[200][39m /dictionary [2m16037ms[22m
+[2m13:22:31[22m [34m[200][39m /dictionary [2m16037ms[22m
+[2m13:22:31[22m [34m[200][39m /dictionary [2m16037ms[22m
+[2m13:22:31[22m [34m[200][39m /dictionary [2m16037ms[22m
+[2m13:22:31[22m [34m[200][39m /dictionary [2m52ms[22m
+[2m13:23:03[22m [34m[watch][39m /src/styles/global.css
+[2m13:23:41[22m [34m[watch][39m /src/styles/global.css
+[2m13:24:51[22m [34m[watch][39m /src/styles/global.css
+[2m13:25:10[22m [34m[vite][39m program reload
+[2m13:25:12[22m [34m[vite][39m program reload
+[2m13:25:12[22m [34m[vite][39m program reload
+[2m13:25:12[22m [34m[vite][39m program reload
+[2m13:25:12[22m [34m[vite][39m program reload
+[2m13:25:12[22m [34m[vite][39m program reload
+[2m13:25:12[22m [34m[vite][39m program reload
+[2m13:25:12[22m [34m[vite][39m program reload
+[2m13:25:12[22m [34m[vite][39m program reload
+[2m13:25:12[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:13[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:14[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:15[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:16[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:17[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:18[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:19[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:20[22m [34m[vite][39m program reload
+[2m13:25:21[22m [34m[vite][39m program reload
+[2m13:25:21[22m [34m[vite][39m program reload
+[2m13:25:21[22m [34m[200][39m /dictionary [2m8787ms[22m
+[2m13:25:21[22m [34m[200][39m /dictionary [2m8787ms[22m
+[2m13:25:21[22m [34m[200][39m /dictionary [2m8787ms[22m
+[2m13:25:21[22m [34m[200][39m /dictionary [2m8787ms[22m
+[2m13:25:21[22m [34m[200][39m /dictionary [2m8787ms[22m
+[2m13:25:21[22m [34m[200][39m /dictionary [2m8787ms[22m
+[2m13:25:36[22m [34m[200][39m /dictionary [2m12ms[22m
+[2m13:34:01[22m [34m[watch][39m /src/styles/global.css
+[2m13:34:46[22m [34m[vite][39m program reload
+[2m13:34:47[22m [34m[vite][39m program reload
+[2m13:34:47[22m [34m[vite][39m program reload
+[2m13:34:47[22m [34m[vite][39m program reload
+[2m13:34:47[22m [34m[vite][39m program reload
+[2m13:34:47[22m [34m[vite][39m program reload
+[2m13:34:47[22m [34m[vite][39m program reload
+[2m13:34:47[22m [34m[vite][39m program reload
+[2m13:34:47[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:48[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:49[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:50[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:51[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:52[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:53[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:54[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:55[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[vite][39m program reload
+[2m13:34:56[22m [34m[200][39m /dictionary [2m9169ms[22m
+[2m13:34:56[22m [34m[200][39m /dictionary [2m9169ms[22m
+[2m13:34:56[22m [34m[200][39m /dictionary [2m9169ms[22m
+[2m13:34:56[22m [34m[200][39m /dictionary [2m9169ms[22m
+[2m13:34:56[22m [34m[200][39m /dictionary [2m9169ms[22m
+[2m13:34:56[22m [34m[200][39m /dictionary [2m9169ms[22m
+[2m13:35:50[22m [34m[vite][39m program reload
+[2m13:35:50[22m [34m[200][39m /dictionary [2m15ms[22m
+[2m13:36:11[22m [34m[vite][39m program reload
+[2m13:36:11[22m [34m[200][39m /dictionary [2m12ms[22m
+[2m13:36:28[22m [34m[watch][39m /src/styles/global.css
+[2m13:36:42[22m [34m[vite][39m program reload
+[2m13:36:43[22m [34m[200][39m /dictionary [2m11ms[22m
+[2m13:36:53[22m [34m[200][39m /dictionary [2m2ms[22m
+[2m13:39:48[22m [34m[vite][39m program reload
+[2m13:39:48[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[vite][39m program reload
+[2m13:39:49[22m [34m[200][39m /dictionary [2m768ms[22m
+[2m13:39:49[22m [34m[200][39m /dictionary [2m768ms[22m
+[2m13:39:49[22m [34m[200][39m /dictionary [2m768ms[22m
+[2m13:40:04[22m [34m[vite][39m program reload
+[2m13:40:05[22m [34m[200][39m /dictionary [2m23ms[22m
+[2m13:45:03[22m [34m[watch][39m /src/styles/global.css
+[2m13:45:27[22m [34m[watch][39m /src/styles/global.css
+[2m13:45:35[22m [34m[vite][39m program reload
+[2m13:45:35[22m [34m[200][39m /dictionary [2m13ms[22m
+[2m13:47:39[22m [34m[200][39m /dictionary [2m5ms[22m
+[2m13:55:44[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m13:55:44[22m [34m[200][39m /dictionary [2m17ms[22m
+[2m13:56:03[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m13:56:04[22m [34m[200][39m /dictionary [2m23ms[22m
+[2m13:56:51[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m13:56:51[22m [34m[200][39m /dictionary [2m15ms[22m
+[2m13:57:31[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m13:57:32[22m [34m[200][39m /dictionary [2m19ms[22m
+[2m13:57:58[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m13:57:58[22m [34m[200][39m /dictionary [2m15ms[22m
+[2m13:58:07[22m [34m[vite][39m program reload
+[2m13:58:08[22m [34m[200][39m /dictionary [2m12ms[22m
+[2m14:10:52[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:10:52[22m [34m[200][39m /dictionary [2m17ms[22m
+[2m14:11:15[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:11:15[22m [34m[200][39m /dictionary [2m37ms[22m
+[2m14:11:33[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:11:33[22m [34m[200][39m /dictionary [2m18ms[22m
+[2m14:28:39[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:28:39[22m [34m[200][39m /dictionary [2m29ms[22m
+[2m14:33:23[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:33:23[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m14:34:15[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:34:15[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m14:38:14[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:38:14[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m14:38:24[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:38:24[22m [34m[200][39m /dictionary [2m27ms[22m
+[2m14:39:35[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:39:35[22m [34m[200][39m /dictionary [2m40ms[22m
+[2m14:40:05[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:40:05[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m14:46:35[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:46:35[22m [34m[200][39m /dictionary [2m21ms[22m
+[2m14:46:53[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:46:54[22m [34m[200][39m /dictionary [2m33ms[22m
+[2m14:47:19[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:47:19[22m [34m[200][39m /dictionary [2m25ms[22m
+[2m14:52:29[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:52:29[22m [34m[200][39m /dictionary [2m30ms[22m
+[2m14:53:20[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:53:21[22m [34m[200][39m /dictionary [2m33ms[22m
+[2m14:53:35[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:53:35[22m [34m[200][39m /dictionary [2m31ms[22m
+[2m14:53:55[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:53:55[22m [34m[200][39m /dictionary [2m22ms[22m
+[2m14:54:06[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m14:54:06[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m15:00:12[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:00:12[22m [34m[200][39m /dictionary [2m27ms[22m
+[2m15:00:35[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:00:36[22m [34m[200][39m /dictionary [2m29ms[22m
+[2m15:13:15[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:13:15[22m [34m[200][39m /dictionary [2m25ms[22m
+[2m15:17:55[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:17:55[22m [34m[200][39m /dictionary [2m29ms[22m
+[2m15:18:48[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:18:49[22m [34m[200][39m /dictionary [2m29ms[22m
+[2m15:20:30[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:20:30[22m [34m[200][39m /dictionary [2m22ms[22m
+[2m15:26:57[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:26:57[22m [34m[200][39m /dictionary [2m36ms[22m
+[2m15:28:38[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:28:38[22m [34m[200][39m /dictionary [2m27ms[22m
+[2m15:28:58[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:28:58[22m [34m[200][39m /dictionary [2m28ms[22m
+[2m15:33:40[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:33:41[22m [34m[200][39m /dictionary [2m30ms[22m
+[2m15:33:49[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:33:49[22m [34m[200][39m /dictionary [2m22ms[22m
+[2m15:53:14[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m15:53:14[22m [34m[200][39m /dictionary [2m28ms[22m
+[2m15:57:10[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m15:57:11[22m [34m[200][39m /dictionary [2m17ms[22m
+[2m15:57:34[22m [34m[watch][39m /src/styles/global.css
+[31m[1m15:57:35[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+    at async handlePages (C:\Projects\astro-site\node_modules\astro\dist\core\pages\handler.js:32:20)
+[31m[1m15:57:35[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:35[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:35[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:37[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:37[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:38[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:38[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:40[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:40[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:42[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:42[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:43[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:43[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:45[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:45[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:47[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:47[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:48[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:48[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:50[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:50[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:51[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:51[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:53[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:53[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:55[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:55[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:56[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:56[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:57:58[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:57:58[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:00[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:00[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:01[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:01[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:03[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:03[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:04[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:04[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:06[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:06[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:08[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:08[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:09[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:09[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:11[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:11[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:12[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:12[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:14[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:14[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:16[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:16[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:17[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:17[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:19[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:19[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:21[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:21[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:22[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:22[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:24[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:24[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:25[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:25[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:27[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:27[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:29[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:29[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:30[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:30[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:32[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:32[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:34[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:34[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:35[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:35[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:37[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:37[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:38[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:38[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[31m[1m15:58:40[22m [ERROR][39m ReferenceError: sortedInput is not defined
+    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    at new AstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:20:30)
+    at createAstroComponentInstance 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\instance.js:75:20)
+    at renderAstroComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:361:20)
+    at renderComponent (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\component.js:382:12)
+    at eval (C:\Projects\astro-site\src\pages\dictionary.astro:10:1)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async callComponentAsTemplateResultOrResponse 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:203:25)
+    at async renderToAsyncIterable 
+(C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\astro\render.js:235:26)
+    at async renderPage (C:\Projects\astro-site\node_modules\astro\dist\runtime\server\render\page.js:43:24)
+[31m[1m15:58:40[22m [ERROR][39m sortedInput is not defined
+  [1mStack trace:[22m
+[2m    at Object.default (C:\Projects\astro-site\src\pages\dictionary.astro:20:80)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[2m15:58:41[22m [34m[watch][39m /src/styles/global.css
+[2m15:58:41[22m [34m[200][39m /dictionary [2m17ms[22m
+[2m15:58:41[22m [34m[200][39m /dictionary [2m17ms[22m
+[2m15:58:41[22m [34m[200][39m /dictionary [2m1ms[22m
+[33m[1m16:08:41[22m [WARN] [router][39m A `getStaticPaths()` route pattern was matched, but no matching static path was found for requested path `/characters/妈`.
+
+Possible dynamic routes being matched: src/pages/characters/[id].astro, src/pages/[category]/[subcategory].astro.
+[2m16:08:41[22m [33m[404][39m /characters/妈 [2m20ms[22m
+[2m16:09:22[22m [34m[200][39m /characters/八 [2m11ms[22m
+[2m16:10:28[22m [34m[watch][39m /src/styles/global.css
+[2m16:10:28[22m [34m[content][39m Syncing content
+[2m16:10:28[22m [34m[content][39m Content config changed
+[2m16:10:28[22m [34m[content][39m Clearing content store
+[2m16:10:29[22m [34m[200][39m /characters/八 [2m65ms[22m
+[2m16:10:29[22m [34m[200][39m /characters/八 [2m2ms[22m
+[2m16:10:29[22m [34m[content][39m Synced content
+[2m16:10:38[22m [34m[200][39m /characters/妈 [2m3ms[22m
+[2m16:11:31[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m16:16:36[22m [34m[200][39m /characters/妈 [2m6ms[22m
+[2m16:26:30[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m16:26:31[22m [34m[200][39m /characters/妈 [2m12ms[22m
+[2m16:28:36[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m16:28:36[22m [34m[200][39m /characters/妈 [2m30ms[22m
+[2m16:30:04[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m16:30:04[22m [34m[200][39m /characters/妈 [2m16ms[22m
+[2m16:30:11[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m16:30:12[22m [34m[200][39m /characters/妈 [2m17ms[22m
+[2m16:30:19[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m16:30:19[22m [34m[200][39m /characters/妈 [2m10ms[22m
+[2m16:30:24[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m16:30:25[22m [34m[200][39m /characters/妈 [2m7ms[22m
+[2m16:40:29[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m16:40:30[22m [34m[200][39m /characters/妈 [2m15ms[22m
+[2m16:40:49[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m16:40:49[22m [34m[200][39m /characters/妈 [2m14ms[22m
+[2m16:41:01[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m16:41:01[22m [34m[200][39m /characters/妈 [2m14ms[22m
+[2m16:41:31[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m16:41:31[22m [34m[200][39m /characters/妈 [2m12ms[22m
+[2m16:42:02[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m16:42:02[22m [34m[200][39m /characters/妈 [2m15ms[22m
+[2m16:42:22[22m [34m[watch][39m src/components/StrokeInput.astro
+[2m16:42:22[22m [34m[200][39m /characters/妈 [2m11ms[22m
+[2m16:42:45[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m16:42:45[22m [34m[200][39m /characters/妈 [2m6ms[22m
+[2m16:42:58[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m16:42:59[22m [34m[200][39m /characters/妈 [2m6ms[22m
+[2m16:44:02[22m [34m[200][39m /dictionary [2m12ms[22m
+[2m17:01:42[22m [34m[200][39m /characters/妈 [2m4ms[22m
+[2m17:06:14[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m17:06:14[22m [34m[200][39m /characters/妈 [2m25ms[22m
+[2m17:06:45[22m [34m[200][39m /dictionary [2m23ms[22m
+[2m17:12:14[22m [34m[vite][39m program reload
+[2m17:12:15[22m [34m[200][39m /dictionary [2m30ms[22m
+[2m17:13:26[22m [34m[200][39m / [2m15ms[22m
+[2m17:13:28[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m17:18:12[22m [34m[200][39m /dictionary [2m4ms[22m
+[2m17:18:13[22m [34m[watch][39m src/components/StrokeInput.astro
+[2m17:18:14[22m [34m[200][39m /dictionary [2m24ms[22m
+[2m17:18:14[22m [34m[200][39m /dictionary [2m24ms[22m
+[2m17:18:26[22m [34m[watch][39m src/components/StrokeInput.astro
+[2m17:18:26[22m [34m[200][39m /dictionary [2m20ms[22m
+[2m17:18:26[22m [34m[200][39m /dictionary [2m20ms[22m
+[2m17:18:40[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m17:18:40[22m [34m[200][39m /dictionary [2m15ms[22m
+[2m17:18:40[22m [34m[200][39m /dictionary [2m15ms[22m
+[2m17:18:53[22m [34m[200][39m /dictionary [2m4ms[22m
+[2m17:21:21[22m [34m[200][39m /words/妈妈 [2m22ms[22m
+[2m17:36:16[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m17:36:16[22m [34m[200][39m /dictionary [2m27ms[22m
+[2m17:36:20[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m17:36:42[22m [34m[200][39m /dictionary [2m2ms[22m
+[2m17:36:56[22m [34m[200][39m /dictionary [2m2ms[22m
+[2m17:37:28[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m17:42:38[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m17:42:38[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m17:42:38[22m [34m[200][39m /dictionary [2m4ms[22m
+[2m17:42:47[22m [34m[watch][39m src/components/DictionarySearch.astro
+[2m17:42:48[22m [34m[200][39m /dictionary [2m39ms[22m
+[2m17:42:48[22m [34m[200][39m /dictionary [2m39ms[22m
+[2m17:42:51[22m [34m[200][39m /dictionary [2m2ms[22m
+[2m17:42:56[22m [34m[200][39m /words/道理 [2m11ms[22m
+[2m17:49:34[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m17:49:34[22m [34m[200][39m /dictionary [2m27ms[22m
+[2m17:49:37[22m [34m[200][39m /dictionary [2m4ms[22m
+[2m17:51:31[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m17:51:31[22m [34m[200][39m /dictionary [2m24ms[22m
+[2m17:51:31[22m [34m[200][39m /dictionary [2m2ms[22m
+[2m17:51:37[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m17:51:37[22m [34m[200][39m /dictionary [2m18ms[22m
+[2m17:51:37[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m17:51:43[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m17:51:43[22m [34m[200][39m /dictionary [2m19ms[22m
+[2m17:51:43[22m [34m[200][39m /dictionary [2m4ms[22m
+[2m17:51:45[22m [34m[200][39m /dictionary [2m2ms[22m
+[2m17:55:17[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m17:55:18[22m [34m[200][39m /dictionary [2m41ms[22m
+[2m17:55:18[22m [34m[200][39m /dictionary [2m41ms[22m
+[2m17:55:21[22m [34m[200][39m /dictionary [2m4ms[22m
+[2m18:04:32[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:04:33[22m [34m[200][39m /dictionary [2m24ms[22m
+[2m18:04:33[22m [34m[200][39m /dictionary [2m2ms[22m
+[2m18:10:02[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:10:03[22m [34m[200][39m /dictionary [2m39ms[22m
+[2m18:10:03[22m [34m[200][39m /dictionary [2m5ms[22m
+[2m18:10:06[22m [34m[200][39m /dictionary [2m4ms[22m
+[2m18:10:48[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:10:49[22m [34m[200][39m /dictionary [2m29ms[22m
+[2m18:10:49[22m [34m[200][39m /dictionary [2m5ms[22m
+[2m18:13:47[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:13:47[22m [34m[200][39m /dictionary [2m27ms[22m
+[2m18:13:48[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:13:51[22m [34m[200][39m /dictionary [2m4ms[22m
+[2m18:14:22[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:14:22[22m [34m[200][39m /dictionary [2m28ms[22m
+[2m18:14:23[22m [34m[200][39m /dictionary [2m2ms[22m
+[2m18:14:29[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:20:56[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:20:57[22m [34m[200][39m /dictionary [2m38ms[22m
+[2m18:20:57[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:21:08[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:21:08[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m18:21:08[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:21:33[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:21:33[22m [34m[200][39m /dictionary [2m19ms[22m
+[2m18:21:34[22m [34m[200][39m /dictionary [2m5ms[22m
+[2m18:22:24[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:22:25[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m18:22:25[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m18:22:49[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:22:49[22m [34m[200][39m /dictionary [2m24ms[22m
+[2m18:22:49[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:23:27[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:23:27[22m [34m[200][39m /dictionary [2m18ms[22m
+[2m18:23:27[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:25:35[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:25:36[22m [34m[200][39m /dictionary [2m26ms[22m
+[2m18:25:36[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:25:38[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:25:38[22m [34m[200][39m /dictionary [2m21ms[22m
+[2m18:25:38[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:26:06[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:26:07[22m [34m[200][39m /dictionary [2m25ms[22m
+[2m18:26:07[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:26:12[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:26:13[22m [34m[200][39m /dictionary [2m19ms[22m
+[2m18:26:13[22m [34m[200][39m /dictionary [2m4ms[22m
+[2m18:26:16[22m [34m[200][39m /dictionary [2m2ms[22m
+[2m18:26:31[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:26:31[22m [34m[200][39m /dictionary [2m24ms[22m
+[2m18:26:31[22m [34m[200][39m /dictionary [2m3ms[22m
+[2m18:26:55[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:26:56[22m [34m[200][39m /dictionary [2m22ms[22m
+[2m18:26:56[22m [34m[200][39m /dictionary [2m22ms[22m
+[2m18:30:20[22m [34m[watch][39m src/components/RadicalInput.astro
+[2m18:30:20[22m [34m[200][39m /dictionary [2m36ms[22m
+[2m18:30:20[22m [34m[200][39m /dictionary [2m4ms[22m
+[31m[1m18:37:35[22m [ERROR][39m [31m[UnhandledRejection][39m Astro detected an unhandled rejection. Here's the 
+stack trace:
+Error: EBUSY: resource busy or locked, watch 'C:\Projects\astro-site\.astro.zip'
+    at FSWatcher.<computed> (node:internal/fs/watchers:323:19)
+    at Object.watch (node:fs:2609:36)
+    at createFsWatchInstance (file:///C:/Projects/astro-site/node_modules/vite/dist/node/chunks/node.js:9429:16)
+    at setFsWatchListener (file:///C:/Projects/astro-site/node_modules/vite/dist/node/chunks/node.js:9471:14)
+    at NodeFsHandler._watchWithNodeFs 
+(file:///C:/Projects/astro-site/node_modules/vite/dist/node/chunks/node.js:9586:20)
+    at NodeFsHandler._handleFile (file:///C:/Projects/astro-site/node_modules/vite/dist/node/chunks/node.js:9630:24)
+    at NodeFsHandler._addToNodeFs (file:///C:/Projects/astro-site/node_modules/vite/dist/node/chunks/node.js:9804:26)
+  [1mHint:[22m
+[33m    Make sure your promises all have an `await` or a `.catch()` handler.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/unhandled-rejection/[24m[39m
+  [1mStack trace:[22m
+[2m    at FSWatcher.<computed> (node:internal/fs/watchers:323:19)
+    [...] See full stack trace in the browser, or rerun with --verbose.[22m
+[2m18:38:45[22m [34m[200][39m /dictionary [2m5ms[22m
+[2m18:38:45[22m [34m[200][39m /dictionary [2m3ms[22m
