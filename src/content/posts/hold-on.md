@@ -4,7 +4,7 @@ description: "A reflection on relentless innovation and delusional progress, and
 date: "2026-09-30"
 ---
 
-People must spend so that firms can produce. Investors reap the returns to keep the money machine turning. This drives the K-shaped economy where the rich get richer and the rest get normalized—living but not thriving.
+People must spend so that firms can produce. Investors reap the returns to keep the money machine turning. This drives the K-shaped economy where the rich get richer and the rest get normalized - living but not thriving.
 
 The trick we use here is innovation. Without it, there would be no reason to buy the next iPhone, the next EV, the next concert ticket, the next fashion trend, the new bag, or the fresh pair of shoes. In relative terms, any firm that fails to innovate is eventually squeezed out of the market.
 
