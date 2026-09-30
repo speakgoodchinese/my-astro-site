@@ -59,7 +59,7 @@ Understanding how Chinese differs from English helps learners master the languag
 
 5. **How Complex Information is Composed**
 
-    Chinese: Parataxis (hierarchical stacking) - a topic-comment concept is nested within a larger topic-comment concept so details emerge organically within the bigger picture, often omitting link words depending on context.
+    Chinese: Parataxis (hierarchical stacking) - a topic-comment concept is nested within a larger topic-comment concept so details emerge organically within the bigger picture, often omitting link words.
 
     English: Hypotaxis (linear expansion) - uses dependent clauses, such as which, that, who, and conjunctions to provide mandatory logical interlocks linking details to the macro-narrative.
 
