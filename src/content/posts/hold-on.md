@@ -10,7 +10,7 @@ The trick we use here is innovation. Without it, there would be no reason to buy
 
 All of this is framed as progress - the endless, brutal competition that makes things better. From clay to bronze to iron and now AI materials, human civilization evolves on the BIG gene embedded in human nature.
 
-Yet, there seems to be a DEEP gene, recessive and quiet, that provides a balance to the frenzy: the need to stay grounded with deep roots. An optimized system cannot withstand risk and will collapse when conditions shift, and a flourishing crown is no cure for a rotten root in a stormy weather.
+Yet, there seems to be a DEEP gene, recessive and quiet, that provides a balance to the frenzy: the need to stay grounded with deep roots. An optimized system cannot withstand risk and will collapse when conditions change, and a flourishing crown is no cure for a rotten root in a stormy weather.
 
 As the ancient wisdom reminds us:
 
