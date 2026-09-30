@@ -57,7 +57,7 @@ Understanding how Chinese differs from English helps learners master the languag
 
    > 他昨天下午认认真真把生物课本第二篇读过了。Maximal: Earnestly and thoroughly, he had read through the second chapter of the biology textbook yesterday afternoon.
 
-5. **How Complex Information is Clarified**
+5. **How Complex Information is Composed**
 
     Chinese: Parataxis (hierarchical stacking) - a topic-comment concept is nested within a larger topic-comment concept so details emerge organically within the bigger picture, often omitting link words depending on context.
 
