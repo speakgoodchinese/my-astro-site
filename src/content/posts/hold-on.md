@@ -26,4 +26,4 @@ As Laozi warned:
 
 企者不立，跨者不行
 
-Those who truly understand simply keep the two in balance, waiting and ready for the day the entire structure collapses all at once.
+Those who truly understand simply keep the two in balance, ready for the day the entire structure collapses all at once.
