@@ -16,7 +16,7 @@ Yet, there must be a balance: the need to stay grounded with deep roots. For a h
 
 As the ancient wisdom reminds us:
 
-君子务本，本立而道生
+> 君子务本，本立而道生
 
 In a stable system, innovation is the forward force while tradition is the restoring force. When the two work in tandem, progress is steady and enduring. Hollow progress driven by relentless innovation that abandons cultural roots is a recipe for extinction.
 
@@ -24,6 +24,6 @@ Are we doomed for extinction? Many sense the answer but keep quiet, while the no
 
 As Laozi warned:
 
-企者不立，跨者不行
+> 企者不立，跨者不行
 
 Those who understand simply keep the two in balance, ready for the day the entire structure collapses all at once.
