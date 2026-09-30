@@ -83,7 +83,7 @@ Because Chinese relies on built-in lexical meaning rather than inflection and ag
     >The Sun ☀️ / ____
 
     >The Cockerel 🐓 / ____
-4. **Deconstructing Compound Words:** Interrogating the lexical DNA of compound words to unlock the relatinal meaning of each character - a technique especially useful when reading classical texts like Tang poetry.
+4. **Deconstructing Compound Words:** Interrogating the lexical DNA of compound words to unlock the relational meaning of each character - a technique especially useful when reading classical texts like Tang poetry.
     >白日依山尽 黄河入海流 欲穷千里目 更上一层楼
 
 ### Moving Beyond Basics
