@@ -8,7 +8,7 @@ People must spend so that firms can produce. Investors reap the returns to keep 
 
 The trick we use here is innovation. Without it, there would be no reason to buy the next iPhone, the next EV, the next concert ticket, the next fashion trend, the new bag, or the fresh pair of shoes. In relative terms, any firm that fails to innovate is eventually squeezed out of the market.
 
-All of this is framed as progress - the endless, brutal competition that makes things better. From clay to bronze to iron and now AI meterials, human civilization evolves on the BIG gene embedded in human nature.
+All of this is framed as progress - the endless, brutal competition that makes things better. From clay to bronze to iron and now AI materials, human civilization evolves on the BIG gene embedded in human nature.
 
 Yet, there seems to be a DEEP gene, recessive and quiet, that provides a balance to the frenzy: the need to stay grounded with deep roots. A hyper-optimized system cannot withstand risk and will collapse when conditions shift, and a flourishing crown is no cure for a rotten root when stormy weather arrives.
 
@@ -18,10 +18,10 @@ As the ancient wisdom reminds us:
 
 In a stable system, innovation is the forward force while tradition is the restoring force. When the two work in tandem, progress is steady and enduring. Hollow progress driven by relentless innovation that abandons cultural roots is a recipe for extinction.
 
-Are we doomed for extinction? Many sense the answer but keep quiet, while the noisy crowd shouts, "Forward! Forward!"
+Are we doomed for extinction? Many sense the answer, while the noisy crowd shouts, "Forward! Forward!"
 
 As Laozi warned:
 
 > 企者不立，跨者不行
 
-Those who understand simply keep the two in balance, ready for the day the entire structure collapses all at once.
+Those who understand keep the two in balance, ready for the day the entire structure collapses all at once.
