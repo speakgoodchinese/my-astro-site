@@ -39,7 +39,7 @@ Understanding how Chinese differs from English helps learners master the languag
 
     Chinese: Lexical encoding, high-context - relational logic is embedded directly into the lexicon; the full semantic value must be mastered, and the user must be well-trained to understand the embedded logic.
 
-    English: Syntactic encoding, low-context - root words are inflected to signal relational logic, and the user picks up the logic from the wordings).
+    English: Syntactic encoding, low-context - root words are inflected to signal relational logic, and the user picks up the logic from the wordings.
 
     In the examples below, notice how the character 成 shifts in lexical meaning. This must be learned as a pattern by heart, as the distinction is not marked by syntax:
 
