@@ -77,7 +77,7 @@ Because Chinese relies on built-in lexical meaning rather than inflection and ag
 
 1. **Topic-Comment Framing:** Training the brain to establish the frame first rather than hunting for a subject-verb-object pipeline.
     >The Sun ☀️ / Rises 🌅
-2. **Contextual Cloze (Fill-in-the-Blanks):** Teaching students to rely on internal lexical logic and collocational boundaries rather than applying a set of grammar rules.
+2. **Contextual Cloze (Fill-in-the-Blanks):** Training students to rely on internal lexical logic to deduce the matching comment.
     >The Sun ☀️ / ____
 3. **Sequential Picture Narration:** Forcing the learner to construct discourse as a sequence of cinematic scenes rather than a chronological chain.
     >The Sun ☀️ / ____
