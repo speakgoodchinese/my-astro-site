@@ -20,7 +20,7 @@ In a stable system, innovation is the forward force while tradition is the resto
 
 Are we doomed for extinction? Many sense the answer, while the noisy crowd shouts, "Forward! Forward!"
 
-They deem the total mastery of English as the prerequisite to the global economy in an all-in surrender that discards cultural roots for mindless assimilation.
+They deem the total mastery of English as the prerequisite to the global economy in an all-out surrender that discards cultural roots for mindless assimilation.
 
 Yet, as Laozi warned:
 
