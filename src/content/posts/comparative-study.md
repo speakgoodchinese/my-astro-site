@@ -6,7 +6,7 @@ date: "2026-09-25"
 
 ### Chinese is Like Making a Movie  
 
-A picture composition like the one shown below may seem purely inspirational, but it serves a much more fundamental linguistic need: observing a mosaic of related scenes and stitching them into a text with lexical and thematic coherence. This is how the Chinese language works - like a movie that zooms in and out on different frames to complete the narrative. This approach differs fundamentally from English, where the storyline moves more like a twisting, turning roller-coaster.
+A picture composition like the one shown below may seem purely inspirational, but it serves a much more fundamental linguistic need: observing a mosaic of related scenes and stitching them into a text with thematic coherence. This is how the Chinese language works - like a movie that zooms in and out on different frames to complete the narrative. This approach differs fundamentally from English, where the storyline moves more like a twisting, turning roller-coaster.
 
 ![看图作文](../../assets/看图作文.png)
 
