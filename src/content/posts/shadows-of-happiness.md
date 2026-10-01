@@ -10,4 +10,4 @@ If we expand our viewpoint, however, every perceived form, including the radiant
 
 From this viewpoint, happiness and success trap the mind in a [[虚妄|delulu]] state just as effectively as fear and greed do. The mantra to [[离苦得乐|seek happiness and avoid suffering]] holds true only when we realize that conditioned happiness is merely a passing shadow, inherently impermanent and bound to cycle into despair - a wayang show that must eventually come to an end.
 
-When we realize that all perceptions - pleasure and pain, triumph and despair - are mere shadows rather than [[如来|ultimate reality]], the frantic impulse to chase happiness dissolves. We stop playing the wayang king, trade away the raucous laughter for peaceful joy, and finally find peace with ourselves.
+When we realize that all perceptions - pleasure and pain, triumph and despair - are mere shadows rather than [[如来|ultimate reality]], the frantic impulse to chase happiness dissolves. We stop playing the wayang king. We trade away raucous laughter for peaceful joy, free of shadows, even the happy ones.
