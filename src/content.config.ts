@@ -89,7 +89,6 @@ const charactersCollection = defineCollection({
       strokeSequence: z.array(z.enum(STROKE_TYPES)).optional(),
     }).nullable().optional(),
     peripherals: z.object({
-      glyphs: z.array(z.string()).default([]),
       strokes: z.number().int().nonnegative().optional(),
       strokeSequence: z.array(z.enum(STROKE_TYPES)).default([]),
     }).default({ glyphs: [], strokeSequence: [] }).optional(),
