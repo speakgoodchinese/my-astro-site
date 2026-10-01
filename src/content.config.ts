@@ -81,7 +81,6 @@ const charactersCollection = defineCollection({
     definition: z.string(),
     strokes: z.number().int().positive().optional(),
     strokeSequence: z.array(z.enum(STROKE_TYPES)).optional(),
-    radical: z.string().optional(),
     semanticCluster: z.string().nullable().optional(),
     headingForm: z.object({
       glyph: z.string(),
@@ -95,7 +94,6 @@ const charactersCollection = defineCollection({
       strokeSequence: z.array(z.enum(STROKE_TYPES)).default([]),
     }).default({ glyphs: [], strokeSequence: [] }).optional(),
     level: z.enum(['一级', '二级', '三级']).optional(),
-    traditional: z.string().optional(),
     relatedChars: z.array(z.string()).default([]),
     date: z.string().optional(),
   }),
