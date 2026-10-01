@@ -92,25 +92,25 @@
       <div class="stroke-right-spacer mb-1.5 md:mb-2" aria-hidden="true"></div>
       <div class="stroke-pad" aria-label="笔画按钮 Stroke buttons">
       <div class="pad-row pad-row-1">
-        <button type="button" class="pad-btn pad-btn-横 stroke-btn" data-stroke="横">
+        <button type="button" class="pad-btn pad-btn-横 stroke-btn" data-stroke="一">
           <span class="pad-keys">Q W E R T</span>
           <span class="pad-sym">一</span>
         </button>
-        <button type="button" class="pad-btn pad-btn-竖 stroke-btn" data-stroke="竖">
+        <button type="button" class="pad-btn pad-btn-竖 stroke-btn" data-stroke="丨">
           <span class="pad-keys">Y U I O P</span>
           <span class="pad-sym">丨</span>
         </button>
-        <button type="button" class="pad-btn pad-btn-撇 stroke-btn" data-stroke="撇">
+        <button type="button" class="pad-btn pad-btn-撇 stroke-btn" data-stroke="丿">
           <span class="pad-keys">H J K L</span>
           <span class="pad-sym">丿</span>
         </button>
       </div>
       <div class="pad-row pad-row-2">
-        <button type="button" class="pad-btn pad-btn-点 stroke-btn" data-stroke="点">
+        <button type="button" class="pad-btn pad-btn-点 stroke-btn" data-stroke="丶">
           <span class="pad-keys">A S D F G</span>
           <span class="pad-sym">丶</span>
         </button>
-        <button type="button" class="pad-btn pad-btn-折 stroke-btn" data-stroke="折">
+        <button type="button" class="pad-btn pad-btn-折 stroke-btn" data-stroke="𠃊">
           <span class="pad-keys">Z X C V B N M</span>
           <span class="pad-sym">𠃊</span>
         </button>
@@ -125,25 +125,25 @@
 </div>
 
 <script>
-  type StrokeType = '横' | '竖' | '撇' | '点' | '折' | '通配';
+  type StrokeType = '一' | '丨' | '丿' | '丶' | '𠃊' | '通配';
   const BASE_META: Record<Exclude<StrokeType, '通配'>, { sym: string; cls: string; txt: string }> = {
-    横: { sym: '一', cls: 'bg-jade/10 border-jade/30 text-jade', txt: 'text-jade' },
-    竖: { sym: '丨', cls: 'bg-sky-500/10 border-sky-400/30 text-sky-700', txt: 'text-sky-700' },
-    撇: { sym: '丿', cls: 'bg-violet-500/10 border-violet-400/30 text-violet-700', txt: 'text-violet-700' },
-    点: { sym: '丶', cls: 'bg-cinnabar/10 border-cinnabar/30 text-cinnabar', txt: 'text-cinnabar' },
-    折: { sym: '𠃊', cls: 'bg-amber-500/10 border-amber-400/40 text-amber-700', txt: 'text-amber-700' },
+    一: { sym: '一', cls: 'bg-jade/10 border-jade/30 text-jade', txt: 'text-jade' },
+    丨: { sym: '丨', cls: 'bg-sky-500/10 border-sky-400/30 text-sky-700', txt: 'text-sky-700' },
+    丿: { sym: '丿', cls: 'bg-violet-500/10 border-violet-400/30 text-violet-700', txt: 'text-violet-700' },
+    丶: { sym: '丶', cls: 'bg-cinnabar/10 border-cinnabar/30 text-cinnabar', txt: 'text-cinnabar' },
+    𠃊: { sym: '𠃊', cls: 'bg-amber-500/10 border-amber-400/40 text-amber-700', txt: 'text-amber-700' },
   };
   const META: Record<StrokeType, { sym: string; cls: string; txt: string }> = {
     ...BASE_META,
     通配: { sym: '＊', cls: 'bg-slate-500/10 border-slate-400/30 text-slate-700', txt: 'text-slate-700' },
-  };
+  };  
   function charToStroke(ch: string): StrokeType | null {
     const u = ch.toUpperCase();
-    if ('QWERT'.includes(u)) return '横';
-    if ('YUIOP'.includes(u)) return '竖';
-    if ('ASDFG'.includes(u)) return '点';
-    if ('HJKL'.includes(u)) return '撇';
-    if ('ZXCVBNM'.includes(u)) return '折';
+    if ('QWERT'.includes(u)) return '一';
+    if ('YUIOP'.includes(u)) return '丨';
+    if ('ASDFG'.includes(u)) return '丶';
+    if ('HJKL'.includes(u)) return '丿';
+    if ('ZXCVBNM'.includes(u)) return '𠃊';
     if ('*?X'.includes(u) || u === 'SPACE') return '通配';
     return null;
   }

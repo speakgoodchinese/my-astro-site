@@ -6,11 +6,11 @@ date: "2026-09-30"
 
 People must spend so that firms can produce. Investors reap the returns to keep the money machine running. This drives the K-shaped economy where the rich get richer and the rest get normalized - living but not thriving.
 
-The trick we use here is innovation. Without it, there would be no reason to buy the next iPhone, the next EV, the next concert ticket, the next fashion trend, the new bag, or the fresh pair of shoes. In relative terms, any firm that fails to innovate is eventually squeezed out of the market.
+The system runs on innovation. Without it, there would be no reason to buy the next iPhone, the next EV, the next concert ticket, or the next fashion trend. In relative terms, any firm that fails to innovate is eventually squeezed out of the market.
 
-All of this is framed as progress - the endless, brutal competition that makes things better. From clay to bronze to iron and now AI materials, human civilization evolves on the BIG gene embedded in human nature.
+All of this is framed as progress - the endless, brutal competition that makes things better. From clay to bronze to iron and now AI materials, humans evolve on the BIG gene embedded in human nature.
 
-Yet, there seems to be a DEEP gene, recessive and quiet, that provides a balance to the frenzy: the need to stay grounded with deep roots. An optimized system cannot withstand risk and will collapse when conditions change, and a flourishing crown is no cure for a rotten root in a stormy weather.
+Yet, there seems to be a DEEP gene, recessive and quiet, that provides a balance to the frenzy: the need to stay grounded with deep roots for stability. An over-optimized system cannot withstand risk and will collapse when conditions change, and a flourishing crown is no cure for rotten roots in stormy weather.
 
 As the ancient wisdom reminds us:
 
@@ -20,8 +20,10 @@ In a stable system, innovation is the forward force while tradition is the resto
 
 Are we doomed for extinction? Many sense the answer, while the noisy crowd shouts, "Forward! Forward!"
 
-As Laozi warned:
+They deem the total mastery of English as the prerequisite to the global economy in an all-in surrender that discards cultural roots for mindless assimilation.
+
+Yet, as Laozi warned:
 
 > 企者不立，跨者不行
 
-Those who understand keep the two in balance, ready for the day the entire structure collapses all at once.
+Those who understand keep the two forces in balance, ready for the day the entire structure collapses all at once.

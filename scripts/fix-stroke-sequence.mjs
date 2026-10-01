@@ -6,20 +6,21 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 const charsDir = path.join(root, 'src/content/characters');
 
-const VALID = new Set(['横', '竖', '撇', '点', '折']);
+const VALID = new Set(['一', '丨', '丿', '丶', '𠃊']);
 // Stroke class lookup for 5-type model — cover common multi-character stroke names.
 // 横→横 | 提→横 | 竖→竖 | 竖钩→竖 | 撇→撇 | 点→点 | 捺→点 | 其它含折/钩→折
 const CLASS_MAP = {
-  '横': '横', '提': '横',
-  '竖': '竖',
-  '撇': '撇',
-  '点': '点', '捺': '点',
+  '一': '一', '㇀': '一',
+  '丨': '丨', '亅': '丨',
+  '丿': '丿',
+  '丶': '丶', '㇏': '丶',
 };
+
 function classify(s) {
   if (!s) return '折';
   if (CLASS_MAP[s]) return CLASS_MAP[s];
   // Any compound stroke with 折/钩 → 折; otherwise default → 折
-  return '折';
+  return '𠃊';
 }
 
 let fixed = 0, dropped = 0;

@@ -23,8 +23,8 @@ export const POSITION_SHORT_CN: Record<RadicalPosition, string> = {
   surround: '包围',
 };
 
-export const STROKE_ORDER: Record<'横' | '竖' | '撇' | '点' | '折', number> = {
-  '横': 1, '竖': 2, '撇': 3, '点': 4, '折': 5,
+export const STROKE_ORDER: Record<'一' | '丨' | '丿' | '丶' | '𠃊', number> = {
+  '一': 1, '丨': 2, '丿': 3, '丶': 4, '𠃊': 5,
 };
 export type StrokeType = keyof typeof STROKE_ORDER;
 

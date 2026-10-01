@@ -7,18 +7,19 @@ const root = path.resolve(__dirname, '..');
 const charsDir = path.join(root, 'src/content/characters');
 
 // --- Stroke 5-type classifier (mirrors fix-stroke-sequence logic) ---
-const STROKE_VALID = new Set(['横', '竖', '撇', '点', '折']);
+const STROKE_VALID = new Set(['一', '丨', '丿', '丶', '𠃊']);
 const CLASS_MAP = {
-  '横': '横', '提': '横',
-  '竖': '竖', '竖钩': '竖',
-  '撇': '撇',
-  '点': '点', '捺': '点',
+  '一': '一', '㇀': '一',
+  '丨': '丨', '亅': '丨',
+  '丿': '丿',
+  '丶': '丶', '㇏': '丶',
 };
+
 function classifyStroke(s) {
-  if (!s) return '折';
+  if (!s) return '𠃊';
   if (STROKE_VALID.has(s)) return s;
   if (CLASS_MAP[s]) return CLASS_MAP[s];
-  return '折';
+  return '𠃊';
 }
 function normalizeSeq(arr) {
   if (!Array.isArray(arr)) return [];
@@ -61,17 +62,17 @@ function setFieldObject(inner, key, value) {
 // Each allomorph = { glyph, position, strokes (count, optional), strokeSequence (5-type, optional) }
 const CLUSTER_TABLE = [
   ['水', [
-    { glyph: '氵', position: 'left', strokeSequence: ['点','点','提→横'] },
+    { glyph: '氵', position: 'left', strokeSequence: ['丶','丶','㇀→一'] },
     { glyph: '水', position: 'bottom' },
     { glyph: '氺', position: 'bottom' },
   ]],
   ['手', [
-    { glyph: '扌', position: 'left', strokeSequence: ['横','竖钩','提→横'] },
+    { glyph: '扌', position: 'left', strokeSequence: ['一','亅','㇀→一'] },
     { glyph: '手', position: 'bottom' },
     { glyph: '龵', position: 'top' },
   ]],
   ['心', [
-    { glyph: '忄', position: 'left', strokeSequence: ['点','点','竖'] },
+    { glyph: '忄', position: 'left', strokeSequence: ['丶','丶','丨'] },
     { glyph: '心', position: 'bottom' },
     { glyph: '⺗', position: 'bottom' },
   ]],
@@ -80,7 +81,7 @@ const CLUSTER_TABLE = [
     { glyph: '灬', position: 'bottom' },
   ]],
   ['人', [
-    { glyph: '亻', position: 'left', strokeSequence: ['撇','竖'] },
+    { glyph: '亻', position: 'left', strokeSequence: ['丿','丨'] },
     { glyph: '人', position: 'top' },
     { glyph: '入', position: 'top' },
   ]],
@@ -89,7 +90,7 @@ const CLUSTER_TABLE = [
     { glyph: '阝', position: 'right' }, // 邑 右耳
   ]],
   ['言', [
-    { glyph: '讠', position: 'left', strokeSequence: ['点','横折提→折'] },
+    { glyph: '讠', position: 'left', strokeSequence: ['丶','横折提→𠃊'] },
     { glyph: '言', position: 'top' },
   ]],
   ['口', [

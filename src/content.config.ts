@@ -1,6 +1,8 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const STROKE_TYPES = ['一', '丨', '丿', '丶', '𠃊'] as const;
+
 const manifestoCollection = defineCollection({
   loader: glob({ pattern: '**.md', base: './src/content/manifesto' }),
   schema: z.object({
@@ -78,19 +80,19 @@ const charactersCollection = defineCollection({
     pinyin: z.string(),
     definition: z.string(),
     strokes: z.number().int().positive().optional(),
-    strokeSequence: z.array(z.enum(['横', '竖', '撇', '点', '折'])).optional(),
+    strokeSequence: z.array(z.enum(STROKE_TYPES)).optional(),
     radical: z.string().optional(),
     semanticCluster: z.string().nullable().optional(),
     headingForm: z.object({
       glyph: z.string(),
       position: z.enum(RADICAL_POSITIONS),
       strokes: z.number().int().nonnegative().optional(),
-      strokeSequence: z.array(z.enum(['横', '竖', '撇', '点', '折'])).optional(),
+      strokeSequence: z.array(z.enum(STROKE_TYPES)).optional(),
     }).nullable().optional(),
     peripherals: z.object({
       glyphs: z.array(z.string()).default([]),
       strokes: z.number().int().nonnegative().optional(),
-      strokeSequence: z.array(z.enum(['横', '竖', '撇', '点', '折'])).default([]),
+      strokeSequence: z.array(z.enum(STROKE_TYPES)).default([]),
     }).default({ glyphs: [], strokeSequence: [] }).optional(),
     level: z.enum(['一级', '二级', '三级']).optional(),
     traditional: z.string().optional(),

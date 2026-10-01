@@ -104,9 +104,8 @@ import type { RadicalPosition, SortedCharEntry, StrokeType } from '../utils/radi
   </div>
 
 </div>
-
 <script>
-  type Stroke5 = '横' | '竖' | '撇' | '点' | '折' | '通配';
+  type Stroke5 = '一' | '丨' | '丿' | '丶' | '𠃊' | '通配';
   // Note: position order for UI filtering matches POSITION_ORDER; we add "__none__"
   // as a sentinel for 无部首.
   type UiPos = RadicalPosition | '__none__';
@@ -122,7 +121,7 @@ import type { RadicalPosition, SortedCharEntry, StrokeType } from '../utils/radi
     peripherals: { glyphs: string[]; strokes?: number | null; strokeSequence: Stroke5[] };
   }
   const STROKE_RANK: Record<Stroke5, number> = {
-    '横': 1, '竖': 2, '撇': 3, '点': 4, '折': 5, '通配': 99,
+    '一': 1, '丨': 2, '丿': 3, '丶': 4, '𠃊': 5, '通配': 99,
   };
   function cmpStrokeSeq(a: Stroke5[] | null | undefined, b: Stroke5[] | null | undefined): number {
     const ax = a ?? []; const bx = b ?? [];
@@ -542,13 +541,12 @@ import type { RadicalPosition, SortedCharEntry, StrokeType } from '../utils/radi
       renderAll();
     });
   }
-
   function charToStrokeKey(upper: string): Stroke5 | null {
-    if ('QWERT'.includes(upper)) return '横';
-    if ('YUIOP'.includes(upper)) return '竖';
-    if ('HJKL'.includes(upper)) return '撇';
-    if ('ASDFG'.includes(upper)) return '点';
-    if ('ZXCVBNM'.includes(upper)) return '折';
+    if ('QWERT'.includes(upper)) return '一';
+    if ('YUIOP'.includes(upper)) return '丨';
+    if ('HJKL'.includes(upper)) return '丿';
+    if ('ASDFG'.includes(upper)) return '丶';
+    if ('ZXCVBNM'.includes(upper)) return '𠃊';
     if (upper === ' ' || upper === '*' || upper === '?') return '通配';
     return null;
   }

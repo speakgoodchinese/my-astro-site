@@ -1,5 +1,5 @@
 export type StructureType = 'first' | 'last' | 'equal';
-export type StrokeType = '横' | '竖' | '撇' | '点' | '折' | '通配';
+export type StrokeType = '一' | '丨' | '丿' | '丶' | '𠃊' | '通配';
 
 export interface CharacterData {
   char: string;
@@ -209,20 +209,20 @@ export function fromSerializableIndex(
 }
 
 export const STROKE_META: Record<Exclude<StrokeType, '通配'>, { symbol: string; label: string; color: string; qwertyZone: string }> = {
-  横: { symbol: '一', label: '横 Héng Horizontal', color: 'jade', qwertyZone: 'QWERT' },
-  竖: { symbol: '丨', label: '竖 Shù Vertical', color: 'sky', qwertyZone: 'YUIOP' },
-  撇: { symbol: '丿', label: '撇 Piě Left-falling', color: 'violet', qwertyZone: 'HJKL' },
-  点: { symbol: '丶', label: '点 Diǎn Dot / Right-falling', color: 'cinnabar', qwertyZone: 'ASDFG' },
-  折: { symbol: '𠃊', label: '折 Zhé Turn / Bend', color: 'amber', qwertyZone: 'ZXCVBNM' },
+  一: { symbol: '一', label: '一 Héng Horizontal', color: 'jade', qwertyZone: 'QWERT' },
+  丨: { symbol: '丨', label: '丨 Shù Vertical', color: 'sky', qwertyZone: 'YUIOP' },
+  丿: { symbol: '丿', label: '丿 Piě Left-falling', color: 'violet', qwertyZone: 'HJKL' },
+  丶: { symbol: '丶', label: '丶 Diǎn Dot / Right-falling', color: 'cinnabar', qwertyZone: 'ASDFG' },
+  𠃊: { symbol: '𠃊', label: '𠃊 Zhé Turn / Bend', color: 'amber', qwertyZone: 'ZXCVBNM' },
 };
 
 export function charToStroke(ch: string): StrokeType | null {
   const upper = ch.toUpperCase();
-  if ('QWERT'.includes(upper)) return '横';
-  if ('YUIOP'.includes(upper)) return '竖';
-  if ('ASDFG'.includes(upper)) return '撇';
-  if ('HJKL'.includes(upper)) return '点';
-  if ('ZXCVBNM'.includes(upper)) return '折';
+  if ('QWERT'.includes(upper)) return '一';
+  if ('YUIOP'.includes(upper)) return '丨';
+  if ('ASDFG'.includes(upper)) return '丿';
+  if ('HJKL'.includes(upper)) return '丶';
+  if ('ZXCVBNM'.includes(upper)) return '𠃊';
   if ('*?'.includes(upper)) return '通配';
   return null;
 }

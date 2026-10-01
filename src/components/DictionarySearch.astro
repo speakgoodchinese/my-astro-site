@@ -80,7 +80,7 @@ import RadicalInput from './RadicalInput.astro';
 </div>
 
 <script>
-  type StrokeType = '横' | '竖' | '撇' | '点' | '折' | '通配';
+  type StrokeType = '一' | '丨' | '丿' | '丶' | '𠃊' | '通配';
   interface CharEntry {
     id: string;
     char: string;
@@ -213,11 +213,11 @@ import RadicalInput from './RadicalInput.astro';
     }
     if (prefix.length > 0) {
       const META_COMMIT: Record<StrokeType, { sym: string; cls: string }> = {
-        横: { sym: '一', cls: 'bg-jade/10 border-jade/30 text-jade' },
-        竖: { sym: '丨', cls: 'bg-sky-500/10 border-sky-400/30 text-sky-700' },
-        撇: { sym: '丿', cls: 'bg-violet-500/10 border-violet-400/30 text-violet-700' },
-        点: { sym: '丶', cls: 'bg-cinnabar/10 border-cinnabar/30 text-cinnabar' },
-        折: { sym: '𠃊', cls: 'bg-amber-500/10 border-amber-400/40 text-amber-700' },
+        一: { sym: '一', cls: 'bg-jade/10 border-jade/30 text-jade' },
+        丨: { sym: '丨', cls: 'bg-sky-500/10 border-sky-400/30 text-sky-700' },
+        丿: { sym: '丿', cls: 'bg-violet-500/10 border-violet-400/30 text-violet-700' },
+        丶: { sym: '丶', cls: 'bg-cinnabar/10 border-cinnabar/30 text-cinnabar' },
+        𠃊: { sym: '𠃊', cls: 'bg-amber-500/10 border-amber-400/40 text-amber-700' },
         通配: { sym: '＊', cls: 'bg-slate-500/10 border-slate-400/30 text-slate-700' },
       };
       if (committed.length > 0) {
@@ -749,7 +749,7 @@ import RadicalInput from './RadicalInput.astro';
         }
         d.type === 'char' ? pushChar(d) : pushWord(d);
       }
-    }
+    }   
     // Apply stroke-filter AFTER all passes populate buckets (committed-aware).
     const applyStrokes = (list: SearchDoc[]) => applyStrokeFilter(list, usedStrokePrefix, charSeqs, committed);
     const hasStrokeSignal = usedStrokePrefix.length > 0 || committed.length > 0;
@@ -761,7 +761,7 @@ import RadicalInput from './RadicalInput.astro';
       const n = Math.min(sa.length, sb.length);
       for (let i = 0; i < n; i++) {
         const x = sa[i], y = sb[i];
-        const rank: Record<string, number> = { '横': 1, '竖': 2, '撇': 3, '点': 4, '折': 5, '通配': 0 };
+        const rank: Record<string, number> = { '一': 1, '丨': 2, '丿': 3, '丶': 4, '𠃊': 5, '通配': 0 };
         const rx = rank[x] ?? 0, ry = rank[y] ?? 0;
         if (rx !== ry) return rx - ry;
       }

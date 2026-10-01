@@ -7,6 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 const charsDir = path.join(root, 'src/content/characters');
 const wordsDir = path.join(root, 'src/content/words');
+const STROKE_TYPES = ['一', '丨', '丿', '丶', '𠃊'] as const;
 
 function frontmatterMatter(text) {
   const match = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?/);
@@ -60,7 +61,7 @@ const charSchema = z.object({
   pinyin: z.string(),
   definition: z.string(),
   strokes: z.number().int().positive().optional(),
-  strokeSequence: z.array(z.enum(['横','竖','撇','点','折'])).optional(),
+  strokeSequence: z.array(z.enum(STROKE_TYPES)).optional(),
   radical: z.string().optional(),
   level: z.enum(['一级','二级','三级']).optional(),
   traditional: z.string().optional(),
