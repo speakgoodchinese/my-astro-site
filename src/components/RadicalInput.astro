@@ -401,7 +401,7 @@ import type { RadicalPosition, SortedCharEntry, StrokeType } from '../utils/radi
         return;
       }
 
-      for (const c of matched.slice(0, 18)) {
+      for (const c of matched.slice(0, 100)) {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'wiki-term-link rad-char-btn rounded-lg border border-border-warm bg-white hover:border-cinnabar hover:shadow-xs py-2 transition';

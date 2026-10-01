@@ -70,7 +70,7 @@ const subcategoriesCollection = defineCollection({
   }),
 });
 
-export const RADICAL_POSITIONS = ['left', 'right', 'top', 'bottom', 'centre', 'surround'] as const;
+export const RADICAL_POSITIONS = ['whole', 'left', 'right', 'top', 'bottom', 'centre', 'surround'] as const;
 export type RadicalPosition = (typeof RADICAL_POSITIONS)[number];
 
 const charactersCollection = defineCollection({
