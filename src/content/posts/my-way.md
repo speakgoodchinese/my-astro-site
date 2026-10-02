@@ -10,11 +10,11 @@ Institutions constantly forgo the higher principle of freedom to preserve their 
 
 Combating this institutional decay demands rigorous critical thinking. This requires detaching from prepackaged narratives propagated by mainstream media, political elites, and educational institutions, while casting one's gaze far back to discern the foundational philosophy of true governance:
 
-> 观天为象，查地为法
+> 观天为象，察地为法
 
 Space must be preserved for individual freedom, and resources must be shared equitably. After all, everything has its natural place.
 
-Maintaining alignment with this principle amidst the turbulence of daily work requires profound self-awareness. Ultimately, true harmony is not achieved by forcing all things into rigid, centralized moulds, but by recognizing that every entity must be allowed to follow its own natural course.
+Maintaining alignment with this principle amidst the turbulence of daily work requires profound self-awareness. Ultimately, true harmony is not achieved by forcing all things into rigid moulds, but by recognizing that every entity has its own strength and weakness.
 
 > 尺有所短，寸有所长
 
