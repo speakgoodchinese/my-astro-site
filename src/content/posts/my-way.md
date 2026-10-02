@@ -1,10 +1,10 @@
 ---
 title: "各行其道：要做就做，不做滚蛋"
-description: "Exploring the blind spots of governance and corporate management: preserving the natural paths of all things."
+description: "Exploring the blind spot of corporate management: preserving the natural paths of all things."
 date: "2026-10-02"
 ---
 
-Nowadays, freedom increasingly functions as an ideology to fabricate consensus rather than a lived reality. It rarely translates to the individual level, where system-imposed constraints set by corporate management restrict rather than empower people.
+Nowadays, freedom increasingly becomes as an ideology rather than a lived reality. It rarely translates to the individual level, where system-imposed constraints set by corporate management restrict rather than empower people.
 
 Institutions constantly forgo the higher principle of freedom to preserve their own privileges, drifting into mindless expansion or aggressive cost-cutting that destroys human options. Some might even argue that institutions operate autocratically - forgetting that through sound governance, they can and should protect the vulnerable and advance human progress.
 
@@ -16,4 +16,4 @@ Just as everything has its natural place, space must be preserved for individual
 
 > 尺有所短，寸有所长
 
-Maintaining alignment with this principle amidst the turbulence of daily work requires profound self-awareness. When governance forgets this fundamental law and reduces options to mere compliance or exit, it leaves individuals no choice but to forge their own paths.
+Maintaining alignment with this principle amidst the turbulence of economic upheavals requires profound self-awareness. When governance forgets this fundamental law and reduces options to mere compliance or exit, it leaves individuals no choice but to forge their own paths.
