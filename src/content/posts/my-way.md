@@ -4,7 +4,7 @@ description: "Exploring the blind spot of corporate management: preserving the n
 date: "2026-10-02"
 ---
 
-Nowadays, freedom increasingly becomes as an ideology rather than a lived experience. It rarely translates to the individual level, where system-imposed constraints set by corporate management restrict rather than empower people.
+Nowadays, freedom increasingly becomes an ideology rather than a lived experience. It rarely translates to the individual level, where system-imposed constraints set by corporate management restrict rather than empower people.
 
 Institutions constantly forgo the higher principle of freedom to preserve their own privileges, drifting into mindless expansion or aggressive cost-cutting that destroys human options. Some might even argue that institutions operate autocratically - forgetting that through sound governance, they can and should protect the vulnerable and advance human progress.
 
