@@ -12,11 +12,8 @@ Combating this institutional decay demands rigorous critical thinking. This requ
 
 > 观天为象，察地为法
 
-Space must be preserved for individual freedom, and resources must be shared equitably. After all, everything has its natural place.
-
-Maintaining alignment with this principle amidst the turbulence of daily work requires profound self-awareness. Ultimately, true harmony is not achieved by forcing all things into rigid moulds, but by recognizing that every entity has its own strength and weakness.
+Just as everything has its natural place, space must be preserved for individuals, and resources must be shared equitably.Efficiency is achieved not by forcing all things into rigid moulds, but by recognizing that everything has its unique strengths and limitations.
 
 > 尺有所短，寸有所长
 
-When governance forgets this fundamental law and reduces options to mere compliance or exit, it leaves individuals no choice but to forge their own paths.
-
+Maintaining alignment with this principle amidst the turbulence of daily work requires profound self-awareness. When governance forgets this fundamental law and reduces options to mere compliance or exit, it leaves individuals no choice but to forge their own paths.
