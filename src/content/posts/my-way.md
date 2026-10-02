@@ -4,7 +4,7 @@ description: "Exploring the blind spots of governance and corporate management: 
 date: "2026-10-02"
 ---
 
-Nowadays, freedom increasingly functions as an ideology to fabricate consensus rather than a lived reality. It rarely translates to the individual level, where system-imposed constraints set by corporate management and legal requirements restrict rather than empower people.
+Nowadays, freedom increasingly functions as an ideology to fabricate consensus rather than a lived reality. It rarely translates to the individual level, where system-imposed constraints set by corporate management restrict rather than empower people.
 
 Institutions constantly forgo the higher principle of freedom to preserve their own privileges, drifting into mindless expansion or aggressive cost-cutting that destroys human options. Some might even argue that institutions operate autocratically - forgetting that through sound governance, they can and should protect the vulnerable and advance human progress.
 
@@ -12,7 +12,7 @@ Combating this institutional decay demands rigorous critical thinking. This requ
 
 > 观天为象，察地为法
 
-Just as everything has its natural place, space must be preserved for individuals, and resources must be shared equitably.Efficiency is achieved not by forcing all things into rigid moulds, but by recognizing that everything has its unique strengths and limitations.
+Just as everything has its natural place, space must be preserved for individuals, and resources must be shared equitably. Efficiency is achieved not by forcing all things into rigid moulds, but by recognizing that everything has its unique strengths and limitations.
 
 > 尺有所短，寸有所长
 
