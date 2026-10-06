@@ -41,7 +41,7 @@ Understanding how Chinese differs from English helps learners master the languag
 
     English: Syntactic encoding, low-context - root words are inflected to signal relational logic, and the user picks up the logic from the wordings.
 
-    In the examples below, notice how the character 成 shifts in lexical meaning. This must be learned as a pattern by heart, as the distinction is not marked by syntax:
+    In the examples below, notice how the character 成 shifts in lexical meaning. This must be learned as a pattern, as the distinction is not marked by syntax:
 
     > 言之成理 (yán zhī chéng lǐ): To form a reasonable argument; an articulation that pulls words together into a coherent rationale.
 
