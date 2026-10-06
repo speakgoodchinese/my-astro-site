@@ -23,6 +23,6 @@ This realization doesn't come through grand theories, but through resonance, muc
 
 Realizing that the mind has reached its absolute limit is the prerequisite for seeing your true self. This is why you have to [[知止而后有定|stop the mental noise to let the soul calm itself]].
 
-That doesn't mean stop the thinking. We must inquire and explore, but without restricting ourselves to science and logic. This builds the pressure that will eventually be released as the flow. All of our lived inputs - raw experiences, emotional upheavals, and the frictions of daily existence - eventually settle into the background. And when the flow moves on its own, our soul naturally resonates with it. 
+That doesn't mean stop the thinking. We must inquire and explore, but without restricting ourselves to science and logic. All of our lived inputs - raw experiences, emotional upheavals, and the frictions of daily existence - eventually settle into the background. This builds the pressure that will eventually be released as the flow. And when the flow moves on its own, our soul naturally resonates with it. 
 
 When that happens, the [[佛|soul wakes up]] to a [[如来|reality that is already present]]. At that moment, the distinction between limited and boundless existence dissolves; [[天地与我并生|I am with who I am, and who I am is with me]].
