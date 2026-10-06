@@ -73,7 +73,7 @@ Understanding how Chinese differs from English helps learners master the languag
 
 ### How Teaching Should be Approachable
 
-Because Chinese relies on built-in lexical meaning rather than inflection and agreement to construct narratives, traditional grammar drills are largely ineffective. Instead, use these four methods to train students like movie directors:
+Because Chinese relies on built-in lexical meaning rather than inflection and agreement, traditional grammar drills are largely ineffective. Instead, use these four methods to train students like movie directors:
 
 1. **Topic-Comment Framing:** Training the brain to establish the frame first rather than hunting for a subject-verb-object pipeline.
     >The Sun ☀️ / Rises 🌅
